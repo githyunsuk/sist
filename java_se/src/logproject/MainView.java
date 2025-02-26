@@ -12,6 +12,7 @@ public class MainView extends JFrame {
 
 	private JTextField inputLineField;
 	private JButton logAnalyzeBtn, createReportBtn;
+	private JTextArea jta;
 	private LoginView lv;
 	
 	public MainView(LoginView lv) { //로그인뷰를 매개변수로 받음
@@ -24,10 +25,14 @@ public class MainView extends JFrame {
 		logAnalyzeBtn = new JButton("로그 분석");
 		createReportBtn = new JButton("리포트 생성");
 		
+		jta = new JTextArea(60, 120);
+		JScrollPane jsp = new JScrollPane(jta);
+		
 		//컴포넌트 추가
 		add(inputLineField);
 		add(logAnalyzeBtn);
 		add(createReportBtn);
+		add("Center", jsp);
 		
 		//이벤트 생성
 		MainViewEvt mve = new MainViewEvt(this, lv);
@@ -36,7 +41,7 @@ public class MainView extends JFrame {
 		createReportBtn.addActionListener(mve);
 		
 		setVisible(true);
-		setBounds(100,100,600,400);
+		setBounds(100,100,600,800);
 	}
 
 	public JTextField getInputLineField() {
@@ -49,6 +54,14 @@ public class MainView extends JFrame {
 
 	public JButton getCreateReportBtn() {
 		return createReportBtn;
+	}
+
+	public JTextArea getJta() {
+		return jta;
+	}
+
+	public LoginView getLv() {
+		return lv;
 	}
 	
 }

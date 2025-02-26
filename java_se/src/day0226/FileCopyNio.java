@@ -22,11 +22,6 @@ public class FileCopyNio {
 		if(originalFileName == null) {
 			return;
 		}
-		
-		if(originalFileName == null) {
-			return;
-		}
-		
 		//복사할 파일명 생성: 원본 파일_copy.확장
 		StringBuilder copyFileName = new StringBuilder(originalFileName.getAbsolutePath());
 		copyFileName.insert(copyFileName.lastIndexOf("."), "_copy");

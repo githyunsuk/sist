@@ -23,6 +23,7 @@ public class LoginViewEvt extends WindowAdapter implements ActionListener {
 		loginData.put("admin","1234");
 		loginData.put("root","1111");
 		loginData.put("administrator","12345");
+		loginData.put("1", "1");
 	}
 
 	//로그인 성공시 MainView로 넘어가는 클래스
