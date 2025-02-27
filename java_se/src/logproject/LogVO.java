@@ -2,6 +2,7 @@ package logproject;
 
 public class LogVO {
 
+	private String logMsg;
 	private String service;
 	private String browserName;
 	private String keyName;
@@ -9,6 +10,10 @@ public class LogVO {
 	private boolean isBooks = false;
 	
 	public LogVO(String line) {
+		
+		//기존 문자열을 쪼개기 전 원본 상태로 저장
+		logMsg = line;
+		
 		//받아들인 라인을 ']' 기준으로 쪼개 배열에 저장
 		String[] lineArr = line.split("]");
 		
@@ -72,6 +77,14 @@ public class LogVO {
 
 	public void setBooks(boolean isBooks) {
 		this.isBooks = isBooks;
+	}
+
+	public String getLogMsg() {
+		return logMsg;
+	}
+
+	public void setLogMsg(String logMsg) {
+		this.logMsg = logMsg;
 	}
 	
 	
