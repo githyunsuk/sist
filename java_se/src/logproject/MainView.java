@@ -1,8 +1,14 @@
 package logproject;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  * 로그 분석과 리포트 생성을 할 수 있는 버튼이 있는 mainview 클래스 
@@ -19,7 +25,7 @@ public class MainView extends JFrame {
 		
 		super("로그 파일 분석");
 		this.lv = lv;
-		setLayout(new FlowLayout());
+		setLayout(new BorderLayout());
 		
 		inputLineFieldA = new JTextField(10); //원하는 라인 입력
 		inputLineFieldB = new JTextField(10); //원하는 라인 입력
@@ -27,14 +33,18 @@ public class MainView extends JFrame {
 		createReportBtn = new JButton("리포트 생성");
 		
 		jta = new JTextArea(60, 80);
+		jta.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
 		JScrollPane jsp = new JScrollPane(jta);
 		
 		//컴포넌트 추가
-		add(inputLineFieldA);
-		add(inputLineFieldB);
-		add(logAnalyzeBtn);
-		add(createReportBtn);
-		add("Center", jsp);
+		JPanel topPanel = new JPanel();
+		topPanel.add(inputLineFieldA);
+		topPanel.add(inputLineFieldB);
+		topPanel.add(logAnalyzeBtn);
+		topPanel.add(createReportBtn);
+	
+		add(topPanel, BorderLayout.NORTH);
+		add(jsp, BorderLayout.CENTER);
 		
 		//이벤트 생성
 		MainViewEvt mve = new MainViewEvt(this, lv);
@@ -43,7 +53,7 @@ public class MainView extends JFrame {
 		createReportBtn.addActionListener(mve);
 		
 		setVisible(true);
-		setBounds(100,100,600,800);
+		setBounds(100,100,800,600);
 	}
 
 	
