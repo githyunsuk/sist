@@ -16,7 +16,9 @@ public class LogVO {
 		
 		int startIdx = lineArr[1].indexOf("key=") + 4;
 		int endIdx = lineArr[1].indexOf("&");
-		keyName = lineArr[1].substring(startIdx, endIdx);
+		if(startIdx != -1 && endIdx != -1) {
+			keyName = lineArr[1].substring(startIdx, endIdx); //오류			
+		}
 		
 		browserName = lineArr[2].substring(1);
 		
@@ -26,7 +28,7 @@ public class LogVO {
 		
 		startIdx = lineArr[1].indexOf("find/") + 5;
 		endIdx = lineArr[1].indexOf("?");
-		if(lineArr[1].substring(startIdx, endIdx).equals("books")) {
+		if(endIdx != -1 && lineArr[1].substring(startIdx, endIdx).equals("books")) {
 			isBooks = true;
 		}
 		

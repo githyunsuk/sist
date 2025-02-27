@@ -10,7 +10,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class MainView extends JFrame {
 
-	private JTextField inputLineField;
+	private JTextField inputLineFieldA, inputLineFieldB;
 	private JButton logAnalyzeBtn, createReportBtn;
 	private JTextArea jta;
 	private LoginView lv;
@@ -21,15 +21,17 @@ public class MainView extends JFrame {
 		this.lv = lv;
 		setLayout(new FlowLayout());
 		
-		inputLineField = new JTextField(20); //원하는 라인 입력
+		inputLineFieldA = new JTextField(10); //원하는 라인 입력
+		inputLineFieldB = new JTextField(10); //원하는 라인 입력
 		logAnalyzeBtn = new JButton("로그 분석");
 		createReportBtn = new JButton("리포트 생성");
 		
-		jta = new JTextArea(60, 120);
+		jta = new JTextArea(60, 80);
 		JScrollPane jsp = new JScrollPane(jta);
 		
 		//컴포넌트 추가
-		add(inputLineField);
+		add(inputLineFieldA);
+		add(inputLineFieldB);
 		add(logAnalyzeBtn);
 		add(createReportBtn);
 		add("Center", jsp);
@@ -44,9 +46,16 @@ public class MainView extends JFrame {
 		setBounds(100,100,600,800);
 	}
 
-	public JTextField getInputLineField() {
-		return inputLineField;
+	
+	public JTextField getInputLineFieldA() {
+		return inputLineFieldA;
 	}
+
+
+	public JTextField getInputLineFieldB() {
+		return inputLineFieldB;
+	}
+
 
 	public JButton getLogAnalyzeBtn() {
 		return logAnalyzeBtn;
