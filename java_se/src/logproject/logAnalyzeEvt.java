@@ -55,9 +55,7 @@ public class logAnalyzeEvt {
 
 	}// 생성자 end
 
-	/**
-	 * 파일을 읽어들여 파일의 각 줄별로 객체화
-	 */
+	//파일 읽기
 	public void readLogFile(File file) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		String line;
@@ -67,9 +65,7 @@ public class logAnalyzeEvt {
 	}// readLogFile
 
 	
-	/**
-	 * 로그 파일 처리
-	 */
+	//로그 파일 처리
 	public void processLogs() {
 		startLine = mv.getInputLineFieldA().getText().isBlank() ? 1
 				: Integer.parseInt(mv.getInputLineFieldA().getText());
@@ -91,16 +87,13 @@ public class logAnalyzeEvt {
 	}// processLogs
 
 	
-	/**
-	 * 각 해쉬맵에 value 값 삽입
-	 */
+	//해시맵에 값 넣기
 	public void putMapValue(Map<String, Integer> map, String key) {
 		map.put(key, map.getOrDefault(key, 0) + 1);
 	}// putMapValue
 
-	/**
-	 * 결과 출력
-	 */
+
+	//결과 출력
 	public void printResults() {
 		StringBuilder msg = new StringBuilder();
 
