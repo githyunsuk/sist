@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.swing.JFileChooser;
 
-
 public class LogAnalyzeEvt {
 
 	private MainView mv;
@@ -25,7 +24,7 @@ public class LogAnalyzeEvt {
 
 	private int books500Cnt;
 	private int startLine, endLine;
-	
+
 	private File file;
 	private StringBuilder[] sb;
 
@@ -36,39 +35,31 @@ public class LogAnalyzeEvt {
 		jfc.showOpenDialog(mv);
 		file = jfc.getSelectedFile();
 
-		if (file == null)
+		if (file == null) {
 			return;
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-		String str = "";
-		// 파일을 읽어들여 각 줄을 객체로 저장하고, 처리
-		try {
-			while ((str = br.readLine()) != null) {
-				LogVO lvo = new LogVO(str);
-				lvoList.add(lvo);
-
-			}
-		} finally {
-			if (br != null) br.close();
 		}
-		
-		readLogFile(file); //
+	
+		readLogFile(file);
 		processLogs();
 		printResults();
 
 	}// 생성자 end
 
-	//파일 읽기
+	// 파일 읽기
 	public void readLogFile(File file) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		String line;
-		while ((line = br.readLine()) != null) {
-			lvoList.add(new LogVO(line));
+		try {
+			while ((line = br.readLine()) != null) {
+				lvoList.add(new LogVO(line));
+			}
+		} finally {
+			if (br != null)
+				br.close();
 		}
 	}// readLogFile
 
-	
-	//로그 파일 처리
+	// 로그 파일 처리
 	public void processLogs() {
 		startLine = mv.getInputLineFieldA().getText().isBlank() ? 1
 				: Integer.parseInt(mv.getInputLineFieldA().getText());
@@ -89,21 +80,19 @@ public class LogAnalyzeEvt {
 
 	}// processLogs
 
-	
-	//해시맵에 값 넣기
+	// 해시맵에 값 넣기
 	public void putMapValue(Map<String, Integer> map, String key) {
 		map.put(key, map.getOrDefault(key, 0) + 1);
 	}// putMapValue
 
-
-	//결과 출력
+	// 결과 출력
 	public void printResults() {
 		StringBuilder result = new StringBuilder();
-		//GenerateReportEvt에 보내기 위한 StringBuilder 객체 초기화
+		// GenerateReportEvt에 보내기 위한 StringBuilder 객체 초기화
 		sb = new StringBuilder[6];
 		for (int i = 0; i < sb.length; i++) {
-	        sb[i] = new StringBuilder();
-	    }
+			sb[i] = new StringBuilder();
+		}
 
 		// 1. 최다 사용 키의 이름과 횟수
 		int countMostUsedKey = Collections.max(keyMap.values());
@@ -143,7 +132,7 @@ public class LogAnalyzeEvt {
 				mostUsedTime = key + "시";
 			}
 		}
-		
+
 		sb[3].append("4. 요청이 가장 많은 시간: [").append(mostUsedTime).append("]\n");
 		result.append(sb[3]);
 
@@ -170,5 +159,4 @@ public class LogAnalyzeEvt {
 		return sb;
 	}
 
-	
 }// end class

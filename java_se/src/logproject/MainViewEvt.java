@@ -41,6 +41,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 			return;
 		}
 		
+		//로그 파일을 안누르고 리포트 버튼을 누룰시
 		if( lae == null) {
 			JOptionPane.showMessageDialog(mv,"우선 로그 분석을 완료하세요");
 			return;
