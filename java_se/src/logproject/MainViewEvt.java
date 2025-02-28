@@ -15,6 +15,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 
 	private MainView mv;
 	private LoginView lv;
+	private LogAnalyzeEvt lae;
 	
 	public MainViewEvt(MainView mv, LoginView lv) {
 		this.mv = mv;
@@ -25,19 +26,31 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 		//로그 분석 이벤트 클래스 생성
 		mv.getJta().setText("");
 		try {
-			new logAnalyzeEvt(mv);
+			lae = new LogAnalyzeEvt(mv);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void createReport() {
+	public void generateReport() {
 		//리포트 생성 클래스
 		String id = lv.getIdField().getText();
 		if(id.equals("root")) { //만약 아이디가 root면 실행 거부 후 return
 			JOptionPane.showMessageDialog(mv, "권한이 없습니다.");
 			return;
+		}
+		
+		if( lae == null) {
+			JOptionPane.showMessageDialog(mv,"우선 로그 분석을 완료하세요");
+			return;
+		}
+		
+		//로그 분석을 완료한 객체를 넘겨주고 GenerateReportEvt 클래스 생성
+		try {
+			new GenerateReportEvt(mv, lae);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -56,7 +69,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 		}
 		//리포트 생성 버튼을 누르면
 		if(ae.getSource() == mv.getCreateReportBtn()) {
-			createReport();
+			generateReport();
 		}
 	}
 }

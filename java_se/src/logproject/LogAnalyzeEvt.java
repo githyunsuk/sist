@@ -13,7 +13,7 @@ import java.util.Map;
 import javax.swing.JFileChooser;
 
 
-public class logAnalyzeEvt {
+public class LogAnalyzeEvt {
 
 	private MainView mv;
 
@@ -25,13 +25,16 @@ public class logAnalyzeEvt {
 
 	private int books500Cnt;
 	private int startLine, endLine;
+	
+	private File file;
+	private StringBuilder[] sb;
 
-	public logAnalyzeEvt(MainView mv) throws IOException {
+	public LogAnalyzeEvt(MainView mv) throws IOException {
 		this.mv = mv;
 
 		JFileChooser jfc = new JFileChooser("c:/dev");
 		jfc.showOpenDialog(mv);
-		File file = jfc.getSelectedFile();
+		file = jfc.getSelectedFile();
 
 		if (file == null)
 			return;
@@ -95,7 +98,12 @@ public class logAnalyzeEvt {
 
 	//결과 출력
 	public void printResults() {
-		StringBuilder msg = new StringBuilder();
+		StringBuilder result = new StringBuilder();
+		//GenerateReportEvt에 보내기 위한 StringBuilder 객체 초기화
+		sb = new StringBuilder[6];
+		for (int i = 0; i < sb.length; i++) {
+	        sb[i] = new StringBuilder();
+	    }
 
 		// 1. 최다 사용 키의 이름과 횟수
 		int countMostUsedKey = Collections.max(keyMap.values());
@@ -107,21 +115,24 @@ public class logAnalyzeEvt {
 				break;
 			}
 		}
-		msg.append("1. 최대사용 키: ").append(mostUsedKey).append(", ").append(countMostUsedKey).append("회\n");
+		sb[0].append("1. 최대사용 키: ").append(mostUsedKey).append(", ").append(countMostUsedKey).append("회\n");
+		result.append(sb[0]);
 
 		// 2. 브라우저별 접속
-		msg.append("2. 브라우저별 접속\n");
+		sb[1].append("2. 브라우저별 접속\n");
 		for (var e : browserMap.entrySet()) {
-			msg.append(e.getKey()).append(" - ").append(e.getValue()).append("[")
+			sb[1].append(e.getKey()).append(" - ").append(e.getValue()).append("[")
 					.append(String.format("%.2f", (double) e.getValue() / endLine * 100)).append("%]\n");
 		}
+		result.append(sb[1]);
 
 		// 3. 서비스를 성공적으로 수행한(200) 횟수,실패(404) 횟수
 		int serviceSucceed = serviceMap.getOrDefault("200", 0);
 		int serviceFailed = serviceMap.getOrDefault("404", 0);
 
-		msg.append("3. 서비스를 성공적으로 수행한 횟수: ").append(serviceSucceed).append("회, ").append("실패 횟수: ")
+		sb[2].append("3. 서비스를 성공적으로 수행한 횟수: ").append(serviceSucceed).append("회, ").append("실패 횟수: ")
 				.append(serviceFailed).append("회\n");
+		result.append(sb[2]);
 
 		// 4. 요청이 가장 많은 시간 [10시]
 		int numTime = Collections.max(timeMap.values());
@@ -132,20 +143,32 @@ public class logAnalyzeEvt {
 				mostUsedTime = key + "시";
 			}
 		}
-
-		msg.append("4. 요청이 가장 많은 시간: [").append(mostUsedTime).append("]\n");
+		
+		sb[3].append("4. 요청이 가장 많은 시간: [").append(mostUsedTime).append("]\n");
+		result.append(sb[3]);
 
 		// 5. 비정상적인 요청(403)이 발생한 횟수,비율구하기
 		int cnt403 = serviceMap.getOrDefault("403", 0);
 
-		msg.append("5. 비정상적인 요청(403)이 발생한 횟수: ").append(cnt403).append("[")
+		sb[4].append("5. 비정상적인 요청(403)이 발생한 횟수: ").append(cnt403).append("[")
 				.append(String.format("%.2f", (double) cnt403 / endLine * 100)).append("%]\n");
+		result.append(sb[4]);
 
 		// 6. books 에 대한 요청 URL중 에러(500)가 발생한 횟수, 비율 구하기 ( 전체 레코드를 비율의 대상으로 구하세요 )
-		msg.append("6. books에 대한 요천 URL 중 에러(500)가 발생한 횟수: ").append(books500Cnt).append("[")
+		sb[5].append("6. books에 대한 요천 URL 중 에러(500)가 발생한 횟수: ").append(books500Cnt).append("[")
 				.append(String.format("%.2f", (double) books500Cnt / endLine * 100)).append("%]\n");
+		result.append(sb[5]);
 
-		mv.getJta().append(msg.toString());
+		mv.getJta().append(result.toString());
 	} // end printResults()
 
+	public File getFile() {
+		return file;
+	}
+
+	public StringBuilder[] getSb() {
+		return sb;
+	}
+
+	
 }// end class
