@@ -23,6 +23,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 
 	public void logAnalyze() {
 		//로그 분석 이벤트 클래스 생성
+		mv.getJta().setText("");
 		try {
 			new logAnalyzeEvt(mv);
 		} catch (IOException e) {

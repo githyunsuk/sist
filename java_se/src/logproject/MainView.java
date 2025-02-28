@@ -33,7 +33,7 @@ public class MainView extends JFrame {
 		createReportBtn = new JButton("리포트 생성");
 		
 		jta = new JTextArea(60, 80);
-		jta.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
+		jta.setFont(new Font("궁서체", Font.ITALIC, 24));
 		JScrollPane jsp = new JScrollPane(jta);
 		
 		//컴포넌트 추가
