@@ -26,19 +26,13 @@ public class LoginViewEvt extends WindowAdapter implements ActionListener {
 		loginData.put("1", "1");
 	}
 
-	//로그인 성공시 MainView로 넘어가는 클래스
+	//로그인 성공시 MainView로 넘어가는 method
 	public void openMainView() {
 		new MainView(lv);
 	}
 	
-	@Override
-	public void windowClosing(WindowEvent we) {
-		lv.dispose();
-	}
-
-	//아이디와 비밀번호가 맞는지 확인하느 클래스
-	@Override
-	public void actionPerformed(ActionEvent ae) {
+	//로그인 처리하는 method
+	public void loginProcess() {
 		String id = lv.getIdField().getText();
 		String pw = new String(lv.getPwField().getPassword());
 		
@@ -57,6 +51,35 @@ public class LoginViewEvt extends WindowAdapter implements ActionListener {
 			lv.dispose(); //로그인 성공시 로그인창 닫음
 		} else {
 			JOptionPane.showMessageDialog(lv, "아이디와 비밀번호를 확인하세요", "", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void registerProcess() {
+		
+	}
+	
+	public void cancelProcess() {
+		lv.dispose();
+	}
+	
+	@Override
+	public void windowClosing(WindowEvent we) {
+		cancelProcess();
+	}
+
+	//아이디와 비밀번호가 맞는지 확인하느 클래스
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource() == lv.getLoginBtn()) {
+			loginProcess();
+		}
+		
+		if(ae.getSource() == lv.getRegisterBtn()) {
+			registerProcess();
+		}
+		
+		if(ae.getSource() == lv.getCancelBtn()) {
+			cancelProcess();
 		}
 	}
 }

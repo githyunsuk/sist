@@ -111,7 +111,7 @@ public class LogAnalyzeEvt {
 		sb[1].append("2. 브라우저별 접속\n");
 		for (var e : browserMap.entrySet()) {
 			sb[1].append(e.getKey()).append(" - ").append(e.getValue()).append("[")
-					.append(String.format("%.2f", (double) e.getValue() / endLine * 100)).append("%]\n");
+					.append(String.format("%.2f", (double) e.getValue() / (endLine- startLine + 1) * 100)).append("%]\n");
 		}
 		result.append(sb[1]);
 
@@ -140,12 +140,12 @@ public class LogAnalyzeEvt {
 		int cnt403 = serviceMap.getOrDefault("403", 0);
 
 		sb[4].append("5. 비정상적인 요청(403)이 발생한 횟수: ").append(cnt403).append("[")
-				.append(String.format("%.2f", (double) cnt403 / endLine * 100)).append("%]\n");
+				.append(String.format("%.2f", (double) cnt403 / (endLine - startLine + 1) * 100)).append("%]\n");
 		result.append(sb[4]);
 
 		// 6. books 에 대한 요청 URL중 에러(500)가 발생한 횟수, 비율 구하기 ( 전체 레코드를 비율의 대상으로 구하세요 )
 		sb[5].append("6. books에 대한 요천 URL 중 에러(500)가 발생한 횟수: ").append(books500Cnt).append("[")
-				.append(String.format("%.2f", (double) books500Cnt / endLine * 100)).append("%]\n");
+				.append(String.format("%.2f", (double) books500Cnt / (endLine - startLine + 1) * 100)).append("%]\n");
 		result.append(sb[5]);
 
 		mv.getJta().append(result.toString());
