@@ -2,11 +2,7 @@ package logproject;
 
 public class LogVO {
 
-	private String logMsg;
-	private String service;
-	private String browserName;
-	private String keyName;
-	private String time;
+	private String logMsg, service, browserName, keyName, time;
 	private boolean isBooks = false;
 
 	public LogVO(String line) {
@@ -21,29 +17,36 @@ public class LogVO {
 		service = lineArr[0].substring(1);
 
 		// 키 이름 추출
-		int startIdx = lineArr[1].indexOf("key=") + 4;
-		int endIdx = lineArr[1].indexOf("&");
-		if (startIdx != -1 && endIdx != -1) {
-			keyName = lineArr[1].substring(startIdx, endIdx);
-		}
+		keyName = extractKeyName(lineArr[1]);
 
 		// 브라우저 추출
 		browserName = lineArr[2].substring(1);
 
 		// 시간 추출
-		startIdx = lineArr[3].indexOf(" ") + 1;
-		endIdx = lineArr[3].indexOf(":");
-		time = lineArr[3].substring(startIdx, endIdx);
+		time = extractTime(lineArr[3]);
 
 		// books 인지 체크
-		startIdx = lineArr[1].indexOf("find/") + 5;
-		endIdx = lineArr[1].indexOf("?");
-		if (endIdx != -1 && lineArr[1].substring(startIdx, endIdx).equals("books")) {
-			isBooks = true;
-		}
+		isBooks = checkIsBooks(lineArr[1]);
 
 	}
 
+	private String extractKeyName(String str) {
+		int startIdx = str.indexOf("key=") + 4;
+		int endIdx = str.indexOf("&", startIdx);
+		return (startIdx != -1 && endIdx != -1) ? str.substring(startIdx, endIdx) : "";
+	}
+
+	private String extractTime(String part) {
+        int startIdx = part.indexOf(" ") + 1;
+        int endIdx = part.indexOf(":");
+        return (startIdx != -1 && endIdx != -1) ? part.substring(startIdx, endIdx) : "";
+    }
+
+    private boolean checkIsBooks(String part) {
+        int startIdx = part.indexOf("find/") + 5;
+        int endIdx = part.indexOf("?", startIdx);
+        return (endIdx != -1 && part.substring(startIdx, endIdx).equals("books"));
+    }
 	public String getLogMsg() {
 		return logMsg;
 	}

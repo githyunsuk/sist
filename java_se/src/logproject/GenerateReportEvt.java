@@ -9,13 +9,10 @@ import javax.swing.JOptionPane;
 
 public class GenerateReportEvt {
 
-	private MainView mv;
-	private LogAnalyzeEvt lae;
 	private StringBuilder[] sb;
 	
-	public GenerateReportEvt(MainView mv, LogAnalyzeEvt lae) throws IOException {
-		this.mv = mv;
-		this.lae = lae;
+	public GenerateReportEvt(MainView mv, LogAnalyzeEvt lae, File logFile) throws IOException {
+
 		sb = lae.getSb();
 		//디렉토리 생성
 		File dir = new File("c:/dev/report");
@@ -29,7 +26,7 @@ public class GenerateReportEvt {
 			bw = new BufferedWriter(new FileWriter(file));
 			
 			bw.write("-----------------------------------------------------------------------------------\n");
-			bw.write("파일명 (" + lae.getFile().getAbsolutePath() + ") log\n");
+			bw.write("파일명 (" + logFile.getAbsolutePath() + ") log\n");
 			bw.write("-----------------------------------------------------------------------------------\n");
 			bw.write("최다 사용키와 횟수: " + sb[0] + "\n\n");
 			bw.write("브라우저별 접속 횟수, 비율: " + sb[1] + "\n\n");

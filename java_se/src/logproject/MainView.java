@@ -28,16 +28,16 @@ public class MainView extends JFrame {
 
 	private JTextField inputLineFrom, inputLineTo;
 	private JButton logAnalyzeBtn, generateReportBtn, openFileBtn, logoutBtn;
-	private JTextArea jta;
-	private JLabel openFileLabel, nameLabel;
-	private JScrollPane jsp;
+	
+	private JLabel openFileLbl, nameLbl;
+	private JLabel[] questionLbl = new JLabel[6];
+	private JLabel[] answerLbl = new JLabel[6];
+	
 	private DefaultTableModel dtm;
 	private JTable jt;
-	private JLabel q1Label, q2Label, q3Label, q4Label, q5Label, q6Label;
-	private JLabel a1Label, a2Label, a3Label, a4Label, a5Label, a6Label;
+	private JScrollPane jsp;
 
 	private LoginView lv;
-	private LoginViewEvt lve;
 
 	public MainView(LoginView lv) { // 로그인뷰를 매개변수로 받음
 
@@ -48,21 +48,21 @@ public class MainView extends JFrame {
 		logAnalyzeBtn = new JButton("로그파일 분석");
 		generateReportBtn = new JButton("레포트 생성");
 		
-		nameLabel = new JLabel(lv.getIdField().getText() + "님 안녕하세요?");
+		nameLbl = new JLabel(lv.getIdField().getText() + "님 안녕하세요?");
 		logoutBtn = new JButton("로그아웃");
 		openFileBtn = new JButton("불러오기");
-		openFileLabel = new JLabel("");
-		openFileLabel.setPreferredSize(new Dimension(700, 30));
-		openFileLabel.setBorder(new LineBorder(Color.black));
+		openFileLbl = new JLabel("");
+		openFileLbl.setPreferredSize(new Dimension(700, 30));
+		openFileLbl.setBorder(new LineBorder(Color.black));
 		
 		inputLineFrom = new JTextField(10); // 원하는 라인 입력
 		inputLineTo = new JTextField(10); // 원하는 라인 입력
 
 		// 파일 불러오기 및 정보, 로그아웃 라벨
 		JPanel topPanel = new JPanel();
-		topPanel.add(nameLabel);
+		topPanel.add(nameLbl);
 		topPanel.add(logoutBtn);
-		topPanel.add(openFileLabel);
+		topPanel.add(openFileLbl);
 		topPanel.add(openFileBtn);
 
 		// 라인 요청 라벨
@@ -103,6 +103,7 @@ public class MainView extends JFrame {
 		
 		String[] columnNames = { "Index", "응답코드", "URL", "Browser", "Time" };
 	    dtm.setColumnIdentifiers(columnNames);
+	    
 //		jta = new JTextArea(60, 80);
 //		//스크롤바가 자동으로 밑으로 안내려가게 설정(원리는 모르지만 구글에 검색하니 나왔음...)
 //		DefaultCaret caret = (DefaultCaret)jta.getCaret();
@@ -119,55 +120,20 @@ public class MainView extends JFrame {
 		southPanel.setLayout(new GridLayout(6, 1));
 		southPanel.setBorder(new TitledBorder("분석 결과"));
 		southPanel.setPreferredSize(new Dimension(800, 300));
-
-		JPanel q1Panel = new JPanel();
-		q1Panel.setLayout(new GridLayout(1, 2));
-		q1Label = new JLabel("최다 사용키와 횟수:", JLabel.CENTER);
-		a1Label = new JLabel("", JLabel.CENTER);
-		q1Panel.add(q1Label);
-		q1Panel.add(a1Label);
-
-		JPanel q2Panel = new JPanel();
-		q2Panel.setLayout(new GridLayout(1, 2));
-		q2Label = new JLabel("브라우저별 접속 횟수, 비율:", JLabel.CENTER);
-		a2Label = new JLabel("", JLabel.CENTER);
-		q2Panel.add(q2Label);
-		q2Panel.add(a2Label);
-
-		JPanel q3Panel = new JPanel();
-		q3Panel.setLayout(new GridLayout(1, 2));
-		q3Label = new JLabel("200응답 횟수, 404응답 횟수:", JLabel.CENTER);
-		a3Label = new JLabel("", JLabel.CENTER);
-		q3Panel.add(q3Label);
-		q3Panel.add(a3Label);
-
-		JPanel q4Panel = new JPanel();
-		q4Panel.setLayout(new GridLayout(1, 2));
-		q4Label = new JLabel("요청이 가장 많은 시간:", JLabel.CENTER);
-		a4Label = new JLabel("", JLabel.CENTER);
-		q4Panel.add(q4Label);
-		q4Panel.add(a4Label);
-
-		JPanel q5Panel = new JPanel();
-		q5Panel.setLayout(new GridLayout(1, 2));
-		q5Label = new JLabel("403응답 횟수, 비율:", JLabel.CENTER);
-		a5Label = new JLabel("", JLabel.CENTER);
-		q5Panel.add(q5Label);
-		q5Panel.add(a5Label);
-
-		JPanel q6Panel = new JPanel();
-		q6Panel.setLayout(new GridLayout(1, 2));
-		q6Label = new JLabel("books에 대한 요청 URL중 에러(500)가 발생한 횟수, 비율:", JLabel.CENTER);
-		a6Label = new JLabel("", JLabel.CENTER);
-		q6Panel.add(q6Label);
-		q6Panel.add(a6Label);
-
-		southPanel.add(q1Panel);
-		southPanel.add(q2Panel);
-		southPanel.add(q3Panel);
-		southPanel.add(q4Panel);
-		southPanel.add(q5Panel);
-		southPanel.add(q6Panel);
+		
+		String[] questionTexts = {
+	            "최다 사용키와 횟수:", "브라우저별 접속 횟수, 비율:", "200응답 횟수, 404응답 횟수:",
+	            "요청이 가장 많은 시간:", "403응답 횟수, 비율:", "books에 대한 요청 URL중 에러(500)가 발생한 횟수, 비율:"
+	        };
+		
+		for(int i=0; i<6; i++) {
+			questionLbl[i] = new JLabel(questionTexts[i], JLabel.CENTER);
+            answerLbl[i] = new JLabel("", JLabel.CENTER);
+            JPanel panel = new JPanel(new GridLayout(1, 2));
+            panel.add(questionLbl[i]);
+            panel.add(answerLbl[i]);
+            southPanel.add(panel);
+		}
 
 		add(southPanel, "South");
 
@@ -209,20 +175,20 @@ public class MainView extends JFrame {
 		return logoutBtn;
 	}
 
-	public JTextArea getJta() {
-		return jta;
+	public JLabel getOpenFileLbl() {
+		return openFileLbl;
 	}
 
-	public JLabel getOpenFileLabel() {
-		return openFileLabel;
+	public JLabel getNameLbl() {
+		return nameLbl;
 	}
 
-	public JLabel getNameLabel() {
-		return nameLabel;
+	public JLabel[] getQuestionLbl() {
+		return questionLbl;
 	}
 
-	public JScrollPane getJsp() {
-		return jsp;
+	public JLabel[] getAnswerLbl() {
+		return answerLbl;
 	}
 
 	public DefaultTableModel getDtm() {
@@ -233,60 +199,12 @@ public class MainView extends JFrame {
 		return jt;
 	}
 
-	public JLabel getQ1Label() {
-		return q1Label;
-	}
-
-	public JLabel getQ2Label() {
-		return q2Label;
-	}
-
-	public JLabel getQ3Label() {
-		return q3Label;
-	}
-
-	public JLabel getQ4Label() {
-		return q4Label;
-	}
-
-	public JLabel getQ5Label() {
-		return q5Label;
-	}
-
-	public JLabel getQ6Label() {
-		return q6Label;
-	}
-
-	public JLabel getA1Label() {
-		return a1Label;
-	}
-
-	public JLabel getA2Label() {
-		return a2Label;
-	}
-
-	public JLabel getA3Label() {
-		return a3Label;
-	}
-
-	public JLabel getA4Label() {
-		return a4Label;
-	}
-
-	public JLabel getA5Label() {
-		return a5Label;
-	}
-
-	public JLabel getA6Label() {
-		return a6Label;
+	public JScrollPane getJsp() {
+		return jsp;
 	}
 
 	public LoginView getLv() {
 		return lv;
-	}
-
-	public LoginViewEvt getLve() {
-		return lve;
 	}
 
 	

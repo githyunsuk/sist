@@ -14,7 +14,6 @@ import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  * 메인뷰의 이벤트를 처리하는 클래스
@@ -25,7 +24,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 	private LoginView lv;
 	private LogAnalyzeEvt lae;
 	
-	private File file;
+	private File logFile;
 	private ArrayList<LogVO> lvoList = new ArrayList<LogVO>();
 	
 	private StringTokenizer stk;
@@ -39,45 +38,46 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 	//파일 불러오기 method
 	public void openFile() throws IOException {
 		
-		//기존 불러왔던 파일이 남아있을 수 있으니 테이블 초기화
+		//기존 불러왔던 파일이 남아있을 수 있으니 테이블과 openFileLbl, inputLine 초기화
 		mv.getDtm().setRowCount(0);
+		mv.getOpenFileLbl().setText("");
+		mv.getInputLineFrom().setText("");
+		mv.getInputLineTo().setText("");
 		
 		JFileChooser jfc = new JFileChooser("c:/dev");
 		jfc.showOpenDialog(mv);
-		file = jfc.getSelectedFile();
+		logFile = jfc.getSelectedFile();
 
-		if (file == null || !file.exists()) {
+		if (logFile == null || !logFile.exists()) {
 			JOptionPane.showMessageDialog(mv, "파일이 존재하지 않습니다");
 		    return;  
 		}
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-		String msg;
-		int startLine = 0;
-		try {
-			while ((msg = br.readLine()) != null) {
-				lvoList.add(new LogVO(msg));
-				setLogTable(startLine++, msg);
-				
-			}
-		} finally {
-			if (br != null)
-				br.close();
-		}
-		mv.getOpenFileLabel().setText(file.getAbsolutePath());
+		//try ~ with ~ resources
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(logFile)))) {
+	        String msg;
+	        int startLine = 0;
+	        while ((msg = br.readLine()) != null) {
+	            lvoList.add(new LogVO(msg));
+	            setLogTable(startLine++, msg);
+	        }
+	    }
+		mv.getOpenFileLbl().setText(logFile.getAbsolutePath());
 	}
 	
 	//로그 분석 이벤트 클래스 생성
 	public void logAnalyze() {
-		if(file == null) {
+		if(logFile == null) {
 			JOptionPane.showMessageDialog(mv, "파일을 먼저 불러와주세요");
 			return;
 		}
+		
 		try {
-			lae = new LogAnalyzeEvt(mv, file, lvoList);
+			lae = new LogAnalyzeEvt(mv, lvoList);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	//로그 테이블을 채우는 method(LogAnalyzeEvt에서 재사용)
@@ -92,6 +92,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 		String[] newData = {String.valueOf(startLine + 1), strArr[0], strArr[1], strArr[2], strArr[3]};
 		mv.getDtm().addRow(newData);
 	}
+	
 	//리포트 생성 클래스
 	public void generateReport() {
 		String id = lv.getIdField().getText();
@@ -108,7 +109,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 		
 		//로그 분석을 완료한 객체를 넘겨주고 GenerateReportEvt 클래스 생성
 		try {
-			new GenerateReportEvt(mv, lae);
+			new GenerateReportEvt(mv, lae, logFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

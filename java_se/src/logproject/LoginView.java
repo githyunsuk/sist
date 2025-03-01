@@ -68,7 +68,7 @@ public class LoginView extends JFrame {
 		registerBtn.addActionListener(lve);
 		cancelBtn.addActionListener(lve);
 		
-		setBounds(100,100,500,300);
+		setBounds(700,300,500,300);
 		setVisible(true);
 	
 	}
