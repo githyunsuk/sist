@@ -146,6 +146,7 @@ public class LogAnalysis extends Panel {
 		opendFileLabel.setBorder(new LineBorder(Color.black));
 		lineFrom = new JTextField(10);
 		lineTo = new JTextField(10);
+		
 //--------------------------------------------------------
 		JPanel openPanel = new JPanel();
 		openPanel.add(openFileBtn);

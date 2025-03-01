@@ -44,7 +44,7 @@ public class LogVO {
 
 	}
 
-	public String fgetLogMsg() {
+	public String getLogMsg() {
 		return logMsg;
 	}
 

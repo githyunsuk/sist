@@ -14,8 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class LoginViewEvt extends WindowAdapter implements ActionListener {
 
-	LoginView lv;
-	Map<String, String> loginData; //로그인 데이터 저장하는 해쉬맵
+	private LoginView lv;
+	private LoginViewEvt lve;
+	private Map<String, String> loginData; //로그인 데이터 저장하는 해쉬맵
 	
 	public LoginViewEvt(LoginView lv) {
 		this.lv = lv;
