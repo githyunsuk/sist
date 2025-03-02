@@ -38,10 +38,11 @@ public class LogAnalyzeEvt {
 		//setLogTable Method 호출 위한 객체 생성
 		MainViewEvt mve = new MainViewEvt(mv, null);
 		
-		
+		//inputLine에 입력된 값으로 시작과 끝 값을 설정. 만약 입력된 값이 없다면 default 값(처음과 끝)으로 각각 설정
 		startLine = mv.getInputLineFrom().getText().isBlank() ? 1 : Integer.parseInt(mv.getInputLineFrom().getText());
 		endLine = mv.getInputLineTo().getText().isBlank() ? lvoList.size() : Integer.parseInt(mv.getInputLineTo().getText());
 		
+		//inputLine에 입력된 값이 파일 배열의 크기를 넘어서면 default 값(처음과 끝)으로 각각 설정
 		startLine = Math.max(startLine, 1);
 		endLine = Math.min(endLine, lvoList.size());
 		
@@ -63,7 +64,7 @@ public class LogAnalyzeEvt {
 			keyMap.merge(log.getKeyName(), 1, Integer::sum);
 			timeMap.merge(log.getTime(), 1, Integer::sum);
 		
-
+			//만약 log의 요청값이 books이면 service가 500이면 카운트 증가
 			if (log.isBooks() && "500".equals(log.getService())) {
 				books500Cnt++;
 			}

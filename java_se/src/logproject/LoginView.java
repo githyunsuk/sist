@@ -62,6 +62,7 @@ public class LoginView extends JFrame {
 		add(jpCenter,"Center");
 		add(jpButton,"South");
 		
+		//이벤트 설정
 		LoginViewEvt lve = new LoginViewEvt(this);
 		addWindowListener(lve);
 		loginBtn.addActionListener(lve);

@@ -58,16 +58,16 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 	        String msg;
 	        int startLine = 0;
 	        while ((msg = br.readLine()) != null) {
-	            lvoList.add(new LogVO(msg));
-	            setLogTable(startLine++, msg);
+	            lvoList.add(new LogVO(msg)); //LogVO 배열에 모든 문자열을 저장
+	            setLogTable(startLine++, msg); //범위 입력 전 우선 모든 내용을 테이블에 띄움
 	        }
 	    }
-		mv.getOpenFileLbl().setText(logFile.getAbsolutePath());
+		mv.getOpenFileLbl().setText(logFile.getAbsolutePath()); //불러온 파일명을 파일라벨에 띄움
 	}
 	
 	//로그 분석 이벤트 클래스 생성
 	public void logAnalyze() {
-		if(logFile == null) {
+		if(logFile == null) { //파일을 아직 불러오지 않았으면
 			JOptionPane.showMessageDialog(mv, "파일을 먼저 불러와주세요");
 			return;
 		}

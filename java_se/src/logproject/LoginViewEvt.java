@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 public class LoginViewEvt extends WindowAdapter implements ActionListener {
 
 	private LoginView lv;
-	private LoginViewEvt lve;
 	private Map<String, String> loginData; //로그인 데이터 저장하는 해쉬맵
 	
 	public LoginViewEvt(LoginView lv) {
@@ -24,7 +23,6 @@ public class LoginViewEvt extends WindowAdapter implements ActionListener {
 		loginData.put("admin","1234");
 		loginData.put("root","1111");
 		loginData.put("administrator","12345");
-		loginData.put("1", "1");
 	}
 
 	//로그인 성공시 MainView로 넘어가는 method
@@ -55,7 +53,20 @@ public class LoginViewEvt extends WindowAdapter implements ActionListener {
 		}
 	}
 	
+	//회원가입 처리(매우 빈약)
 	public void registerProcess() {
+		String id = lv.getIdField().getText();
+		String pw = new String(lv.getPwField().getPassword());
+		
+		if(loginData.containsKey(id)) {
+			JOptionPane.showMessageDialog(lv, "이미 존재하는 아이디입니다.", "", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		loginData.put(id, pw);
+		JOptionPane.showMessageDialog(lv, "회원가입 완료");
+		lv.getIdField().setText("");
+		lv.getPwField().setText("");
 		
 	}
 	
