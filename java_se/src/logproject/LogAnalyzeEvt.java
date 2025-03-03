@@ -75,7 +75,7 @@ public class LogAnalyzeEvt {
 	// 결과 출력
 	public void printResults() {
 
-		//레포트 파일 생성 클래스에 넘기기 위한 StringBuilder 초기화
+		//레포트 파일 생성 클래스에 넘기기 위한 StringBuilder 배열 초기화
 		sb = new StringBuilder[6];
 		for(int i=0; i<6; i++) {
 			sb[i] = new StringBuilder();

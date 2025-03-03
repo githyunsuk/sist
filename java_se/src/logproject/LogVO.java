@@ -30,18 +30,21 @@ public class LogVO {
 
 	}
 
+	//key 이름 추출 method
 	private String extractKeyName(String str) {
 		int startIdx = str.indexOf("key=") + 4;
 		int endIdx = str.indexOf("&", startIdx);
 		return (startIdx != -1 && endIdx != -1) ? str.substring(startIdx, endIdx) : "";
 	}
 
+	//시간 추출 method
 	private String extractTime(String part) {
         int startIdx = part.indexOf(" ") + 1;
         int endIdx = part.indexOf(":");
         return (startIdx != -1 && endIdx != -1) ? part.substring(startIdx, endIdx) : "";
     }
 
+	//books 여부 체크하는 method
     private boolean checkIsBooks(String part) {
         int startIdx = part.indexOf("find/") + 5;
         int endIdx = part.indexOf("?", startIdx);
