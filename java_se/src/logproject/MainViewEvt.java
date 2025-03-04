@@ -25,7 +25,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 	private LogAnalyzeEvt lae;
 	
 	private File logFile;
-	private ArrayList<LogVO> lvoList = new ArrayList<LogVO>();
+	private ArrayList<LogVO> lvoList;
 	
 	private StringTokenizer stk;
 	private String[] strArr;
@@ -43,6 +43,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 		mv.getOpenFileLbl().setText("");
 		mv.getInputLineFrom().setText("");
 		mv.getInputLineTo().setText("");
+		lvoList = new ArrayList<LogVO>(); //LogVO 객체 배열 초기화 - 파일 불러올 때 마다 배열이 초기화 되어야함
 		
 		JFileChooser jfc = new JFileChooser("c:/dev");
 		jfc.showOpenDialog(mv);
@@ -73,7 +74,7 @@ public class MainViewEvt extends WindowAdapter implements ActionListener {
 		}
 		
 		try {
-			lae = new LogAnalyzeEvt(mv, lvoList);
+			lae = new LogAnalyzeEvt(mv, this, lvoList);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,5 +1,8 @@
 package logproject;
 
+/**
+ * 로그 파일을 객체로 저장하여 처리하는 클래스
+ */
 public class LogVO {
 
 	private String logMsg, service, browserName, keyName, time;
@@ -10,7 +13,7 @@ public class LogVO {
 		// 기존 문자열을 쪼개기 전 원본 상태로 저장
 		logMsg = line;
 
-		// ']' 기분으로 라인 분리
+		// ']' 기준으로 라인 분리
 		String[] lineArr = line.split("]");
 
 		// 서비스 추출

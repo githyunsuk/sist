@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+/**
+ * 레포트 생성 클래스 
+ */
 public class GenerateReportEvt {
 
 	private StringBuilder[] reportData;

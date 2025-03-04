@@ -6,10 +6,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 로그 파일을 분석하는 이벤트 클래스 
+ */
 public class LogAnalyzeEvt {
 
 	private MainView mv;
+	private MainViewEvt mve;
 	private ArrayList<LogVO> lvoList;
 
 	private Map<String, Integer> serviceMap = new HashMap<>();
@@ -23,8 +26,9 @@ public class LogAnalyzeEvt {
 	private StringBuilder[] sb;
 	
 
-	public LogAnalyzeEvt(MainView mv, ArrayList<LogVO> lvoList) throws IOException {
+	public LogAnalyzeEvt(MainView mv, MainViewEvt mve, ArrayList<LogVO> lvoList) throws IOException {
 		this.mv = mv;
+		this.mve = mve;
 		this.lvoList = lvoList;
 
 		processLogs();
@@ -34,10 +38,7 @@ public class LogAnalyzeEvt {
 
 	// 로그 파일 처리
 	public void processLogs() {
-		
-		//setLogTable Method 호출 위한 객체 생성
-		MainViewEvt mve = new MainViewEvt(mv, null);
-		
+	
 		//inputLine에 입력된 값으로 시작과 끝 값을 설정. 만약 입력된 값이 없다면 default 값(처음과 끝)으로 각각 설정
 		startLine = mv.getInputLineFrom().getText().isBlank() ? 1 : Integer.parseInt(mv.getInputLineFrom().getText());
 		endLine = mv.getInputLineTo().getText().isBlank() ? lvoList.size() : Integer.parseInt(mv.getInputLineTo().getText());
