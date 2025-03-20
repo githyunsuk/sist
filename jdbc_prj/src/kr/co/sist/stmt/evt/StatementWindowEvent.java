@@ -97,6 +97,8 @@ public class StatementWindowEvent extends WindowAdapter implements ActionListene
 			JOptionPane.showMessageDialog(ew, "성별 선택해");
 			return;
 		} // end if
+		
+		//업무로직을 처리
 		StatementService ss = new StatementService(ew);
 		ss.addStmtMember(sVO);
 
@@ -108,23 +110,34 @@ public class StatementWindowEvent extends WindowAdapter implements ActionListene
 		// Total JLabel 값 바꾸기
 		ew.getJlblCount2().setText(String.valueOf(ew.getDlm().size()));
 	}// addList
+	
+	public void modifyMember(StatementMemberVO smVO) {
+		//업무로직을 처리
+		StatementService ss = new StatementService(ew);
+		smVO.setNum(1);
+		String alertMsg="회원 정보 변경 실패";
+		if(ss.modifyStmtMember(smVO)) {
+			alertMsg = "회원정보가 성공적으로 변경되었습니다.";
+		} //변경을 수행
+		
+		JOptionPane.showMessageDialog(ew, alertMsg);
 
-	public void deleteList(String name) {
-		// #. 유효성 검증
-		// 이름에 값을 입력안하고 삭제 버튼을 누르면 전부다 삭제되네? 아래 for문 안돌아야될텐데..
-		// 비어있으면 Early Return 맥여버리자..
-		if (ew.getJtfName().getText().isEmpty()) {
-			return;
-		} // end if
+		//레코드 추가 후 입력 필드를 초기화
+		ew.getJtfName().setText("");
+		ew.getJtfAge().setText("");
+		ew.getJtfPhoneNumber().setText("");
+		ew.getJtfName().requestFocus();
+	}
 
-		// 리스트에 모든 데이터를 확인해보자.
-		for (int i = 0; i < ew.getDlm().size(); i++) {
-			if (ew.getDlm().getElementAt(i).startsWith(name) == true) {
-				ew.getDlm().removeElementAt(i);
-				i--; // 삭제하고 나면 인덱스가 바뀌는거 맞출려고 i-- 했습니다.
-			} // end if
-		} // end for
-
+	public void removeMember(int num) {
+		
+		StatementService ss = new StatementService(ew);
+		String alterMsg = "회원 정보를 삭제하지 못하였습니다.";
+		if(ss.removeStmtMember(num)) {
+			alterMsg = "회원 정보를 삭제하였습니다.";
+		}
+		JOptionPane.showMessageDialog(ew, alterMsg);
+		
 		// Total JLabel 값 바꾸기
 		ew.getJlblCount2().setText(String.valueOf(ew.getDlm().size()));
 	}// deleteList
@@ -185,10 +198,17 @@ public class StatementWindowEvent extends WindowAdapter implements ActionListene
 			}
 		} // 추가버튼
 		if (e.getSource() == jbtnChange) {
-			changeList(name, age, phoneNumber, gender);
+			try {
+				//입력된 값을 VO객체에 할당
+				StatementMemberVO smVO = new StatementMemberVO(0, Integer.parseInt(age), name, gender, phoneNumber, null);
+				modifyMember(smVO); //업무로직을 처리
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(ew, "나이에 숫자를 입력해");
+			}
 		} // 변경버튼
 		if (e.getSource() == jbtnDelete) {
-			deleteList(name);
+			int num = 3;
+			removeMember(num);
 		} // 삭제버튼
 
 	}// actionPerformed
