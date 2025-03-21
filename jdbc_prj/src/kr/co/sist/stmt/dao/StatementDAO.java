@@ -2,6 +2,7 @@ package kr.co.sist.stmt.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -164,6 +165,57 @@ public class StatementDAO {
 	public List<StatementMemberVO> selectAllStmtMember() throws SQLException {
 		List<StatementMemberVO> list = new ArrayList<StatementMemberVO>();
 
+		//1.드라이버 로딩
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String id = "scott";
+		String pass = "tiger";
+		try {
+		//2.커넥션 얻기
+			conn = DriverManager.getConnection(url,id,pass);
+		//3.쿼리문 생성객체 얻기
+			stmt = conn.createStatement();
+		//4.쿼리문 수행 후 결과 얻기
+			StringBuilder selectAllMember = new StringBuilder();
+			selectAllMember
+			.append("	select	num,name,age,gender,tel,input_date	")
+			.append("	from	statement_member		");
+			
+			rs = stmt.executeQuery(selectAllMember.toString());
+			//쿼리를 수행 한 후 inline view 앞에 생성된 cursor의 제어권을 얻기
+			
+			//몇 줄의 레코드가 있는지 알 수 없다.
+			StatementMemberVO smVO = null;
+			while(rs.next()) {
+				smVO = new StatementMemberVO();
+				smVO.setNum(rs.getInt("num"));
+				smVO.setName(rs.getString("name"));
+				smVO.setAge(rs.getInt("age"));
+				smVO.setGender(rs.getString("gender"));
+				smVO.setTel(rs.getString("tel"));
+				smVO.setInputDate(rs.getDate("input_date"));
+				
+//				System.out.println(smVO);
+				//레코드의 컬럼값을 가진 VO객체를 List에 추가
+				list.add(smVO);
+			}
+			System.out.println(list);
+		}finally {
+		//5.연결 끊기
+			if(rs != null) rs.close();
+			if(stmt != null) stmt.close();
+			if(conn != null) conn.close();
+		}
 		return list;
 	}
 
@@ -178,5 +230,45 @@ public class StatementDAO {
 		StatementMemberVO smVO = null;
 
 		return smVO;
+	}
+	
+	/**
+	 * STATEMENT_MEMBER 테이블에 모든 레코드의 수를 얻기
+	 * @return 레코드의 수
+	 * @throws SQLException
+	 */
+	public int selectCntStmtMember() {
+		int cnt = 0;
+		
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String id = "scott";
+		String pass = "tiger";
+		//2.커넥션 얻기
+		//3.쿼리문 생성객체 얻기
+		//5.자동으로 연결이 끊어진다. try~with~resources
+		String selectAllCnt = "select count(num) cnt from statement_member";
+		try(Connection con = DriverManager.getConnection(url,id,pass);
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(selectAllCnt)) {
+			
+			//4.쿼리문 실행 후 결과 얻기
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+			
+		} catch(SQLException se) {
+			se.printStackTrace();
+		}
+		
+		
+		
+		
+		return cnt;
 	}
 }

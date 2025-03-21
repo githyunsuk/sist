@@ -1,6 +1,7 @@
 package kr.co.sist.stmt.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -76,5 +77,25 @@ public class StatementService {
 		}
 		return flag;
 	}//removeStmtMember
+	
+	public int searchAllCnt() {
+		int cnt = 0;
+		StatementDAO sDAO = new StatementDAO();
+		cnt = sDAO.selectCntStmtMember();
+		return cnt;
+	}//searchAllCnt
+	
+	public List<StatementMemberVO> searchAllMember(){
+		List<StatementMemberVO> list = null;
+		
+		StatementDAO sDAO = new StatementDAO();
+		try {
+			list = sDAO.selectAllStmtMember();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}//searchAllMember
 
 }
