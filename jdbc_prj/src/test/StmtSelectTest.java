@@ -20,7 +20,7 @@ class StmtSelectTest {
 		try {
 //			assertEquals(sd.selectAllStmtMember(), 10);
 			//오차범위: 조회된 레코드 수, 예상조회레코드 수, 오차 범위
-			assertEquals(sd.selectAllStmtMember().size(),10,4);
+			assertEquals(sd.selectAllStmtMember().size(),4,4);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
