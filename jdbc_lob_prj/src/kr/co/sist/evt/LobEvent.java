@@ -123,7 +123,6 @@ public class LobEvent extends WindowAdapter implements ActionListener {
 	}// searchMember
 
 	private void closeWindow() {
-		System.out.println("closeWindow");
 		lv.dispose();
 	}
 

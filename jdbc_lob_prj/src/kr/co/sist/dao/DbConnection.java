@@ -26,7 +26,7 @@ public class DbConnection {
 		}//getInstance
 		
 		public Connection getConn()throws SQLException{
-			//properties 파일 사용 ( ㅅ스코드에 계정정보를 하드코딩하지 않는다.)
+			//properties 파일 사용 ( 소스코드에 계정정보를 하드코딩하지 않는다.)
 			String currentDir=System.getProperty("user.dir");
 			File file= new File(currentDir+"/src/properties/database.properties");
 			if( !file.exists() ) {

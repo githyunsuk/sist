@@ -113,7 +113,7 @@ public class LobDAO {
 			selectLob
 			.append("	select	name,email,tel,img,img_name,intro,input_date") 
 			.append("	from	lob_data									") 
-			.append("	where	num=?										"); 
+			.append("	where	num=.										"); 
 		//3.
 			pstmt=con.prepareStatement(selectLob.toString());
 		//4.
