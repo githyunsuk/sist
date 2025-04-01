@@ -75,5 +75,14 @@ public class DbConnection {
 		}
 	}// closeDB
 
+	public static void main(String[] args) {
+		try {
+			DbConnection.getInstance().getConn();
+			System.out.println("연결완료");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }// class
