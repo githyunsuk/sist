@@ -1,0 +1,6 @@
+@charset "UTF-8";
+/*
+외부 파일방식: 여러 HTML file에서 사용할 공통 디자인 정의
+*/
+
+ol, p {font-family: 궁서체; font-weight: bold;}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div{ margin-bottom: 10px}
+/* 테두리 선의 설정*/
+.solid{ border: 1px solid #333}
+.dotted{border: 1px dotted #333 }
+.dashed{ border: 1px dashed #333}
+/* 더블은 선의 두께가 3px 부터 적용 */
+.double{ border: 3px dashed #333}
+
+.left{ border-left: 4px solid #444}
+.top{ border-top: 2px dotted #FF0000}
+.right{ border-right: 10px solid #333}
+.bottom{ border-bottom: 4px double #333}
+
+
+</style>
+</head>
+<body>
+<div class="solid">실선</div>
+<div class="dotted">짧은 점선</div>
+<div class="dashed">긴점선</div>
+<div class="double">이중선</div>
+
+<div><input type="text" class="double"></div>
+<hr>
+<strong>특정위치의 선</strong>
+<div class="left">왼쪽</div>
+<div class="top">윗쪽</div>
+<div class="right">오른쪽</div>
+<div class="bottom">아래쪽</div>
+<hr>
+
+<!-- class 속성은 태그에 하나만 사용할 수 있다.  -->
+<div class="top bottom left right" >여러개의 클래스를 적용.</div>
+
+
+
+</body>
+</html>

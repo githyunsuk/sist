@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<strong>칸 합치기: colspan</strong>
+	<table border="1" width="300" height="300">
+		<tr>
+			<td colspan="2" width="200">1</td>
+			<td width="100">2</td>
+			<td colspan="3" width="300">3</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+		</tr>
+	</table>
+	<hr>
+	<strong>행 합치기: rowspan</strong>
+	<table border="1" width="300" height="300">
+		<tr height="100">
+			<td rowspan="2">1</td>
+			<td>2</td>
+			<td>3</td>
+		</tr>
+		<tr height="100">
+			<!--<td>4</td>-->
+			<td rowspan="2">5</td>
+			<!-- <td>6</td> -->
+		</tr>
+		<tr height="100">
+			<td>7</td>
+			<!-- <td>8</td>
+			<td>9</td> -->
+		</tr>
+	</table>
+</body>
+</html>

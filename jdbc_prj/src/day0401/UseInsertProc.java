@@ -47,6 +47,7 @@ public class UseInsertProc {
 	}//insertCpEmp
 	
 	public static void main(String[] args) {
+		
 		CpEmpVO ceVO = new CpEmpVO();
 		ceVO.setEmpno(2);
 		ceVO.setEname("이장훈");

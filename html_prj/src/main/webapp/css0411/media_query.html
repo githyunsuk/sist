@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<style type="text/css">
+/*기본 디자인의 설정*/
+table { border: 1px solid #333; border-spacing: 0px}
+th, td{ border: 1px solid #333 }
+thead > tr { background-color: #F0F0F0 }
+tbody > tr:hover { background-color: #F0F0F0 }
+/*media query: 브라우저의 넓이가 800px 이하의 설정*/
+@media screen and (max-width:800px){
+	.color{ color: #FF0000}
+	#img{ display: none }
+	#numTitle{ width: 100px }
+	#nameTitle{ width: 150px }
+}
+/*media query: 브라우저의 넓이가 800px 이상의 설정*/
+@media screen and (min-width:800px){
+	.color{ color: #FF0000}
+}
+</style>
+</head>
+<body>
+<div class="color">
+	브라우저의 넓이가 800px까지는 글자색이 빨간색으로, 이미지 숨기기, 변경됩니다.
+	880px 이상 부터는 글자색이 파란색으로 변경된다.
+</div>
+<div id="img"><img src="../common/images/img_1.jpg"/></div>
+<table>
+<thead>
+	<tr>
+		<th id="numTitle">번호</th>
+		<th id="nameTitle">이름</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>1</td><td>일장훈</td>
+	</tr>
+	<tr>
+		<td>2</td><td>이장훈</td>
+	</tr>
+	<tr>
+		<td>3</td><td>삼장훈</td>
+	</tr>
+</tbody>
+</table>
+</body>
+</html>

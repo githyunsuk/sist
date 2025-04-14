@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+href="http://192.168.10.76/html_prj/common/css/main_v250409.css"/>
+<style type="text/css">
+div{ border: 1px solid #333}
+#wrap{width:800px; height: 900px; position: relative;
+		top:100px; left: 150px;}
+		/* 앱솔루트는 부모 릴레이티브 좌표에 영향을 받는다.  */
+#abs{width:300px; height: 400px; background-color:#8EC2E4;
+	position: absolute; top:100px; left:200px}
+#fix{width:100px; height: 300px; background-color:#4D9533;
+	position: fixed; top:100px; left:200px}
+</style>
+</head>
+<body>
+<div id="wrap">
+<div id="abs">부모가 relative인 경우 시작좌표에 영향을 받는다</div>
+<div id="fix">시작좌표는 브라우저의 좌상단</div>
+
+</div>
+</body>
+</html>

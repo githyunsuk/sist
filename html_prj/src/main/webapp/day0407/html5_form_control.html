@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<details>
+<summary>오늘 점심은?</summary>
+<strong>돈가츠</strong>
+<span><img src="http://localhost/html_prj/common/images/img_5.jpg" 
+	title="이 아이가 배가 부르다는 느낌을 알까요?"
+	width="130"/></span>
+</details>
+<hr>
+<!-- datalist를 사용할 input을 생성 -->
+<label>관심언어</label><input type="text" list="LangData"/>
+<!-- datalist 생성 : 사용자에게 보여지지 않는다. -->
+<datalist id="LangData">
+	<option value="java"/>
+	<option value="pl/sql"/>
+	<option value="jsp"/>
+	<option value="javascript"/>
+	<option value="c/c++"/>
+	<option value="python"/>
+</datalist>
+<hr>
+<strong>HTML5에서 지원되는 새로운 Form Control</strong><br>
+date : <input type="date" value="2025-07-25"/><br>
+month: <input type="month" value="2025-07"/><br>
+datetime-local : <input type="datetime-local" value="2025-07-29 18:00"/><br>
+time = <input type="time" value="17:50"/><br>
+color : <input type="color" value="#A9B6C8"/><br>
+
+전화번호 : <input type="tel" name="tel"/><br>
+이메일 : <input type="email" name="email"/><br>
+
+범위 설정:
+	0<input type="range" name="length" min="0" max="100" value="50"/>100
+
+<br>
+값을 시각적으로 표현 :
+ <meter value="50" min="0" max="100"></meter>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+</head>
+<body>
+  <h2>회원가입</h2>
+    <table border="1">
+      <tr>
+        <th>* 아이디</th>
+        <td><input type="text" readonly></td>
+        <td><button>ID 중복확인</button></td>
+      </tr>
+      <tr>
+        <th>* 비밀번호</th>
+        <td colspan="2"><input type="password"></td>
+      </tr>
+      <tr>
+        <th>* 비밀번호 확인</th>
+        <td colspan="2"><input type="password"></td>
+      </tr>
+      <tr>
+        <th>* 이름</th>
+        <td colspan="2"><input type="text"></td>
+      </tr>
+      <tr>
+        <th>* 생일</th>
+        <td colspan="2"><input type="text"></td>
+      </tr>
+      <tr>
+        <th>* 연락처</th>
+        <td colspan="2"><input type="text"></td>
+      </tr>
+      <tr>
+        <th>* 휴대폰</th>
+        <td><input type="text"></td>
+        <td><input type="checkbox"> 수신</td>
+      </tr>
+      <tr>
+        <th>* 이메일</th>
+        <td>
+          <input type="text"> @ 
+          <input list="emailList" type="text">
+          <datalist id="emailList">
+          	<option value="직접 입력">
+          	<option value="naver.com">
+          	<option value="daum.net">
+          	<option value="gmail.com">
+          	<option value="hanmail.com">
+          	<option value="nate.com">
+          	<option value="korea.com">
+          </datalist>
+        </td>
+        <td><input type="checkbox"> 수신</td>
+      </tr>
+      <tr>
+        <th>* 성별</th>
+        <td colspan="2">
+          <input type="radio" name="gender"> 남자
+          <input type="radio" name="gender"> 여자
+        </td>
+      </tr>
+      <tr>
+        <th>* 소재지</th>
+        <td colspan="2">
+          <select>
+            <option>선택해주세요</option>
+            <option>서울</option>
+            <option>경기</option>
+            <option>부산</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>* 우편번호</th>
+        <td><input type="text" readonly></td>
+        <td><button>우편번호검색</button></td>
+      </tr>
+      <tr>
+        <th rowspan="2">* 주소</th>
+        <td colspan="2"><input type="text" readonly></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="3" align="center">
+          <button>확인</button>
+          <button>취소</button>
+        </td>
+      </tr>
+    </table>
+</body>
+</html>
