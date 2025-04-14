@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	//지역변수
+	//1.선언
+	var name;
+	//2.값할당: 변수에 값이 할당되며 데이터 형이 결정된다.
+	name="강태일";
+	//3.값 사용
+	console.log(name+"님 어서오고!");
+	document.write(name+"님 안녕하세요?");
+	
+	//전역변수: var를 붙히지 않고 선언하는 변수
+	age = 20;
+	document.write("나이는: " + age+"살입니다.<br>");
+	
+	function useVariable(){
+		alert("지역변수 : " + name+", 전역변수 : " + age);
+	}
+	
+	function defineVariable(){
+		//지역변수
+		var addr="서울시 강남구 역삼동";
+		
+		//전역변수
+		email = "test@test.com";
+		
+		alert("주소 : " + addr + ", 이메일 : " + email);
+	}
+	
+	//defineVariable함수가 호출 된 후 호출되어야한다.
+	function useVariable2(){
+		//alert("지역변수 : " + addr );
+		alert("전역변수 : " + email );
+	}
+	
+	var val = "안녕";
+	document.write( val + " / " + typeof(val)+"<br>");
+	val = '안녕'; //문자열 ", ' 모두 가능
+	document.write( val + " / " + typeof(val)+"<br>");
+	
+	var val2 = 4.14;
+	document.write( val2 + " / " + typeof(val2)+"<br>");
+	
+	val2 = 2025;
+	document.write( val2 + " / " + typeof(val2)+"<br>");
+	
+	var val3 = true;
+	document.write( val3 + " / " + typeof(val3)+"<br>");
+	
+	var val4 = new Date();
+	document.write( val4 + " / " + typeof(val4)+"<br>");
+	
+	var divNode = document.getElementById("div");
+	document.write( divNode + " / " + typeof(divNode)+"<br>");
+</script>
+</head>
+<body>
+<input type="button" value="변수의 사용" class="btn btn-success"
+	onclick="useVariable()"/>
+<input type="button" value="변수의 선언" class="btn btn-danger btn-sm"
+	onclick="defineVariable()"/>
+<input type="button" value="변수의 사용2" class="btn btn-success"
+	onclick="useVariable2()"/>
+</body>
+</html>

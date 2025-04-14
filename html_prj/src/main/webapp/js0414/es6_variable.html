@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<script type="text/javascript">
+
+	alert( name ); //hoisting : 아래 선언된 변수를 위에서 사용 하는 것.
+	
+	var name = "이장훈";
+	
+	var name = "강태일"; //변수를 중복 선언할 수 있다.
+	
+	//상수
+	const day = 14;
+	//day = 15; //값을 할당할 수 없다. error
+	document.write( day );
+	
+	document.write( "<br> ");
+	
+	//alert( age ); //hoisting이 안된다.
+	let age = 25;
+	document.write( age );
+	
+	//let age = 25; //let은 중복 선언할 수 없다.
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+//1.생성) var 배열명 = new Array();
+var arr = new Array(); //가변 길이형
+//2.값 추가) 배열명[방의인덱스]=값; 배열명.push( 값 );
+arr[0] = "오늘은";
+arr[1] = "비오는";
+arr[2] = "월요일.";
+arr[3] = 2025;
+arr.push("년 4월 14일");
+arr.push("JavaScript 수업 하고 있음");
+
+//3.값 사용) 배열명[방의 인덱스]
+document.write( arr[0] + "<br>")
+
+//일괄처리
+document.write("<ol>");
+for(var i=0; i<arr.length; i++){
+	document.write(`<li>arr[${i}]번째 방의 값 : <strong>${ arr[i] }</strong></li>`);
+}
+document.write("</ol>");
+
+document.write( arr.length )
+</script>
+</head>
+<body>
+
+</body>
+</html>

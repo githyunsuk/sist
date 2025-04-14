@@ -7,10 +7,30 @@
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
 
 <style type="text/css">
-
 </style>
+<script type="text/javascript">
+window.document.write("오늘은 월요일 입니다.<br>");
+//<br>: <scipt> 태그 안쪽은 JavaScript 영역이므로 JS코드만 작성가능
+function useAlert(){
+	alert("경고창 출력"); //코드의 실행을 멈춘다. ( debug )
+	//window 생략 가능
+	document.write("오늘은 활기찬 월요일 입니다.<br>");
+	//body가 제공된 후 호출되면, 기존의 body의 내용을 모두 지우고 출력.(안씀)
+}
+
+function useConsole(){
+	//web browser console에 값을 출력할 때 -debug
+	console.log("오늘은 2025-04-14일 입니다.");
+	console.log("내일은 2025-04-15일 입니다.");
+}
+</script>
 </head>
 <body>
-
+<strong>다양한 출력</strong>
+<br>
+<input type="button" value="alert출력" class="btn btn-success"
+	onClick="useAlert()"/>
+<input type="button" value="웹브라우저 console 출력" class="btn btn-warning"
+	onClick="useConsole()"/>
 </body>
 </html>
