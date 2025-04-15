@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	var arr = [2025,4,15,'프로젝트 발표일', "14시", "이대웅", "김희범", "주현석", "정제균"]
+	
+	document.write("<ol>")
+	for (var i=0; i<arr.length; i++){
+		document.write(`<li>${i+1} : ${arr[i]}</li`);
+	}
+	document.write("</ol>")
+	
+	var name = "주현석";
+	var ind = arr.indexOf( name );
+	
+	document.write(`${name}은(는) ${ind}번째 방에 존재합니다.<br>`);
+	
+	// [2025,4,15,'프로젝트 발표일', "14시", "이대웅", "김희범", "주현석", "정제균"];
+	//배열 방의 값을 자르기: splice(시작 인덱스, 자를 방의 수)
+	
+	arr.splice(2,3); //배열의 방을 자르면 크기가 줄어 든다.(가변길이형)
+	
+	document.write("<ol>")
+	for (var i=0; i<arr.length; i++){
+		document.write(`<li>${i+1} : ${arr[i]}</li`);
+	}
+	document.write("</ol>")
+	
+	var arr2 = ["이대웅", "김희범", "주현석", "정제균"];
+	var arr3 = ["프로젝트 발표자", ...arr2, 2025, 4, 15];
+	document.write("<table class='table table-hover'>");
+	for(var i=0; i<arr3.length; i++){
+		document.write("<tr>");
+		document.write(`<td>${arr3[i]}</td>`);
+		document.write("</tr>");
+	}
+	document.write("</table>");
+	</script>
+</head>
+<body>
+
+</body>
+</html>

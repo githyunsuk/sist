@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+	a:hover{ text-decoration: non }
+</style>
+<script type="text/javascript">
+	function named(){
+		alert("이름이 있는 기명함수");
+	}
+	
+	//named();
+	
+	//이름이 없는 anonymous function
+	var anony = function(){
+		alert("이름이 없는 무기명함수");
+	}
+	
+	//함수의 내용을 문자열이고, 문자열이 변수에 할당된다. ()를 붙히지 않으면
+	//문자열의 내용이 그대로 출력되고, ()를 붙히면 함수로서 일을 수행한다.
+	alert( anony ); //함수의 내용이 그대로 출력
+</script>
+</head>
+<body>
+<button class="btn btn-success" onclick="named()">기명함수호출</button>
+<!-- href="속성의 영역은 HTML영역이므로 JS 함수를 호출할 수 없다.) -->
+<!-- <a href="named()" class="btn btn-success">기명함수 호출</a> -->
+<!-- HTML 영역을 JS영역으로 바꾸려면 "javascript:"을 앞에 붙여주면 된다. -->
+<a href="javascript:named()" class="btn btn-success">기명함수 호출</a>
+</body>
+</html>

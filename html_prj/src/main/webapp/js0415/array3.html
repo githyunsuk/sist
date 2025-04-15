@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+//이차원 배열
+//1.일차원 배열을 새성
+var arr2 = new Array();
+//2.방에 일차원 배열을 생성(이차원 배열-가변배열)
+arr2[0] = new Array();
+arr2[1] = new Array();
+arr2[2] = ["주현석","양준수","이호빈","한주성"];
+arr2[3] = ["김민진","박선은","김세형","이장훈"];
+
+//3.값할당
+arr2[0][0] = "이여진";
+arr2[0][1] = "김민경";
+arr2[0][2] = "장태규";
+arr2[0][3] = "강태일";
+
+arr2[1][0] = "김희범";
+arr2[1][1] = "현지영";
+arr2[1][2] = "박인배";
+arr2[1][3] = "김재인";
+//4.값사용
+document.write("<table class='table table-hover'>")
+for(var i=0; i<arr2.length; i++){
+document.write("<tr>")
+	for(var j=0; j<arr2.length; j++){
+	document.write(`<td>${arr2[i][j]}</td>`)
+	}
+document.write("</tr>")
+}
+document.write("</table>")
+</script>
+</head>
+<body>
+
+</body>
+</html>
