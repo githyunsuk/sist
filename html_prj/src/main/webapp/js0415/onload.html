@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function call(){
+	//alert("함수가 호출 되었습니다.");
+	window.open("array2.html","subwin", "width=400,height=600");
+}	
+</script>
+</head>
+<!-- onload 속성은 <body> 태그에서만 동작한다. -->
+<body onload="call()">
+<div>div</div>
+<input type="button" value="로드" onload="call()" class="btn btn-danger"/>
+</body>
+</html>

@@ -31,6 +31,24 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
 	//함수의 내용을 문자열이고, 문자열이 변수에 할당된다. ()를 붙히지 않으면
 	//문자열의 내용이 그대로 출력되고, ()를 붙히면 함수로서 일을 수행한다.
 	alert( anony ); //함수의 내용이 그대로 출력
+	anony();
+	
+	//매개변수 함수: 매개변수에는 var를 사용할 수 없다.
+	function param(name, age){
+		console.log(`이름 :${ name }, 나이 : ${ age }, 태어난 해 : ${2025-age+1}`);
+	}
+	
+	param("강태일", 25);
+	
+	//반환 값이 있는 함수 : 가장 마지막줄에 return 값;
+	function returnValue(){
+		var msg = "오늘은 화요일 입니다.";
+		
+		return msg;
+	}
+	
+	var msg = returnValue();
+	alert("반환값 :" + msg);
 </script>
 </head>
 <body>
