@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function test(name="강태일",age=25){
+	console.log(`이름 : ${name}, 나이:${age}`);
+	
+	//console.log( addr ); //선언되어있지 않은 변수를 사용 : is not defined
+	
+	console.log( email ); //hoisting이 되어있는 변수를 위에서 사용 : undefiend
+	var email; //hoisting
+	
+	console.log( tel ); //let은 hoisting이 안됨. 위에서 사용: initialization
+	let tel;
+}
+</script>
+</head>
+<body>
+	<input type="button" value="매개변수 생략" class="btn btn-primary"
+		onclick="test()"/><br>
+	<input type="button" value="매개변수 입력" class="btn btn-info"
+		onclick="test('이장훈',20)"/><br>
+</body>
+</html>

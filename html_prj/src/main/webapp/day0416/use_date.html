@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+	span{ font-weight: bold; font-size: 25px }
+	span:hover{ font-size: 25px; background-color:#76A1CC;
+			text-decoration: uderLine; }
+</style>
+<script type="text/javascript">
+var useDate = function(){
+	//1.Date 객체 생성.
+	var date = new Date();
+	
+	//month는 0월 부터 시작
+	var output = date.getFullYear() + "-" + (date.getMonth()+1)+"-"+
+		date.getDate()+"&nbsp;"+date.getHours()+":"+
+		date.getMinutes()+":"+date.getSeconds();
+	
+	document.getElementById("output").innerHTML = output;
+	
+	setTimeout(useDate, 1000);
+}
+
+function test(){
+	alert("test function");
+}
+
+//JavaScript은 "함수가 값(First Class Function)"이므로 매개변수에 함수를 넣어주고
+function test2(func){
+	func();//받아낸 함수를 () 붙혀서 호출할 수 있다.
+	alert("test2");
+}
+</script>
+</head>
+<body>
+	<div>
+		지금 시간은 <span id="output"></span> 입니다.
+	</div>
+	<input type="button" value="날짜 정보 얻기" onclick="useDate()" 
+		class="btn btn-success btn-sm"/>
+</body>
+</html>

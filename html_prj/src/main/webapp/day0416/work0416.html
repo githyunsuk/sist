@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon"
+	href="http://192.168.10.75/html_prj/common/images/favicon.ico" />
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" />
+
+<style type="text/css">
+#zodiac {
+	border: 1px solid #333;
+	width: 400px;
+	height: 300px;
+	overflow: auto
+}
+</style>
+<script type="text/javascript">
+	function zodiac() {
+		var nameNode = document.getElementById("name");
+		var birthNode = document.getElementById("birth");
+		var numNode = document.getElementById("num");
+		
+		var year = birthNode.value.substr(0,2);
+		var month = birthNode.value.substr(2,2);
+		var day = birthNode.value.substr(4,2);
+		
+		var jumin = birthNode.value + numNode.value
+		if(jumin.length != 13){
+			alert("주민번호는 13자리")
+			return;
+		}
+		
+		var num = numNode.value.substr(0,1);
+		if(num == 1 || num == 2 || num == 5 || num == 6){
+			year = "19" + year;
+		} else{
+			year = "20" + year;
+		}
+		
+		if(num ==1 || num == 3){
+			gender = "남";
+		} else{
+			gender = "여";
+		}
+		
+		var age = 2025 - year + 1;
+		var zodiac = ["monkey", "rooster", "dog", "pig","rat", "ox", "tiger", 
+		        "rabbit","dragon","snake", "horse", "sheep"];
+		
+		var n = year % 12
+		var myZodiac = zodiac[n];
+		
+		var str = 
+			`${ nameNode.value }님<br>
+			 생년월일: ${year} - ${month} - ${day}<br>
+			 성별: ${gender}<br>
+			 나이: ${age}<br>
+			 띠: <img src="images/${myZodiac}.png">
+			`;
+		document.getElementById("zodiac").innerHTML = str;
+	}
+</script>
+</head>
+<body>
+	<label>이름 :</label>
+	<input type="text" id="name">
+	<br>
+	<label>주민번호 :</label>
+	<input type="text" id="birth"> -
+	<input type="text" id="num">
+	<br>
+	<button class="btn btn-success" onclick="zodiac()">입력</button>
+	<div id="zodiac"></div>
+</body>
+</html>

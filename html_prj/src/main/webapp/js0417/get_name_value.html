@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon"
+	href="http://192.168.10.75/html_prj/common/images/favicon.ico" />
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" />
+
+<style type="text/css">
+textarea {
+	width: 400px;
+	height: 15
+}
+
+.output {
+	border: 1px solid #333;
+	width: 600px;
+	height: 300px
+}
+</style>
+<script type="text/javascript">
+	function getValue(){
+		//name 속성이 유일한 HTML Form Control에 값 받기
+		//1. form태그를 저장
+		var obj = document.frm;
+		//2. 값 얻기 / document.폼이름.control명.value
+		//text
+		var txt = obj.txt.value;
+		/* if (txt == ""){
+			alert("txt에 값을 입력해 주세요.");
+			return;
+		} */
+		//password : 반향문자가 보여지는 Form Control
+		var pass = obj.pass.value;
+		var file = obj.file.value;
+		//확장자가 이미지(jpg,gif,png,bmp)인 파일만 업로드 될 수 있게 유효성 검증.
+		//이 확장자가 아니라면 alert("이미지만 업로드 가능합니다.")를 보여주고 돌아가
+		//해당 확장자면 div에 출력하는 코드 작성.
+		var blockExt=["jpg","gif","png","bmp"];
+		var ext = file.substring(file.lastIndexOf(".")+1);
+		var blockFlag = false;
+		for(var i=0; i<blockExt.length; i++){
+			if(ext == blockExt[i]){
+				blockFlag = true;
+				break;
+			}
+		}
+		if(!blockFlag){
+			alert("이미지만 업로드 가능");
+			return;
+		}
+		
+		var hid = obj.hid.value;
+		
+		var chk = "선택안함";
+		if( obj.flag.checked ){
+			chk = obj.flag.value;
+		}
+		
+		var sel = obj.sel.value;
+		
+		var ta = obj.ta.value;
+		
+		var output=`
+			<ul>
+			<li><strong>text</strong> ${ txt }</li>
+			<li><strong>password</strong> ${ pass }</li>
+			<li><strong>file</strong> ${ file }</li>
+			<li><strong>hidden</strong> ${ hid }</li>
+			<li><strong>checkbox</strong> ${ chk }</li>
+			<li><strong>select</strong> ${ sel }</li>
+			<li><strong>textarea</strong> ${ ta.replaceAll("\n","<br>") }</li>
+			</ul>
+		`;
+		
+		//출력
+		document.getElementById("output").innerHTML = output;
+	}
+</script>
+</head>
+<body>
+	<div>
+		<h3>name속성의 이름이 유일한 HTML Form Control 값 얻기</h3>
+		<form name="frm">
+			<ul><!-- autofocus="autofocus": 커서를 HTML Form Control에 위치 시킬때 -->
+				<li><label>text</label><input type="text" name="txt"
+					autofocus="autofocus" /></li>
+				<li><label>password</label><input type="password" name="pass" /></li>
+				<li><label>file</label><input type="file" name="file" /></li>
+				<li><label>hidden</label><input type="hidden" name="hid"
+					value="5월 1일 근로자의 날 안쉼." /></li>
+				<li><label>checkbox</label><input type="checkbox" name="flag"
+					value="flag" /></li>
+				<li><label>select</label> <select name="sel">
+						<option value="자바">자바</option>
+						<option value="오라클">Oracle</option>
+						<option value="JDBC">JDBC</option>
+						<option value="HTML">HTML</option>
+				</select></li>
+				<li><label>textarea</label> <textarea name="ta"></textarea>
+				<li><input type="button" value="값 얻기" class="btn btn-success" onclick="getValue()"/>
+					<input type="reset" value="초기화" class="btn btn-danger" /></li>
+			</ul>
+		</form>
+	</div>
+	<div id="output" class="output"></div>
+</body>
+</html>

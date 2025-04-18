@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon"
+	href="http://192.168.10.75/html_prj/common/images/favicon.ico" />
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" />
+
+<style type="text/css">
+textarea {
+	width: 400px;
+	height: 15
+}
+</style>
+<script type="text/javascript">
+	function setValue(){
+		//HTML Form Control에 value 설정
+		//1.<form>얻기
+		var obj = document.frm;
+		//2.값 설정
+		obj.txt.value="강태일"; //<input type="text"
+		obj.pass.value="1234"; //<input type="password"
+		/* obj.file.value="" */ //파일은 값을 설정할 수 없다.
+		obj.hid.value="오늘은 4월 17일 목요일 입니다.";
+		obj.ta.value="내일은 금요일";
+		//이미지 변경: value 속성으로 값을 설정하지 않고, src 속성으로 값을 설정한다.
+		obj.img.src = "../day0408/images/img7.png";
+	}
+</script>
+</head>
+<body>
+	<div>
+		<h3>name속성의 이름이 유일한 HTML Form Control 값 얻기</h3>
+		<form name="frm">
+		<img src="../common/images/img_1.jpg" style="width:150px"/>
+			<ul>
+				<!-- autofocus="autofocus": 커서를 HTML Form Control에 위치 시킬때 -->
+				<li><label>text</label><input type="text" name="txt"
+					autofocus="autofocus" /></li>
+				<li><label>password</label><input type="password" name="pass" /></li>
+				<li><label>hidden</label><input type="hidden" name="hid" /></li>
+				<li><label>textarea</label> <textarea name="ta"></textarea>
+				<li><input type="button" value="값 얻기" class="btn btn-success"
+					onclick="setValue()" /> <input type="reset" value="초기화"
+					class="btn btn-danger" /></li>
+			</ul>
+		</form>
+	</div>
+</body>
+</html>

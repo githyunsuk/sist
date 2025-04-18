@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon"
+	href="http://192.168.10.75/html_prj/common/images/favicon.ico" />
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" />
+
+<style type="text/css">
+#output {
+	border: 1px solid #333;
+	width: 400px;
+	height: 300px;
+	overflow: auto
+}
+</style>
+<script type="text/javascript">
+	function useMath() {
+
+		var num = -16;
+		var num2 = 16.5;
+		var num3 = 16.1;
+		var num4 = 16.9;
+		
+		var num5 = "17";
+		//alert(num5 * 2);
+		
+		//alert(-10 / 0) //0으로 나누면 : infinity 또는 -infinity 발생
+		//isFinite(나눈 결과): 무한대가 아니면 true, 무한대면 false가 반환되는 함수
+		/* alert(!isFinite(10/0))
+		if( 10 / 0 == "infinity"){
+			alert("0으로 나눌 수 없다.")
+		} */
+		
+		var num6 = Math.random();
+		var output = `<strong>출력값</strong><br>
+			${num}의 절댓값 : <strong>${Math.abs(num)}</strong><br>
+			${num2}의 절댓값 : <strong>${Math.round(num2)}</strong><br>
+			${num3}의 절댓값 : <strong>${Math.ceil(num3)}</strong><br>
+			${num4}의 절댓값 : <strong>${Math.floor(num4)}</strong><br>
+			숫자변환<br>
+			실수 -> 정수 : 실수 ${num4}를 정수 ${parseInt(num5)}<br>
+			문자열 -> 정수 : 실수 ${num5}를 정수 ${parseInt(num5)}<br>
+			발생한 난수 ${ num6 }<br>
+			발생한 난수에서 범위 난수 ${ num6 * 10 }<br>
+			발생한 난수에서 범위 난수에서 정수 ${ parseInt(num6 * 10) }<br>
+			`;	
+			
+		//NaN : (Not at Number) : 숫자가 아닌 값을 연산하거나, 변환할 때 발생하는 값
+	
+		//1.디자인을 변경할 HTML 태그(Element)를 찾는다.
+		var divNode = document.getElementById("output");
+		//2.찾아낸 HTML태그 안쪽에 HTML코드를 생성한다.
+		divNode.innerHTML = output;
+	}
+	
+	function useDice(){
+		//output에 주사위 이미지 두개를 랜덤하게 출력
+		var ran = parseInt(Math.random() * 6 + 1);
+		var ran2 = parseInt(Math.random() * 6 + 1);
+
+		var diceImg = 
+			`<img src="images/dice_${ran}.png">
+			<img src="images/dice_${ran2}.png">
+			`;
+		document.getElementById("output").innerHTML = diceImg;
+	}
+</script>
+</head>
+<body>
+	<div id="output"></div> 
+	<input type="button" value="클릭" class="btn btn-success"
+		onclick="useMath()">
+	<input type="button" value="주사위 던지기" class="btn btn-success"
+		onclick="useDice()">
+</body>
+</html>

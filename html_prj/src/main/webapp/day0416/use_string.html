@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon"
+	href="http://192.168.10.75/html_prj/common/images/favicon.ico" />
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" />
+
+<style type="text/css">
+#wrap{width:500px; margin: 0px auto }
+
+#output{ border-bottom: 2px solid #333; width:500px; height:300px;
+	overflow: auto; margin-bottom: 20px}
+</style>
+<script type="text/javascript">
+	function useString(){
+		var msg = "Eclipse IDE";
+		var msg2 = "   자바스크립트 CSS   ";
+		
+		var output=`
+		원본문자열 : ${ msg }<br>
+		대문자로 변환 :<strong>${ msg.toUpperCase() }</strong><br>
+		소문자로 변환 :<strong>${ msg.toLowerCase() }</strong><br>
+		앞뒤 공백제거 :<strong>[${ msg2.trim() }</strong>]<br>
+
+		`;
+		
+		document.getElementById("output").innerHTML = output;
+	}
+</script>
+</head>
+<body>
+	<div id="wrapt">
+	<div id="output"></div>
+	<div>
+		<input type="button" value="문자열함수" class="btn btn-info"
+			onclick="useString()" />
+	</div>
+	</div>
+</body>
+</html>
