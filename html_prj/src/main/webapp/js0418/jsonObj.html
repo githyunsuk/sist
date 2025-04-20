@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 파비콘 설정 -->
+<link rel="shortcut icon" href="https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico"/>
+<!--  site 기본 CSS -->
+<link rel="stylesheet" type="text/css"
+href="http://192.168.10.76/html_prj/common/css/main_v250409.css"/>
+<!--  부트스트랩 CDN-->
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function useString() {
+	//문자열로 JSONObject 사용
+var txt = '{"name": "강태일", "age": 25, "flag": true, "addr": "서울시 강남구"}';
+	//객체를 생성
+	var jsonObj=eval("("+txt+")");
+	
+	//값 추가
+	jsonObj.email="kang@kang.com"
+	
+	//parsing
+	var name=jsonObj.name;
+	var age=jsonObj.age;
+	var bool=jsonObj.flag;
+	
+	var obj=document.frm;
+	
+	obj.name.value=name;
+	obj.age.value=age;
+	obj.boolean.value=bool;
+	obj.email.value=jsonObj.email;
+	
+	//alert( jsonObj.addr)
+	jsonObj.addr();
+	
+}//useString
+
+function useJSONObject() {
+	var jsonObj = {
+	        name: '이장훈',
+	        age: 24,
+	        flag: false,
+	        addr: function() { alert('경기도 수원시 영통구'); }
+	    };
+	
+	//값 추가 : 같은 이름이 존재한다면 덮어 쓴다 
+	jsonObj.email="lee@test.com";
+	jsonObj.email="leejanghoon@test.com";
+	
+	//삭제
+	delete jsonObj.age;
+	
+	//parsing : JSONObject에서 이름에 해당하는 값을 얻는 것.
+	var name=jsonObj.name;
+	var age=jsonObj.age;
+	var bool=jsonObj.flag;
+	
+	var obj=document.frm;
+	
+	obj.name.value=name;
+	obj.age.value= age ;
+	obj.boolean.value=bool;
+	obj.email.value=jsonObj.email;
+	
+	//alert( jsonObj.addr)
+	jsonObj.addr();
+}//useJSONObject
+
+</script>
+</head>
+<body>
+<input type="button" value="문자열형식" class="btn btn-success"
+		onclick="useString()">
+<input type="button" value="JSONObj형식" class="btn btn-info"
+		onclick="useJSONObject()">
+		<br>
+<form name="frm">
+<input type="text" name="name" placeholder="string"><br>
+<input type="text" name="age" placeholder="number"><br>
+<input type="text" name="boolean" placeholder="flag"><br>
+<input type="text" name="email" placeholder="이메일"><br>
+
+</form>
+</body>
+</html>

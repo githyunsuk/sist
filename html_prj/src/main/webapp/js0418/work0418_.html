@@ -69,10 +69,22 @@ function updateCount() {
    	count.innerText = intro.value.length;  // 글자수 표시
 }
 
+function idDupWin() {
+	var id = document.getElementById('id').value;
+	
+	window.open("id_dup.jsp?id="+id, "id", "width=510,height=310,left="
+			   + (window.screenX + 200) + ",top=" + (window.screenY + 150));
+}
+
+function confirm(){
+
+}
+
 window.onload = function () {
     document.getElementById('confirmPassword').addEventListener('blur', checkPassword);
     document.getElementById("btnZipcode").addEventListener("click",findZipcode);
     document.getElementById('intro').addEventListener('input', updateCount);
+    document.getElementById("btnIdDup").addEventListener("click",idDupWin)
 }
 
 </script>
@@ -82,24 +94,24 @@ window.onload = function () {
 	<h2>회원가입 양식</h2>
 	<iframe src="../css0410/scrollbar.html"
 	style="border: 0x; width :1420px; height:200px"></iframe>
-	<form>
+	<form name="frm">
 		<table>
 			<tr>
-				<th>아이디</th>
-				<td><input type="text" readonly="readonly" 
+				<th>*아이디</th>
+				<td><input type="text" name="id" id="id" readonly="readonly" 
 				class="inputBox" style="width: 160px">
-				<input type="button" value="ID중복확인" class="btnBox">
+				<input type="button" value="ID중복확인" class="btnBox" id=btnIdDup>
 				</td>
 			</tr>
 			<tr>
-				<th>비밀번호</th>
+				<th>*비밀번호</th>
 				<td><input type="password" id="password" class="inputBox" style="width: 200px">
 				 비밀번호 확인
 				<input type="password" id="confirmPassword" class="inputBox" style="width: 200px">
 				</td>
 			</tr>
 			<tr>
-				<th>이름</th>
+				<th>*이름</th>
 				<td colspan="3"><input type="text" class="inputBox" style="width: 150px"></td>
 			</tr>
 			<tr>
@@ -111,12 +123,12 @@ window.onload = function () {
 				<td colspan="3"><input type="text" class="inputBox" style="width: 130px"></td>
 			</tr>
 			<tr>
-				<th>휴대폰</th>
+				<th>*휴대폰</th>
 				<td colspan="3"><input type="text" class="inputBox"style="width: 130px"><input
 					type="checkbox">수신</td>
 			</tr>
 			<tr>
-				<th>이메일</th>
+				<th>*이메일</th>
 				<td colspan="3"><input type="text" class="inputBox" style="width: 250px">@<input type="text"
 					list="domainData" class="inputBox" style="width: 160px"> <datalist id="langData">
 						<option value="선택해주세요.">
@@ -129,7 +141,7 @@ window.onload = function () {
 					</datalist> <input type="checkbox">수신</td>
 			</tr>
 			<tr>
-				<th>성별</th>
+				<th>*성별</th>
 				<td><input type="radio" name="gender" id="gender"
 					class="gender" value="남자" checked="checked"><label>남자</label>
 					<input type="radio" name="gender" id="gender" class="gender"
@@ -147,7 +159,7 @@ window.onload = function () {
 			</select></td>
 			</tr>
 			<tr>
-			<th>우편번호</th>
+			<th>*우편번호</th>
 			<td colspan="3">
 			<input type="text" id=zipcode readonly = "readonly" class="inputBox" style="width: 150px">
 			<input type="button" id="btnZipcode" value = "우편번호검색" class="btnBox">
@@ -155,7 +167,7 @@ window.onload = function () {
 			</tr>
 			
 			<tr>
-			<th>주소</th>
+			<th>*주소</th>
 			<td>
 				<input type="text" id=addr readonly = "readonly" class="inputBox" style="width: 500px"><br>
 				<input type="text" id=addr2 class="inputBox" style="width: 500px">
@@ -172,7 +184,7 @@ window.onload = function () {
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="button" value="확인" class="btnBox" id="btnConfirm"/>
+					<input type="button" id="btnConfirm" value="확인" class="btnBox" id="btnConfirm"/>
 					<input type="button" value="취소" class="btnBox" id="btnCancle"/>
 			</td>
 			</tr>

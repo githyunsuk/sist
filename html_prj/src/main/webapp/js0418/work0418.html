@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 파비콘 설정 -->
+<link rel="shortcut icon" href="https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico"/>
+<!--  site 기본 CSS -->
+<link rel="stylesheet" type="text/css"
+href="http://192.168.10.76/html_prj/common/css/main_v250409.css"/>
+<!--  부트스트랩 CDN-->
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+window.onload = function() {
+    var name = localStorage.getItem("name");
+    var color = localStorage.getItem("color");
+
+    if (name && color) {
+        var displayDiv = document.getElementById("display");
+        displayDiv.textContent = name + "님 어서오고";
+        displayDiv.style.color = color;
+    }
+};
+function setItem() {
+    var nameInput = document.getElementById("name");
+    var colorInput = document.getElementById("color");
+    var Check = document.getElementById("save");
+
+    if (!Check.checked) {
+        localStorage.clear();
+        alert("체크 안함 초기화");
+    } else {
+        localStorage.setItem("name", nameInput.value);
+        localStorage.setItem("color", colorInput.value);
+        alert("값 저장");
+    }
+    location.reload(); // 바로 반영
+}
+</script>
+</head>
+<body>
+<div>
+<label>이름</label>
+  <input type="text" id="name" />
+<label>좋아하는 색</label>
+ <input type="color" id="color">
+<input type="checkbox" id="save">
+ <br>
+<input type="button" value="입력" onclick="setItem()">
+<br>
+<div id="display">
+</div>
+</div>
+</body>
+</html>

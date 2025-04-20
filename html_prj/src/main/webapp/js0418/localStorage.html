@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 파비콘 설정 -->
+<link rel="shortcut icon" href="https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico"/>
+<!--  site 기본 CSS -->
+<link rel="stylesheet" type="text/css"
+href="http://192.168.10.76/html_prj/common/css/main_v250409.css"/>
+<!--  부트스트랩 CDN-->
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function setItem() {
+	//1. 스토리지 얻기
+	//alert( window.sessionStorage)
+	var ls=localStorage;
+	ls.setItem("name","장준녕");
+	ls.setItem("age",25);
+}//setItem
+function getItem() {
+	var ls=localStorage;
+	
+	var name=ls.getItem("name");
+	var age=ls.getItem("age");
+	
+	var obj=document.frm;
+	obj.name.value=name;
+	obj.age.value=age;
+	
+}//getItem
+function removeItem() {
+	localStorage.removeItem("name");
+	localStorage.removeItem("name");
+}
+function clearItem() {
+	localStorage.clear();
+}
+
+</script>
+</head>
+<body>
+<form name="frm">
+<input type="text" name="name">
+<input type="text" name="age">
+</form>
+<input type="button" value="값설정" class="btn btn-primary" onclick="setItem()">
+<input type="button" value="값얻기" class="btn btn-secondary" onclick="getItem()">
+<input type="button" value="값삭제" class="btn btn-success" onclick="removeItem()">
+<input type="button" value="모든 아이템 삭제" class="btn btn-danger" onclick="clearItem()">
+</body>
+</html>
