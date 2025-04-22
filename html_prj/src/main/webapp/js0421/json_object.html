@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	document.getElementById("btn").addEventListener("click",useJSONArray);
+}
+
+function useJSONArray(){
+	var date = new Date();
+	var nowYear = date.getFullYear();
+	var nowMonth = date.getMonth()+1;
+	var nowDate = date.getDate();
+	
+	//1.JSONObject 생성(데이터와 데이터의 정보를 가진)
+	var jsonObj = {
+		title:"7강의장 학생정보",
+		pubDate: nowYear+"-"+nowMonth+"-"+nowDate,
+		description:"더이상의 자세한 설명은 생략한다.",
+		data:[
+			{name:"강태일",age:25,email:"kang@test.com"},
+			{age:27,name:"이장훈",email:"lee@test.com"},
+			{age:25,email:"jung@test.com",name:"정제균"},
+			{name:"주현석",age:26,email:"zoo@test.com"}
+		]
+	}//jsonObj
+	
+	//2.반복
+	var output = `
+	<div>
+	<ul>
+	<li>제목: ${ jsonObj.title }</li>
+	<li>생산일: ${ jsonObj.pubDate }</li>
+	</ul>
+	<table class='table table-hover'>
+	<thead>
+		<tr>
+		<th>번호</th><th>이름</th><th>나이(태어난 해)</th><th>이메일</th>
+		</tr>
+	</thead>
+	<tbody>
+	`;
+	
+	var jsonTemp;
+	var jsonArr = jsonObj.data;
+	for(var i=0; i<jsonArr.length; i++){
+
+		jsonTemp = jsonArr[i];
+		//3.얻어낸 JSONObject에서 필요한 데이터를 Parsing
+		output += `<tr>
+				  <td>${i+1}</td>
+				  <td><input type="text" value="${jsonTemp.name}"/></td>
+				  <td><input type="text" value="${jsonTemp.age}(${nowYear-jsonTemp.age+1})"/></td>
+				  <td><input type="text" value="${jsonTemp.email}"/></td>
+				  </tr>`
+	}
+	
+	output += `
+	</tbody>
+	</table>
+	</div>`;
+	
+	document.getElementById("output").innerHTML = output;
+}
+</script>
+</head>
+<body>
+<input type="button" value="JSONObject 사용" class="btn btn-success"
+	id="btn"/>
+<div id="output"></div>
+</body>
+</html>

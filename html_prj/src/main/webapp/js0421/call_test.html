@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function test(){
+	var name = "이장훈";
+	
+	function addr(){
+		return "서울시 강남구 역삼동";
+	}
+}
+
+function callTest(){
+	//다른 함수 안에있는 변수나, 함수는 외부에서 사용할 수 없다.
+	alert( test().name )
+	alert( test().addr() )
+}
+
+callTest();
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#txt1").keydown(function(evt){
+        var txt = $("#txt1").val();
+        $("#output").html("키가 눌림 : " + txt);
+        $("#output2").html("키가 눌림 : " + evt.which + ",("+evt.keyCode+")");
+    });
+
+    $("#txt2").keyup(function(evt){
+        var txt = $("#txt2").val();
+        $("#output").html("키가 눌림 : " + txt);
+        $("#output2").html("키가 눌림 : " + evt.which + ",("+evt.keyCode+")");
+    });
+});
+</script>
+</head>
+<body>
+<label>키가 눌릴때</label>
+<input type="text" id="txt1"/><br>
+<label>키가 올라올때</label>
+<input type="text" id="txt2"/><br>
+<div id="output"></div>
+<div id="output2"></div>
+</label>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+.c{ border: 1px solid #333; width: 400px; height: 100px;
+        box-shadow: 10px 5px 10px #333;}
+.c2{ font-weight: bold; color: #FF0000; text-decoration: line-through;
+        font-size: 20px}
+.c3{ color: #FF0000 }
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+		$("#classTest").removeClass("c3");
+        $("#classTest").addClass("c");
+    });
+
+    $("#btn2").click(function(){
+        $("#classTest2").removeClass("c2");
+    });
+});
+</script>
+</head>
+<body>
+<div id="classTest" class="c3">여러개의 디자인 속성을 적용할 때</div>
+<div id="classTest2" class="c2">설정된 디자인 속성을 제거할 때</div>
+
+<input type="button" value="디자인 적용" class="btn btn-success" id="btn"/>
+<input type="button" value="디자인 제거" class="btn btn-danger" id="btn2"/>
+
+</body>
+</html>

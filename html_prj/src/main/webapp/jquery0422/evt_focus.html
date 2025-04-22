@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#txt1").focusin(function(){
+        $("#output").html("txt1에 커서가 들어왔습니다.")
+    });//focusin
+
+    $("#txt2").focusout(function(){
+        $("#output").html("txt2에 커서가 빠져나갔습니다.")
+    });//focusout
+
+    $("#txt3").blur(function(){
+        $("#output").html("txt3에서 커서가 빠져나갔습니다.")
+    });//blur
+
+});//ready
+</script>
+</head>
+<body>
+<input type="text" id="txt1" placeholder="커서가 들어왔을 때"><br>
+<input type="text" id="txt2" placeholder="커서가 빠져 나갔을 때"><br>
+<input type="text" id="txt3" placeholder="커서가 빠져 나갔을 때 blur"><br>
+<div id="output"></div>
+</body>
+</html>

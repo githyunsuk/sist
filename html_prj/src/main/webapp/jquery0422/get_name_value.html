@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon"
+	href="http://192.168.10.75/html_prj/common/images/favicon.ico" />
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" />
+
+<style type="text/css">
+textarea {
+	width: 400px;
+	height: 15
+}
+
+.output {
+	border: 1px solid #333;
+	width: 600px;
+	height: 300px
+}
+</style>
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(getValue);
+	$("#color").mouseover(function(){
+		$("#output").css("color", $("#color").val());
+	});
+});
+
+function getValue(){
+	var txt = $("#txt").val();
+	var pass = $("#pass").val();
+	var file = $("#file").val();
+	var date = $("#date").val();
+	var color = $("#color").val();
+	var hidden = $("[name='hid']").val();
+	var file = $("#sel").val();
+	var ta = $("#ta").val();
+
+	var output =
+		`<ul>
+			<li><strong>text :</strong>${ txt }</li>
+			<li><strong>password :</strong>${ pass }</li>
+			<li><strong>file :</strong>${ file }</li>
+			<li><strong>date :</strong>${ date }</li>
+			<li><strong>color :</strong>${ color }</li>
+			<li><strong>hidden :</strong>${ hidden }</li>
+			<li><strong>select :</strong>${ sel }</li>
+			<li><strong>textarea :</strong>${ ta }</li>
+		</ul>
+		`;
+	//var output2 = `<font color=${color}>${ output }</font>`;
+	$("#output").css("color",color );
+	$("#output").html(output);
+}
+</script>
+</head>
+<body>
+	<div>
+		<h3>name속성의 이름이 유일한 HTML Form Control 값 얻기</h3>
+		<form name="frm">
+			<ul><!-- autofocus="autofocus": 커서를 HTML Form Control에 위치 시킬때 -->
+				<li><label>text</label><input type="text" name="txt" id="txt"
+					autofocus="autofocus" /></li>
+				<li><label>password</label><input type="password" id="pass" name="pass" /></li>
+				<li><label>file</label><input type="file" name="file" id="file" /></li>
+				<li><label>date</label><input type="date" name="date" id="date" /></li>
+				<li><label>color</label><input type="color" name="color" id="color" /></li>
+				<li><label>hidden</label><input type="hidden" name="hid" id="hid"
+					value="5월 1일 근로자의 날 안쉼." /></li>
+				
+				<li><label>select</label> <select name="sel" id="sel">
+						<option value="자바">자바</option>
+						<option value="오라클">Oracle</option>
+						<option value="JDBC">JDBC</option>
+						<option value="HTML">HTML</option>
+				</select></li>
+				<li><label>textarea</label> <textarea name="ta" id="ta"></textarea>
+				<li><input type="button" value="값 얻기" class="btn btn-success" id="btn"/>
+					<input type="reset" value="초기화" class="btn btn-danger" /></li>
+			</ul>
+		</form>
+	</div>
+	<div id="output" class="output"></div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+#output {
+	border: 1px solid #333;
+	width: 600px;
+	height: 300px
+}
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(getArrValue);
+});
+
+function getArrValue(){
+	//이름이 같은 HTML Form Contorl은 배열로 얻어진다.
+	//var chkArr = $("[name='lang']"); //attribute selector
+	// var chkArr = $(".lang"); //class selector
+	
+	// var chkOutput = "";
+	// for(var i=0; i < chkArr.length; i++){
+	// 	if( $(chkArr[i]).is(":checked")){
+	// 		chkOutput += $(chkArr[i]).val() + " ";
+	// 	}
+	// }
+
+	//checked된 Form Control만 얻기
+	var chkedArr = $(".lang:checked");
+	var chkOutput = "";
+
+	// for(var i=0; i<chkedArr.length; i++){
+	// 	chkOutput += $(chkedArr[i]).val() + " ";
+	// }
+	$.each(chkedArr, function(ind, ele){
+		chkOutput += $(ele).val() + " ";
+	});
+
+	//라디오버튼의 값 얻기
+	var radio = $("[name='gender']:checked").val();
+	
+
+	//select의 값 얻기
+	var sel = $("[name='domain'] > option");
+	var selOut = "";
+	$.each(sel,function(i,ele){
+		//alert(i)
+		if($("[name='domain'] > option:eq("+i+")").is(":selected")){
+			selOut = $("[name='domain'] > option:eq("+i+")").val();
+		}
+	});
+
+	$("#output").html(chkOutput + "<br>" + radio + "<br>" + selOut);
+}
+</script>
+</head>
+<body>
+<div>
+<h2>name 속성의 값이 중복되는 Form Control 처리</h2>
+<form name="frm">
+<ul>
+<li><label>radio</label>
+	<input type="radio" name="gender" value="M"/>남자 |
+	<input type="radio" name="gender" value="F"/>여자
+</li>
+<li>
+	<label>checkbox</label>
+	<input type="checkbox" name="Lang" class="lang" value="Java"/>Java SE
+	<input type="checkbox" name="Lang" class="lang" value="C/C++"/>C/C++
+	<input type="checkbox" name="Lang" class="lang" value="JSP"/>JSP
+	<input type="checkbox" name="Lang" class="lang" value="Python"/>Python
+	<input type="checkbox" name="Lang" class="lang" value="Oracle"/>Oracle
+</li>
+<li>
+	<label>select</label>
+	<select name="domain">
+		<option value="daum.net">다음</option>
+		<option value="google.com">구글</option>
+		<option value="youtube.com">유튜브</option>
+		<option value="naver.com">네이버</option>
+	</select>
+</li>
+<li><label>이메일</label>
+	
+</li>
+<li>
+	<input type="button" value="값 얻기" class="btn btn-success"
+		id="btn"/>
+	<input type="reset" value="초기화" class="btn btn-danger"/>
+</li>
+</ul>
+</form>
+</div>
+<div id="output"></div>
+</body>
+</html>

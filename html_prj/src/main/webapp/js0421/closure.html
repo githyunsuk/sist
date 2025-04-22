@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	document.getElementById("btn").addEventListener("click",useClosure);
+}
+
+function useClosure(){
+	//()를 사용한 closure
+	var clo = (
+			{name:"이장훈",age:20,
+				addr:function(msg){
+					var returnValue = msg + "서울시 강남구 역삼동";
+					return returnValue;
+				}
+			}
+	
+	);
+	
+	document.getElementById("output").innerHTML =
+		`
+		이름 : <strong>${ clo.name }</strong><br>
+		나이 : <strong>${ clo.age }</strong><br>
+		주소 : <strong>${ clo.addr("우리집 주소는 ") }</strong><br>
+		`;
+}
+</script>
+</head>
+<body>
+<input type="button" value="()사용한 closure" class="btn btn-success"
+	id="btn"/>
+<div id="output"></div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+img{ width:200px }
+#idWarning{ font-weight: bold; color: #FF0000; display: none;}
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+		$("#imgDiv").hide();
+	});
+	
+	$("#btn2").click(function(){
+		$("#imgDiv").show();
+	});
+	
+	$("#btn3").click(function(){
+		$("#imgDiv").toggle();
+	});
+
+	$("#btn4").click(function(){
+		//$("#imgDiv").fadeOut(1000);
+		$("#imgDiv").fadeOut(500, function(){
+			alert("완전히 사라졌음")
+		});
+	});
+	
+	$("#btn5").click(function(){
+		//$("#imgDiv").fadeIn(1000);
+		$("#imgDiv").fadeIn(500, function(){
+			alert("보여지기 완료")
+		});
+	});
+		
+	$("#btn6").click(function(){
+		$("#imgDiv").fadeToggle(500, function(){
+			alert("작업 완료")
+		});
+	});
+	$("#btn7").click(function(){
+		$("#imgDiv").slideUp(1000);
+	});
+	
+	$("#btn8").click(function(){
+		$("#imgDiv").slideDown(1000);
+	});
+		
+	$("#btn9").click(function(){
+		$("#imgDiv").slideToggle(1000);
+	});
+	
+	$("#btnInput").click(function(){
+		var name = $("#name").val();
+		if(name == ""){
+			for(var i=0; i<10; i++){
+				$("#idWarning").fadeToggle(700)
+			}
+			$("#idWarning").fadeOut(1000);
+			$("#name").focus();
+			return;
+		}
+		
+		location.href="http://daum.net";
+	});
+});
+</script>
+</head>
+<body>
+<div id="imgDiv">
+<img src="../common/images/img_5.jpg"/>
+</div>
+<div>
+<input type="button" class="btn btn-success" value="숨기기" id="btn"/>
+<input type="button" class="btn btn-success" value="보이기" id="btn2"/>
+<input type="button" class="btn btn-success" value="상태반전" id="btn3"/>
+</div>
+<div>
+<input type="button" class="btn btn-success" value="서서히 숨기기" id="btn4"/>
+<input type="button" class="btn btn-success" value="서서히 보이기" id="btn5"/>
+<input type="button" class="btn btn-success" value="서서히 상태반전" id="btn6"/>
+</div>
+<div>
+<input type="button" class="btn btn-success" value="말아올리기" id="btn7"/>
+<input type="button" class="btn btn-success" value="펼처 보이기" id="btn8"/>
+<input type="button" class="btn btn-success" value="상태반전" id="btn9"/>
+</div>
+<div>
+	<label>이름</label>
+	<input type="text" name="name" id="name"/>
+	<span id="idWarning">이름은 필수 입력</span>
+</div>
+<div>
+	<input type="button" value="입력" class="btn btn-success btn-sm" id="btnInput"/>
+</div>
+</body>
+</html>

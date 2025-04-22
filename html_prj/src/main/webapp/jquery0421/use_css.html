@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+#div{ border: 1px solid #333; font-weight: bold; font-size: 20px;
+        color: #FF0000 }
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var style = $("#div").css("border");
+
+    style += `<br>${ $("#div").css("font-weight")}`;
+    style += `<br>${ $("#div").css("font-size")}`;
+    style += `<br>${ $("#div").css("color")}`;
+
+    $("#output").html( style );
+    
+    //selector로 찾아낸 태그에 css속성 설정
+    $("#div2").css("border", "2px dotted #0000FF"); //한번에 하나의 속성만 가능
+    $("#div2").css("color", "#00FF00");
+    $("#div2").css("font-size", "30px");
+    $("#div2").css("text-decoration", "underline");
+});
+</script>
+</head>
+<body>
+<div id="div">오늘은 월요일 입니다.</div>
+<div id="div2">오늘은 월요일 입니다.</div>
+<div id="output"></div>
+</body>
+</html>

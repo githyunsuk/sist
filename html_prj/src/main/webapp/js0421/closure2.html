@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+var clo = function(){
+	var name = "이장훈";
+	
+	function printMsg( msg ){
+
+		alert( name + "의 메시지 " + msg);
+	}
+	
+	//closure를 사용하면 함수 내부의 변수와 함수를 외부에서 사용할 수 있다.
+	return { na : name, alertMsg : printMsg };
+
+}
+
+function useClosure(){
+	alert( clo().na )
+	alert( clo().alertMsg("정부는 5월2일을 임시공유일로 하여 1일부터 황금연휴...고민중."))
+}
+
+useClosure();
+</script>
+</head>
+<body>
+
+</body>
+</html>

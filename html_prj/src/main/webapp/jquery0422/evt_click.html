@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+        alert("버튼 클릭");
+    });//click
+
+    $("#td").click(function(){
+        alert("td가 클릭");
+    });//click
+
+    $("#btn2").click(function(){
+        alert("버튼튼 클릭");
+    });//click
+
+    $("#img").click(function(){
+        alert("img가 클릭");
+    });//click
+
+});//ready
+</script>
+</head>
+<body>
+<button id="btn" class="btn btn-success">버튼</button><br>
+<table>
+<tr>
+    <td id="td">오늘의 요일은?</td>
+</tr>
+</table>
+<br>
+<input type="text" value="버튼" id="btn2" class="btn btn-info"/><br>
+<img src="../common/images/img_1.jpg" id="img"/>
+</body>
+</html>

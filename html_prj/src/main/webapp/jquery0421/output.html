@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+        var msg = "오늘은 <strong>월요일</strong> 입니다.";
+        $("#output").html( msg );
+        $("#output2").text( msg ); 
+    })
+
+    $("#btn2").click(function(){
+        var output = "<img src='../common/images/img_1.jpg'>";
+        $("#output").html( output );
+        $("#output2").text( output ); 
+    })
+    
+    $("#btn3").click(function(){
+		var output = $("#output").html();
+		var output2 = $("#output2").text();
+		alert(output)
+		alert(output2)
+    })
+});
+</script>
+</head>
+<body>
+    <div id="output"></div>
+    <div id="output2"></div>
+    <input type="button" value="클릭" class="btn btn-success" id="btn"/>
+    <input type="button" value="이미지" class="btn btn-success" id="btn2"/>
+    <input type="button" value="태그정보얻기" class="btn btn-success" id="btn3"/>
+</body>
+</html>

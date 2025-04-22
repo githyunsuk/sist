@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	document.getElementById("btn").addEventListener("click",useJSONObject);
+}
+
+function useJSONObject(){
+var jsonObj = {
+	      pubDate: "2025-04-21",
+	      title: "사회 | JTBC News",
+	      title_link: "https://news.jtbc.co.kr",
+	      data: [
+	        {
+	          title: "180㎞ 음주운전 후 아파트 쓰레기통에 숨어 있던 30대 체포",
+	          link: "https://news.jtbc.co.kr/article/NB12243561",
+	          description: "〈자료사진=연합뉴스〉면허 취소 수준의 만취 상태로 운전하던 30대 남성이 경찰을 피해 도주한 뒤 아파트 쓰레기…",
+	          pubDate: "2025-4-21 11:41"
+	        },
+	        {
+	          title: "전장연, 출근길 지하철 시위…4호선 혜화역 무정차 통과",
+	          link: "https://news.jtbc.co.kr/article/NB12243550",
+	          description: "전국장애인차별철폐연대(전장연) 회원들이 21일 오전 서울 지하철 4호선 혜화역에서 제62차 '출근길 지하철 탑니다' 시위",
+	          pubDate: "2025-4-21 8:41"
+	        },
+	        {
+	          title: "'증원 백기'에도 \"전면 중단\"…전국 의사·의대생 대규모 집회",
+	          link: "https://news.jtbc.co.kr/article/NB12243491",
+	          description: "전국 의사와 의대생들이 오늘 대규모 집회를 열고 \"우리는 결코 틀리지 않았다\"면서 이번 사태를",
+	          pubDate: "2025-4-21 10:39"
+	        },
+	        {
+	          title: "'남편이 했던 말에 앙심'…다짜고짜 여사장에 흉기 휘둘러",
+	          link: "https://news.jtbc.co.kr/article/NB12243483",
+	          description: "식당에 있던 주인에게 흉기를 휘두른 70대가 구속됐습니다. 근처에서 차를 대고 과일을 팔던 사람이었습니다",
+	          pubDate: "2025-4-21 10:39"
+	        }
+	      ]
+	    };
+	    
+	    var output = `
+	    <div>
+	    <ul>
+	    <li>날짜: ${ jsonObj.pubDate }</li>
+	    <li>제목: ${ jsonObj.title }</li>
+	    <li>링크: <a href="${jsonObj.title_link}">${jsonObj.title_link}</a></li>
+	    <table class='table table-hover'>
+	    <thead>
+		<tr>
+		<th>번호</th><th>제목</th><th>설명</th><th>기사 작성일</th>
+		</tr>
+		</thead>
+		<tbody>
+	    `;
+	    
+	    var jsonTemp;
+	    var jsonArr = jsonObj.data;
+	    for(var i=0; i<jsonArr.length; i++){
+	    	jsonTemp = jsonArr[i];
+	    	output += `
+	    	<tr>
+	    	<td>${ i+1 }</td>
+	    	<td><a href="${ jsonTemp.link }">${ jsonTemp.title }</a></td>
+	    	<td>${jsonTemp.description.substr(0,30)}...</td>
+	    	<td>${ jsonTemp.pubDate }</td>
+	    	</tr>
+	    	`;
+	    }
+	    
+	    output += `
+	    </tbody>
+	    </table>
+	    </div>
+	    `;
+	    
+	    document.getElementById("output").innerHTML = output;
+};
+
+</script>
+</head>
+<body>
+<input type="button" value="JSONObject 사용" class="btn btn-success"
+	id="btn"/>
+<div id="output"></div>
+</body>
+</html>

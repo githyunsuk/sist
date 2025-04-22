@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+#output {
+	border: 1px solid #333;
+	width: 600px;
+	height: 300px
+}
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(setStatus);
+});
+
+function setStatus(){
+	//img에 title 속성을 설정
+	$("#img").attr("title","오늘은 비오는 화요일 입니다.");
+	$("#img").attr("title", "내일은 화창한 수요일입니다.");
+	
+	var gender = $(".gender");
+	//alert( $(gender[0]).is(":checked") + " "+ $(gender[1]).is(":checked"));
+ 	$(gender[0]).prop("checked", true);
+ 	$(gender[1]).prop("checked", true);
+ 	$(gender[0]).prop("checked", true);
+ 	
+ 	//checkbox
+ 	var lang = $(".lang");
+ 	$(lang[0]).prop("checked",true);
+ 	$(lang[4]).prop("checked",true);
+ 	
+ 	//select
+ 	$("#domain > option:eq(2)").prop("selected",true);
+}
+
+</script>
+</head>
+<body>
+<div>
+<img src="../common/images/img_1.jpg" id="img"/>
+<h2>상태정보를 변경하는 Form Control</h2>
+<form name="frm">
+<ul>
+<li><label>radio</label>
+	<input type="radio" name="gender" value="M"/>남자 |
+	<input type="radio" name="gender" value="F"/>여자
+</li>
+<li>
+	<label>checkbox</label>
+	<input type="checkbox" name="Lang" value="Java"/>Java SE
+	<input type="checkbox" name="Lang" value="C/C++"/>Java SE
+	<input type="checkbox" name="Lang" value="JSP"/>Java SE
+	<input type="checkbox" name="Lang" value="Python"/>Java SE
+	<input type="checkbox" name="Lang" value=""/>Java SE
+</li>
+<li>
+	<label>select</label>
+	<select name="domain">
+		<option value="daum.net">다음</option>
+		<option value="google.com">구글</option>
+		<option value="youtube.com">유튜브</option>
+		<option value="naver.com">네이버</option>
+	</select>
+</li>
+<li>
+	<input type="button" value="값 설정" class="btn btn-success"
+		onclick="setStatus()"/>
+	<input type="reset" value="초기화" class="btn btn-danger"/>
+</li>
+</ul>
+</form>
+</div>
+<div id="mailList">
+<form name="mailFrm"></form>
+<table class="table table-hover">
+<thead>
+<tr>
+	<th style="width:20px"><input type="checkbox" name="flag" onclick="chkAll()"></th>
+	<th style="width:120px">발신자</th>
+	<th style="width:600px">제목</th>
+	<th style="width:120px">수신됨</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><input type="checkbox" name="rmFlag"></td>
+	<td>강태일</td>
+	<td>제주도 푸른바다에서 바다 이야기...</td>
+	<td>2025-04-17 14:16</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="rmFlag"></td>
+	<td>강태일</td>
+	<td>제주도 푸른바다에서 바다 이야기...</td>
+	<td>2025-04-17 14:16</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="rmFlag"></td>
+	<td>강태일</td>
+	<td>제주도 푸른바다에서 바다 이야기...</td>
+	<td>2025-04-17 14:16</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="rmFlag"></td>
+	<td>강태일</td>
+	<td>제주도 푸른바다에서 바다 이야기...</td>
+	<td>2025-04-17 14:16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

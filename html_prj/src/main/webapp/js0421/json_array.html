@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	document.getElementById("btn").addEventListener("click",useJSONArray);
+}
+
+function useJSONArray(){
+	//1.JSONArray 생성
+	var jsonArr = [
+		{name:"강태일",age:25,email:"kang@test.com"},
+		{age:27,name:"이장훈",email:"lee@test.com"},
+		{age:25,email:"jung@test.com",name:"정제균"},
+		{name:"주현석",age:26,email:"zoo@test.com"}
+		];
+	
+	var nowYear = new Date().getFullYear();
+	//2.반복
+	var output = `
+	<div>
+	<table class='table table-hover'>
+	<thead>
+		<tr>
+		<th>번호</th><th>이름</th><th>나이(태어난 해)</th><th>이메일</th>
+		</tr>
+	</thead>
+	<tbody>
+	`;
+	
+	var jsonObj;
+	for(var i=0; i<jsonArr.length; i++){
+
+		jsonObj = jsonArr[i];
+		//3.얻어낸 JSONObject에서 필요한 데이터를 Parsing
+		output += `<tr>
+				  <td>${i+1}</td>
+				  <td>${jsonObj.name}</td>
+				  <td>${jsonObj.age}(${nowYear-jsonObj.age+1})</td>
+				  <td>${jsonObj.email}</td>
+				  </tr>`
+	}
+	
+	output += `
+	</tbody>
+	</table>
+	</div>`;
+	
+	document.getElementById("output").innerHTML = output;
+}
+</script>
+</head>
+<body>
+<input type="button" value="JSONArray 사용" class="btn btn-success"
+	id="btn"/>
+<div id="output"></div>
+</body>
+</html>
