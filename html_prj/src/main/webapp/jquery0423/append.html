@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+var cnt = 0;
+$(function(){
+	$("#divAppend").click(function(){
+		var msg = $("#msg").val();
+		//cnt++;
+		//alert($(".subDiv").length) 
+		var divLength = $(".subDiv").length;
+		if(divLength > 4){
+			alert("5개 까지만 추가 가능");
+			return;
+		}
+		var output= "<div class='subDiv'><strong>" + (divLength+1)
+			+".</strong><input type='text' value='" + msg + "' name='inputMsg'/></div>";
+		//아이디가 div인 node에 생성된 div를 추가
+		$("#div").append(output);
+	});
+	
+	$("#divRemove").click(function(){
+		//$("#div > div:last").remove();
+		//$("#div > div").last().remove();
+		//$("#div > .subDiv:last").remove();
+		$("#div .subDiv:last").remove(); //하위 노드 접근할 때에는 > 생략(그러나 넣는게 더 좋다)
+		
+	});
+	
+	$("#trAppend").click(function(){
+		var num = $("#num").val();
+		var name = $("#name").val();
+		var age = $("#age").val();
+		
+		var createTr= `<tr><td>${ num }</td><td>${ name }</td><td>${ age }</td></tr>`;
+		$("#tab > tbody").append(createTr);
+		
+		$("#num").val("");
+		$("#name").val("");
+		$("#age").val("");
+		
+		$("#num").focus();
+	});
+	
+	$("#trRemove").click(function(){
+		$("#tab > tbody > tr:last").remove();
+	});
+});
+</script>
+</head>
+<body>
+<div>
+<label>메시지</label>
+<input type="text" name="msg" id="msg"/><br>
+<input type="button" value="추가" class="btn btn-success btn-sm" id="divAppend"/>
+<input type="button" value="삭제" class="btn btn-success btn-sm" id="divRemove"/>
+</div>
+<div id="div">
+	<div>오늘은 화창한 수요일 입니다.</div>
+</div>
+<div>
+<h2>아래의 항목을 입력하고 추가해주세요.</h2>
+<label>번호</label><input type="text" name="num" id="num"><br>
+<label>이름</label><input type="text" name="name" id="name"><br>
+<label>나이</label><input type="text" name="age" id="age"><br>
+<input type="button" value="추가" class="btn btn-success btn-sm" id="trAppend"/>
+<input type="button" value="삭제" class="btn btn-success btn-sm" id="trRemove"/>
+</div>
+<div>
+	<table id="tab" class="table table-hover">
+		<thead>
+			<tr>
+				<th style="width:80px;">번호</th>
+				<th style="width:150px;">이름</th>
+				<th style="width:120px;">나이</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</div>
+</body>
+</html>
