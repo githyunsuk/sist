@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>servlet_prj</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  <!--  servlet 등록 -->
+  <servlet>
+  	<servlet-name>hs</servlet-name>
+  	<servlet-class>day0424.HelloServlet</servlet-class>
+  </servlet>
+  <!--  URL에 mapping -->
+  <servlet-mapping>
+  	<servlet-name>hs</servlet-name>
+  	<url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <!--  servlet 등록 -->
+  <servlet>
+  	<servlet-name>lc</servlet-name>
+  	<servlet-class>day0424.LifeCycle</servlet-class>
+  </servlet>
+  <!--  URL에 mapping -->
+  <servlet-mapping>
+  	<servlet-name>lc</servlet-name>
+  	<url-pattern>/life</url-pattern>
+  </servlet-mapping>
+  <!--  servlet 등록 -->
+  <servlet>
+  	<servlet-name>cs</servlet-name>
+  	<servlet-class>day0424.CallServlet</servlet-class>
+  </servlet>
+  <!--  URL에 mapping -->
+  <servlet-mapping>
+  	<servlet-name>cs</servlet-name>
+  	<url-pattern>/call_servlet.do</url-pattern>
+  </servlet-mapping>
+</web-app>

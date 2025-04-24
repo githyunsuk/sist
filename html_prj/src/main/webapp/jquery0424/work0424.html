@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/html_prj/common/images/favicon.ico"/>
+<!-- site 기본css -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.75/html_prj/common/css/main_v250409.css">
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#numFront").on("input", function(){
+		if($("#numFront").val().length == 6){
+			$("#numBack").focus();
+		}
+	});
+	
+	$("#numBack").focusout(function(){
+		var front = $("#numFront").val().length;
+		var back = $("#numBack").val().length;
+		if( (front + back) == 13){
+			solve();
+		} else{
+			alert("유효한 주민번호를 입력하세요");
+		}
+	});
+});
+
+function solve(){
+	var num = $("#numFront").val() + $("#numBack").val();
+	var result = 0;
+	for(var i=0; i<num.length-1; i++){
+		var n = num[i];
+		var value = (i % 8) + 2;
+		result += n * value;
+	}
+	
+	result %= 11;
+	result = 11 - result;
+	result %= 10;
+	
+	if(num[12] == result){
+		$("#span").text("유효한 주민번호");
+	} else{
+		$("#span").text("잘못된 주민번호");
+	}
+}	
+</script>
+</head>
+<body>
+<label>주민번호</label>
+<input type="text" id="numFront"/>-
+<input type="password" id="numBack"/>
+<br>
+<label>결과 </label><span id="span"></span>
+</body>
+</html>
