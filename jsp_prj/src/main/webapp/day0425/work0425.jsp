@@ -94,8 +94,8 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 	    }
 	}
 	
-	int remain = (startDayOfWeek + lastDay) % 7;
-	for (int i = 0; i < 7 - remain; i++) {
+	int remainDay = (startDayOfWeek + lastDay) % 7;
+	for (int i = 0; i < 7 - remainDay; i++) {
 		out.print("<td></td>");
 	}
 	out.print("</tr>");
