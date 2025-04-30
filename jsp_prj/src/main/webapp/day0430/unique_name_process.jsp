@@ -1,3 +1,4 @@
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info="사용자에게 값을 입력받는 화면"%>
@@ -57,64 +58,63 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 </header>
 <main>
 <div id="container">
-<div>
-<div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( GET방식 )</h3>
-<form name="frm" action="" method="">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
-</li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="GET전송" class="btn btn-success" id="btnGet"  />
-</li>
-</ul>
-</form>
+<h2><%= request.getMethod() %>방식</h2>
+<%
+//_jspService에 생성 => 내장객체 사용 가능.
+//사용자가 HTML Form Control에 입력한 값을 받는 일. => request
+
+//입력되는 문자열을 모두 encoding
+//POST방식에 한글을 입력받는 JSP에서
+request.setCharacterEncoding("UTF-8");
+
+String txt = request.getParameter("txt"); 
+String pass = request.getParameter("pass"); 
+String file = request.getParameter("file"); 
+String hid = request.getParameter("hid"); 
+String flag = request.getParameter("flag"); 
+String sel = request.getParameter("sel"); 
+String ta = request.getParameter("ta");
+
+/* 
+if("POST".equals(request.getMethod())){
+	txt = new String(txt.getBytes("8859_1"),"UTF-8");
+} */
+
+%>
+<div id="divParam">
+<table class="table table-hover">
+<thead>
+<tr>
+	<th colspan="2">request 내장객체를 사용한 HTML Form Control 입력값</th> 
+</tr>
+<tbody>
+<tr>
+	<%-- <td>type="text"</td><td><%= URLDecoder.decode(txt,"UTF-8") %></td>
+	<td>type="text"</td><td><%= new String(txt.getBytes("8859_1"),"UTF-8") %></td> --%>
+	<td>type="text"</td><td><%= txt %></td>
+</tr>
+<tr>
+	<td>type="password"</td><td><%= pass %></td>
+</tr>
+<tr>
+	<td>type="file"</td><td><%= file %></td>
+</tr>
+<tr>
+	<td>type="hidden"</td><td><%= hid %></td>
+</tr>
+<tr>
+	<td>type="checkbox"</td><td><%= flag %></td>
+</tr>
+<tr>
+	<td>&lt;select&gt;</td><td><%= sel %></td>
+</tr>
+<tr>
+	<td>&lt;textarea&gt;</td><td><%= ta %></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( POST방식 )</h3>
-<form name="frm" action="" method="">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
-</li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="POST전송" id="btnPost" class="btn btn-success" />
-</li>
-</ul>
-</form>
-</div>
-</div>
+<a href="javascript:history.back()" class="btn btn-info">뒤로</a>
 </div>
 </main>
 <footer class="text-body-secondary py-5">

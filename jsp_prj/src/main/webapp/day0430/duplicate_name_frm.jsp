@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info=""%>
+    info="name속성이 중복되어있는 Form Control"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 
 <!-- favicon 설정 -->
-<link rel="shortcut icon" href="http://192.168.10.75/jsp_prj/common/images/favicon.ico"/>
+<link rel="shortcut icon" href="http://192.168.10.68/jsp_prj/common/images/favicon.ico"/>
 <!--  bootstrap CDN -->
 <link rel="stylesheet" type="text/css"
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
@@ -23,14 +23,15 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <script type="text/javascript">
 $(function(){
 	$("#btnGet").click(function(){
-		//전송하기 전에 입력값에 대한 유효성 검증
-		$("#frmGet").submit(); //전송
-	})
+		$("#frmGet").submit();
+	});
+	
 	$("#btnPost").click(function(){
-		//전송하기 전에 입력값에 대한 유효성 검증
-		$("#frmPost").submit(); //전송
-	})
-});
+		$("#frmPost").submit();
+	});
+});//ready
+
+
 </script>
 </head>
 <body>
@@ -67,62 +68,66 @@ $(function(){
 <main>
 <div id="container">
 <div>
-<div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( GET방식 )</h3>
-<form name="frmGet" id="frmGet" action="../day0430/unique_name_process.jsp" method="" enctype="application/x-www-form-urlencoded">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
-</li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="GET전송" class="btn btn-success" id="btnGet"  />
-</li>
+<h2>name 속성의 값이 중복되는 Form Control 전송(GET)</h2>
+<form name="frmGet" id="frmGet" method="get" action="duplicate_name_process.jsp">
+<ul>
+<li><label>radio</label>
+	<input type="radio" name="gender" value="M"/>남자 | 
+	<input type="radio" name="gender" value="F"/>여자  
+ </li>
+ <li>
+ 	<label>checkbox</label>
+ 	<input type="checkbox" name="lang" value="Java"/>Java SE
+ 	<input type="checkbox" name="lang" value="C/C++"/>C/C++
+ 	<input type="checkbox" name="lang" value="JSP"/>JSP
+ 	<input type="checkbox" name="lang" value="PyThon"/>PyThon
+ 	<input type="checkbox" name="lang" value="ASP"/>ASP
+ </li>
+  <li><label>이메일</label>
+ <!-- HTML Form Control의 종류와 상관 없이
+ 		name 속성이 같다면 배열로 처리된다. 
+   -->
+ 	<input type="text" name="email"/>
+ 	<input type="text" name="email"/>
+ 	<input type="text" name="email"/>
+ </li>
+ <li>
+ 	<input type="button" value="GET방식 전송" class="btn btn-success"
+ 		id="btnGet"/>
+ </li>
 </ul>
 </form>
 </div>
 <div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( POST방식 )</h3>
-<form name="frmPost" id="frmPost" action="http://192.168.10.75/jsp_prj/day0430/unique_name_process.jsp" method="post">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
-</li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="POST전송" id="btnPost" class="btn btn-success" />
-</li>
+<h2>name 속성의 값이 중복되는 Form Control 전송(POST)</h2>
+<form name="frmPost" id="frmPost" method="post" action="duplicate_name_process.jsp">
+<ul>
+<li><label>radio</label>
+	<input type="radio" name="gender" value="M"/>남자 | 
+	<input type="radio" name="gender" value="F"/>여자  
+ </li>
+ <li>
+ 	<label>checkbox</label>
+ 	<input type="checkbox" name="lang" value="Java"/>Java SE
+ 	<input type="checkbox" name="lang" value="C/C++"/>C/C++
+ 	<input type="checkbox" name="lang" value="JSP"/>JSP
+ 	<input type="checkbox" name="lang" value="PyThon"/>PyThon
+ 	<input type="checkbox" name="lang" value="ASP"/>ASP
+ </li>
+  <li><label>이메일</label>
+ <!-- HTML Form Control의 종류와 상관 없이
+ 		name 속성이 같다면 배열로 처리된다. 
+   -->
+ 	<input type="text" name="email"/>
+ 	<input type="text" name="email"/>
+ 	<input type="text" name="email"/>
+ </li>
+ <li>
+ 	<input type="button" value="POST방식 전송" class="btn btn-success"
+ 		id="btnPost"/>
+ </li>
 </ul>
 </form>
-</div>
 </div>
 </div>
 </main>

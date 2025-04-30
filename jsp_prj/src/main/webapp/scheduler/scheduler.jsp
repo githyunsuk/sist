@@ -47,7 +47,27 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <!-- jquery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <script type="text/javascript">
+$(function(){
 
+});
+
+function moveCalendar(flag, year, month){
+	if(flag == 'p'){
+		year = (month-1 == 0 ? year-1 : year);
+		month = (month-1 == 0 ? 12 : month-1); 
+	}
+	
+	if(flag == 'n'){
+		year = (month+1 == 13 ? year+1 : year);
+		month = (month+1 ==13 ? 1 : month+1); 
+	}
+	
+	$("#year").val(year);
+	$("#month").val(month);
+	
+	//전송
+	$("#calFrm").submit();
+}
 </script>
 </head>
 <body>
@@ -84,20 +104,47 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <main>
 <div id="container">
 <%
-	Calendar cal = Calendar.getInstance();
-	//시스템의 현재 날짜
+	Calendar cal = Calendar.getInstance(); //시스템의 현재 날짜 정보를 가지고 있다.
+	StringBuilder flagDate = new StringBuilder();
+	int flagYear = cal.get(Calendar.YEAR);
+	int flagMonth = cal.get(Calendar.MONTH)+1;
+	flagDate.append(flagYear).append(flagMonth);
+	
+	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
+	
+	//매개변수로 입력되는 년,월을 받기
+	String paramYear = request.getParameter("year");
+	String paramMonth = request.getParameter("month");
+	
+	if(paramYear != null){ //입력되는 년, 월을 사용하여
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		cal.set(Calendar.YEAR, Integer.parseInt(paramYear));
+		cal.set(Calendar.MONTH, Integer.parseInt(paramMonth)-1);
+	}
+	
+	//시스템의 현재 날짜 얻기
 	int nowYear = cal.get(Calendar.YEAR);
 	int nowMonth = cal.get(Calendar.MONTH) + 1;
-	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
+	
+	boolean flagToday = flagDate.toString().equals(nowYear+""+nowMonth);
+	
 %>
 <div id="calendarWrap">
+<form action="scheduler.jsp" method="post" id="calFrm">
+<input type="hidden" name="year" id="year"/>
+<input type="hidden" name="month" id="month"/>
+</form>
 <div id="calendarHeader">
-<span title="이전 월" class="prevMonth">&lt;</span>
+<%-- <a href="scheduler.jsp?year=<%=nowMonth-1 == 0 ? nowYear-1 : nowYear%>&month=<%=nowMonth-1 == 0 ? 12 : nowMonth-1%>"><span title="이전 월" class="prevMonth">&lt;</span></a>
 <span class="mainDate"><%=nowYear %>. <%=nowMonth %></span>
-<span title="다음 월" class="nextMonth">&gt;</span>
-<span title="오늘" class="btnToDay">
-<a href="#void">오늘</a>
-</span>
+<a href="scheduler.jsp?year=<%=nowMonth+1 == 13 ? nowYear+1 : nowYear%>&month=<%=nowMonth+1 == 13 ? 1 : nowMonth+1 %>"><span title="다음 월" class="nextMonth">&gt;</span></a>
+
+<a href="scheduler.jsp"><span title="오늘" class="btnToDay">오늘</span></a> --%>
+<a href="javascript:moveCalendar('p',<%=nowYear%>, <%=nowMonth%>)"><span title="이전 월" class="prevMonth">&lt;</span></a>
+<span class="mainDate"><%=nowYear %>. <%=nowMonth %></span>
+<a href="javascript:moveCalendar('n',<%=nowYear%>, <%=nowMonth%>)"><span title="다음 월" class="nextMonth">&gt;</span></a>
+
+<a href="javascript:moveCalendar('t',<%=flagYear%>, <%=flagMonth%>)"><span title="오늘" class="btnToDay">오늘</span></a>
 </div>
 <div id="calendarContainer">
 <table class="calTab">
@@ -153,7 +200,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 		
 		//오늘의 바닥색 
 		todayCss = "weekBgColor";
-		if(tempDay == nowDay){
+		if(tempDay == nowDay && flagToday ){
 			todayCss = "todayBgColor";
 		}
 		//날짜를 출력

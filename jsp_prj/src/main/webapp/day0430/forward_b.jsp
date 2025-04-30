@@ -1,6 +1,14 @@
+<%@page import="java.util.List"%>
+<%@page import="day0430.DataDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info=""%>
+    info="업무처리한 결과를 받아와서 응답할 화면을 만들어서 응답하는 일"%>
+    
+<%
+	//업무처리한 결과를 받는다.
+	String name = (String)request.getAttribute("name");
+	List<DataDTO> list = (List<DataDTO>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,15 +30,17 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <script type="text/javascript">
 $(function(){
-	$("#btnGet").click(function(){
-		//전송하기 전에 입력값에 대한 유효성 검증
-		$("#frmGet").submit(); //전송
-	})
-	$("#btnPost").click(function(){
-		//전송하기 전에 입력값에 대한 유효성 검증
-		$("#frmPost").submit(); //전송
-	})
+
 });
+
+function msg(){
+	alert("이름이 없습니다.");
+	location.href="forward_a.jsp";
+}
+
+<% if(name == null) {%>
+	msg();
+<% } %>
 </script>
 </head>
 <body>
@@ -66,64 +76,15 @@ $(function(){
 </header>
 <main>
 <div id="container">
-<div>
-<div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( GET방식 )</h3>
-<form name="frmGet" id="frmGet" action="../day0430/unique_name_process.jsp" method="" enctype="application/x-www-form-urlencoded">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
-</li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="GET전송" class="btn btn-success" id="btnGet"  />
-</li>
-</ul>
-</form>
-</div>
-<div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( POST방식 )</h3>
-<form name="frmPost" id="frmPost" action="http://192.168.10.75/jsp_prj/day0430/unique_name_process.jsp" method="post">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
-</li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="POST전송" id="btnPost" class="btn btn-success" />
-</li>
-</ul>
-</form>
-</div>
-</div>
+<select>
+<option value="none">---관심있는 과목선택---</option>
+<% 
+if(list != null){
+for(DataDTO dd: list){ %>
+<option value="<%=dd.getCode() %>"><%=dd.getSubject() %></option>
+<%} 
+}%>
+</select>
 </div>
 </main>
 <footer class="text-body-secondary py-5">

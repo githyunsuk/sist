@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info=""%>
+    info="name 속성이 중복된 form control의 값 입력받는 일"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +21,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <!-- jquery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <script type="text/javascript">
-$(function(){
-	$("#btnGet").click(function(){
-		//전송하기 전에 입력값에 대한 유효성 검증
-		$("#frmGet").submit(); //전송
-	})
-	$("#btnPost").click(function(){
-		//전송하기 전에 입력값에 대한 유효성 검증
-		$("#frmPost").submit(); //전송
-	})
-});
+
 </script>
 </head>
 <body>
@@ -66,64 +57,39 @@ $(function(){
 </header>
 <main>
 <div id="container">
-<div>
-<div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( GET방식 )</h3>
-<form name="frmGet" id="frmGet" action="../day0430/unique_name_process.jsp" method="" enctype="application/x-www-form-urlencoded">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
+<%
+	//POST방식일 때 한글 깨짐을 처리하기 위해 입력되는 문자열의 charset을 encoding
+	request.setCharacterEncoding("UTF-8");
+	
+	//web parameter 받기
+	String gender = request.getParameter("gender");
+	String[] lang = request.getParameterValues("lang");
+	
+	String[] email = request.getParameterValues("email");
+%>
+
+<ul>
+<li>성별 : <%= gender %></li>
+<li>취미 :
+<%
+if(lang != null){
+	for(int i=0; i<lang.length; i++ ){ %>
+	<%=i+1 %>. <%=lang[i] %>
+	<% }
+} else{
+	out.println("관심 언어 없음.");
+}
+%>
 </li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="GET전송" class="btn btn-success" id="btnGet"  />
-</li>
-</ul>
-</form>
-</div>
-<div>
-<h3>name속성에 이름이 유일한 HTML Form Control 값 전달 ( POST방식 )</h3>
-<form name="frmPost" id="frmPost" action="http://192.168.10.75/jsp_prj/day0430/unique_name_process.jsp" method="post">
-<ul><!-- autofocus="autofocus": 커서를 HTML Form Control 위치 시킬때 -->
-<li><label>text</label><input type="text" name="txt" autofocus="autofocus"/></li>
-<li><label>password</label><input type="password" name="pass"/></li>
-<li><label>file</label><input type="file" name="file"/></li>
-<li><label>hidden</label>
-	<input type="hidden" name="hid" value="5월 1일 근로자의 날 안쉼."/></li>
-<li><label>checkbox</label>
-	<input type="checkbox" name="flag" value="flag"/></li>
-<li><label>select</label>
-	<select name="sel">
-		<option value="자바">자바</option>
-		<option value="오라클">Oracle</option>
-		<option value="JDBC">JDBC</option>
-		<option value="HTML">HTML</option>
-	</select>
-</li>
-<li><label>textarea</label>
-<textarea name="ta"></textarea>
-</li>
-<li>
-<input type="button" value="POST전송" id="btnPost" class="btn btn-success" />
+<li>이메일 :
+<% 
+if(!email[0].isEmpty()){
+for(int i=0; i<email.length; i++) { %>
+	[<%= i+1 %>. <%= email[i] %>]
+<% }
+ } %>
 </li>
 </ul>
-</form>
-</div>
-</div>
 </div>
 </main>
 <footer class="text-body-secondary py-5">
