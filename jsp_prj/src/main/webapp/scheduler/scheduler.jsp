@@ -1,7 +1,7 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info=""%>
+    info="달력형태"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,6 +103,7 @@ function moveCalendar(flag, year, month){
 </header>
 <main>
 <div id="container">
+<div id="calendarWrap">
 <%
 	Calendar cal = Calendar.getInstance(); //시스템의 현재 날짜 정보를 가지고 있다.
 	StringBuilder flagDate = new StringBuilder();
@@ -129,7 +130,6 @@ function moveCalendar(flag, year, month){
 	boolean flagToday = flagDate.toString().equals(nowYear+""+nowMonth);
 	
 %>
-<div id="calendarWrap">
 <form action="scheduler.jsp" method="post" id="calFrm">
 <input type="hidden" name="year" id="year"/>
 <input type="hidden" name="month" id="month"/>
