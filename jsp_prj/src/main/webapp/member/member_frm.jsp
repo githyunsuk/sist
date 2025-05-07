@@ -1,10 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    info="회원가입 양식"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>회원가입 양식</title>
-<link rel="stylesheet" type="text/css"
-href="http://192.168.10.75/html_prj/common/css/main_v250409.css"/>
+<jsp:include page="../common/jsp/external_file.jsp"/>
 <style type="text/css">
 
 </style>
@@ -75,50 +77,60 @@ window.onload = function () {
     document.getElementById('intro').addEventListener('input', updateCount);
 }
 
+$(function(){
+	$("#btnConfirm").click(function(){
+		$("#frm").submit();
+	});
+});
+
 </script>
 </head>
 <body>
-
+<header data-bs-theme="dark">
+<jsp:include page="../common/jsp/header.jsp"/>
+</header>
+<main>
+<div id="container">
 	<h2>회원가입 양식</h2>
 	<iframe src="http://localhost/jsp_prj/member/scrollbar.html"
 	style="border: 0x; width :1420px; height:200px"></iframe>
-	<form>
+	<form action="a.jsp" method="get" id="frm" name="frm">
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" readonly="readonly" 
-				class="inputBox" style="width: 160px">
+				<td><input type="text"  
+				class="inputBox" style="width: 160px" name="id">
 				<input type="button" value="ID중복확인" class="btnBox">
 				</td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" id="password" class="inputBox" style="width: 200px">
+				<td><input type="password" id="password" name="password" class="inputBox" style="width: 200px">
 				 비밀번호 확인
 				<input type="password" id="confirmPassword" class="inputBox" style="width: 200px">
 				</td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td colspan="3"><input type="text" class="inputBox" style="width: 150px"></td>
+				<td colspan="3"><input type="text" name="name" class="inputBox" style="width: 150px"></td>
 			</tr>
 			<tr>
 				<th>생일</th>
-				<td colspan="3"><input type="text" class="inputBox" style="width: 130px"></td>
+				<td colspan="3"><input type="text" name="birth" class="inputBox" style="width: 130px"></td>
 			</tr>
 			<tr>
 				<th>연락처</th>
-				<td colspan="3"><input type="text" class="inputBox" style="width: 130px"></td>
+				<td colspan="3"><input type="text" name="number" class="inputBox" style="width: 130px"></td>
 			</tr>
 			<tr>
 				<th>휴대폰</th>
-				<td colspan="3"><input type="text" class="inputBox"style="width: 130px"><input
+				<td colspan="3"><input type="text" name="phonenumber" class="inputBox"style="width: 130px"><input
 					type="checkbox">수신</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td colspan="3"><input type="text" class="inputBox" style="width: 250px">@<input type="text"
-					list="domainData" class="inputBox" style="width: 160px"> <datalist id="langData">
+				<td colspan="3"><input type="text" class="inputBox" name="frontEmail" style="width: 250px">@<input type="text"
+					list="domainData" name="backEmail" class="inputBox" style="width: 160px"> <datalist id="langData">
 						<option value="선택해주세요.">
 						<option value="직접 입력">
 						<option value="daum.net">
@@ -149,7 +161,7 @@ window.onload = function () {
 			<tr>
 			<th>우편번호</th>
 			<td colspan="3">
-			<input type="text" id=zipcode readonly = "readonly" class="inputBox" style="width: 150px">
+			<input type="text" name="zipcode" id=zipcode readonly = "readonly" class="inputBox" style="width: 150px">
 			<input type="button" id="btnZipcode" value = "우편번호검색" class="btnBox">
 			</td>
 			</tr>
@@ -157,14 +169,14 @@ window.onload = function () {
 			<tr>
 			<th>주소</th>
 			<td>
-				<input type="text" id=addr readonly = "readonly" class="inputBox" style="width: 500px"><br>
-				<input type="text" id=addr2 class="inputBox" style="width: 500px">
+				<input type="text" name="address" id=addr readonly = "readonly" class="inputBox" style="width: 500px"><br>
+				<input type="text" name="address2" id=addr2 class="inputBox" style="width: 500px">
 			</td>
 			</tr>
 			<tr>
 				<th>자기소개</th>
 				<td>
-				<textarea id="intro" style="width:400px; height:100px"></textarea>
+				<textarea id="intro" name="intro" style="width:400px; height:100px"></textarea>
 				<div style="text-align: right; padding-right:20px">
 				<span id="count">0</span>/500
 				</div>
@@ -178,5 +190,11 @@ window.onload = function () {
 			</tr>
 		</table>
 	</form>
+</div>
+</main>
+<footer class="text-body-secondary py-5">
+<jsp:include page="../common/jsp/footer.jsp"/>
+</footer>
+	
 </body>
 </html>
