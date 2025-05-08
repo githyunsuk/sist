@@ -25,6 +25,8 @@ $(function(){
 <h2>Welcome! You came to English Page.</h2>
 Name: <%= request.getParameter("name") %><br>
 Age: <%= request.getParameter("age") %><br>
+language : <%= request.getParameter("language") %><br>
+ip : <%= request.getAttribute("ip") %><br>
 <a href="javascript:history.back()">뒤로</a>
 </div>
 </main>

@@ -1,3 +1,4 @@
+<%@page import="day0508.Counter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""%>
@@ -22,12 +23,18 @@ $(function(){
 </header>
 <main>
 <div id="container">
-<h2>환영합니다! 한국어 페이지로 방문하셨습니다.</h2>
-이름: <%= request.getParameter("name") %><br>
-나이: <%= request.getParameter("age") %><br>
-사용언어 : <%= request.getParameter("language") %><br>
-접속ip : <%= request.getAttribute("ip") %><br>
-<a href="javascript:history.back()">뒤로</a>
+링크로 이동한 페이지
+<%
+	Counter cnt = (Counter)pageContext.getAttribute("counter");
+	Counter cnt2 = (Counter)request.getAttribute("counter2");
+	Counter cnt3 = (Counter)session.getAttribute("counter3");
+	Counter cnt4 = (Counter)application.getAttribute("counter4");
+%>
+page scope: <%= cnt %>
+request scope: <%= cnt2 %>
+session scope: <%= cnt3 %>
+application scope: <%= cnt4 %>
+
 </div>
 </main>
 <footer class="text-body-secondary py-5">

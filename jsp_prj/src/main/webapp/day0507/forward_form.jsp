@@ -32,6 +32,7 @@ if("localhost".equals(serverName)){
 	ageLabel = "나이";
 	btnLabel = "전송";
 }
+
 %>
 <form action="forward_process.jsp" id="frm" name="name" method="get">
 <label><%= nameLabel %></label>

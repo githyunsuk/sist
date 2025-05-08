@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info=""%>
+    info="scope의 사용"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,7 @@
 <jsp:include page="../common/jsp/external_file.jsp"/>
 <style type="text/css">
  #container{ min-height: 600px; margin-top: 30px; margin-left: 20px}
+ span{ background-color:#E7C059; font-weight:bold; }
 </style>
 <script type="text/javascript">
 $(function(){
@@ -22,12 +23,12 @@ $(function(){
 </header>
 <main>
 <div id="container">
-<h2>환영합니다! 한국어 페이지로 방문하셨습니다.</h2>
-이름: <%= request.getParameter("name") %><br>
-나이: <%= request.getParameter("age") %><br>
-사용언어 : <%= request.getParameter("language") %><br>
-접속ip : <%= request.getAttribute("ip") %><br>
-<a href="javascript:history.back()">뒤로</a>
+<jsp:useBean id="counter" class="day0508.Counter" scope="page"/>
+<jsp:setProperty property="cnt" value="1" name="counter"/>
+
+<h3>당신은 이 페이지에 
+<span><jsp:getProperty property="cnt" name="counter"/></span>번째 방문자입니다.</h3>
+
 </div>
 </main>
 <footer class="text-body-secondary py-5">
