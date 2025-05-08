@@ -3,7 +3,7 @@ package day0508;
 public class Counter {
 	private int cnt;
 
-	private Counter() {
+	public Counter() {
 		System.out.println("Counter 생성");
 	}
 	
