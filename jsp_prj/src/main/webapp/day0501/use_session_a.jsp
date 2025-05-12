@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info="세션의 사용"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,12 +79,22 @@ function chkNull(){
 </header>
 <main>
 <div id="container">
+<c:choose>
+<c:when test="${ empty sessionScope.name }">
 <form action="use_session_b.jsp" method="get">
 <label>이름</label>
 <input type="text" name="name" id="name"/>
 <input type="text" style="display:none"/>
 <input type="button" value="입력" class="btn btn-success" id="btn"/>
 </form>
+</c:when>
+<c:otherwise>
+<c:out value="${ sessionScope.name }"/>님 로그인하셨습니다.
+<a href="use_session_d.jsp">로그아웃</a>
+</c:otherwise>
+</c:choose> 
+
+
 </div>
 </main>
 <footer class="text-body-secondary py-5">
