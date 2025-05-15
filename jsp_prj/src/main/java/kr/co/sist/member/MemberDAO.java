@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import kr.co.sist.dao.DbConnection;
 
@@ -98,4 +100,51 @@ DbConnection db = DbConnection.getInstance();
 			db.dbClose(null, pstmt, con);
 		}
 	}//insertMember
+	
+	public List<MemberDTO> selectAllMember() throws SQLException {
+DbConnection db = DbConnection.getInstance();
+		
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+		//1.JNDI 사용객체 생성
+		//2.DBCP에서 연결객체 얻기(DataSource)
+		//3.Connection 얻기
+			con = db.getDbConn();
+		//4.쿼리문 생성객체 얻기
+			StringBuilder selectIdQuery = new StringBuilder();
+			selectIdQuery
+			.append("	select id, name, birth, tel, email, gender, zipcode, addr, addr2, intro, ip, input_date		")
+			.append("	from web_member	");
+			
+			pstmt = con.prepareStatement(selectIdQuery.toString());
+		//5.바인드 변수에 값 할당
+		//6.쿼리문 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			
+			MemberDTO mDTO = null;
+			while(rs.next()) {
+				mDTO = new MemberDTO();
+				mDTO.setId(rs.getString("id"));
+				mDTO.setName(rs.getString("name"));
+				mDTO.setBirth(rs.getString("birth"));
+				mDTO.setTel(rs.getString("tel"));
+				mDTO.setUseEmail(rs.getString("email"));
+				mDTO.setGender(rs.getString("gender"));
+				mDTO.setInput_date(rs.getDate("input_date"));
+				
+				list.add(mDTO);
+				
+			}
+		} finally {
+		//7.연결 끊기
+			db.dbClose(rs, pstmt, con);
+		}
+		
+		return list;
+	}//selectAllMember
 }

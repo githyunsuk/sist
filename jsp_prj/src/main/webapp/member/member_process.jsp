@@ -38,7 +38,7 @@ request.setCharacterEncoding("UTF-8");
 	//사용중입니다."를 제공해야한다.
 	boolean flag = ms.searchId( mDTO.getId());
 	
-	if(flag){
+	if(!flag){
 		
 	pageContext.setAttribute("addResult", ms.addMember(mDTO));
 %>

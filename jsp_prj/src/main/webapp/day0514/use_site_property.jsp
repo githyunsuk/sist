@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""%>
+<%@ include file="../common/jsp/site_config.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<c:import url="http://192.168.10.75/jsp_prj/common/jsp/external_file.jsp"/>
+<title><c:out value="${ site_name }"/><br></title>
+<c:import url="${url}/common/jsp/external_file.jsp"/>
 <style type="text/css">
  #container{ min-height: 600px; margin-top: 30px; margin-left: 20px}
 </style>
@@ -19,19 +20,17 @@ $(function(){
 </head>
 <body>
 <header data-bs-theme="dark">
-<c:import url="http://192.168.10.75/jsp_prj/common/jsp/header.jsp"/>
+<c:import url="${url}/common/jsp/header.jsp"/>
 </header>
 <main>
 <div id="container">
-<a href="#void">로그인</a>
-<a href="member/member_frm.jsp">회원가입</a>
-<a href="member/member_list.jsp">회원목록</a>
-<a href="#void">상품소개</a>
-<a href="#void">영화소개</a>
+<c:out value="${ url }"/><br>
+<c:out value="${ uploadURL }"/><br>
+<c:out value="${ logo }"/><br>
 </div>
 </main>
 <footer class="text-body-secondary py-5">
-<c:import url="http://192.168.10.75/jsp_prj/common/jsp/footer.jsp"/>
+<c:import url="${url}/common/jsp/footer.jsp"/>
 </footer>
 </body>
 </html>
