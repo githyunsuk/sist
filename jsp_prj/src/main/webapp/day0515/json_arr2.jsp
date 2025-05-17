@@ -6,27 +6,29 @@
 <%@ page language="java" contentType="application/json; charset=UTF-8"
     pageEncoding="UTF-8"
     info=""%>
-    
 <%
-	DeptService ds = new DeptService();
-	
-	List<Dept> list = ds.searchAllDept();
-	//1. JSONArray 생성) [ ]
-	JSONArray jsonArr = new JSONArray();
-	
-	JSONObject jsonTemp = null;
-	
-	for(Dept deptDTO : list){
-		//2. data를 사용하여 JSONObject 생성
-		jsonTemp = new JSONObject();
-		jsonTemp.put("deptno", deptDTO.getDeptno());
-		jsonTemp.put("dname", deptDTO.getDname());
-		jsonTemp.put("loc", deptDTO.getLoc());
-		//3. JSONObject를 JSONArray 배치
-		jsonArr.add(jsonTemp);
-	}
-	
-	//4. JSONArray 값을 출력
-	String strJSON = jsonArr.toJSONString();
+
+DeptService ds=new DeptService();
+
+List<Dept> list=ds.searchAllDept();
+//1.JSONArray 생성 ) []
+      JSONArray jsonArr=new JSONArray();
+      
+      JSONObject jsonTemp=null;
+      for(Dept deptDto : list ){
+//2. data를 사용하여 JSONOject 생성
+      jsonTemp=new JSONObject();
+      jsonTemp.put("deptno", deptDto.getDeptno());
+      jsonTemp.put("dname", deptDto.getDname());
+      jsonTemp.put("loc", deptDto.getLoc());
+//3. JSONObject를 JSONArry 배치
+      jsonArr.add(jsonTemp);
+      }//end for
+   
+//4.JSONArray 값을 출력
+   String strJSON=jsonArr.toJSONString();
 %>
-<%= strJSON %>
+<%=strJSON %>
+
+
+

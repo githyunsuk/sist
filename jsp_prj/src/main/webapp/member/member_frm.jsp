@@ -119,6 +119,37 @@ $(function(){
 		    
 		    $("#frm").submit();
 		  });
+	  
+	  $("#id").keyup(function(evt){
+			var id = $("#id").val();
+			if(id.length > 5){
+				var param = {id:id};
+				$.ajax({
+					url:"ajax_id_dup.jsp",
+					type:"GET",
+					data:param,
+					dataType:"JSON",
+					error:function(xhr){
+						alert("버튼 눌러서 팝업창으로 중복검사해주세요.");
+						console.log(xhr.status);
+					},
+					success:function(jsonObj){
+						var msg = "이미 사용 중";
+						var color = "#FF0000";
+						if(jsonObj.idFlag){
+							msg = "사용가능"
+							color = "#0000FF";
+						}
+						
+						var output = "<span style='color:"+color+"'>"
+						+msg+"</span>";
+						$("#idOutput").html(output);
+					}
+				});
+			} else{
+				$("#idOutput").html("아이디를 검증하세요.");
+			}
+	  });
 	
 });//ready
 
@@ -141,8 +172,10 @@ $(function(){
 		<table>
 			<tr>
 				<th>* 아이디</th>
-				<td><input type="text" name="id" readonly="readonly" class="inputBox" style="width:120px"> 
+				<td><input type="text" name="id" id="id" maxlength="20" class="inputBox" style="width:120px"> 
 				<input type="button" value="ID중복확인" class="btnBox" id="chkID">
+				<br>
+				<div id="idOutput"></div>
 				</td>
 			</tr>
 			<tr>
