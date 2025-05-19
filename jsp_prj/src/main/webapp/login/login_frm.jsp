@@ -1,13 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../common/jsp/site_config.jsp" %>
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
+  <c:import url="${url}/common/jsp/external_file.jsp"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.145.0">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>로그인</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
@@ -142,27 +148,50 @@ function chkNull(){
 			return;
 		}//end if
 		
-		obj.submit(); //<form 태그에 action 설정된 페이지로 이동한다.
-		
+		loginProcess(id, pass);
 	//document.getElementById("output").innerHTML=evt.which;
+}
+
+function loginProcess(id, pass){
+	var param = {id:id, pass:pass}
+	$.ajax({
+		url: "login_process.jsp",
+		type: "POST",
+		data: param,
+		dataType: "JSON",
+		error: function(xhr){
+			alert("로그인 작업이 정상적으로 수행되지 않았습니다.\n 잠시 후에 다시 시도해주세요");
+			console.log(xhr.status);
+		},
+		success: function(jsonObj){
+			if(jsonObj.loginResult){
+				location.href="${url}/index.html";
+			}else{
+				var output = "<img src='images/login_fail.jpg' style='width:200px'/>";
+				output += "<br/>아이디나 비번을 확인해주세요.";
+				$("#LoginFail").html(output);
+			}
+		}
+	});
 }
 </script>
     
 
     
 <main class="form-signin w-100 m-auto">
-  <form name="loginFrm" action="loginProcess.jsp">
+  <form name="loginFrm" action="#void">
     <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" name="id" id="floatingInput" placeholder="아이디">
+      <input type="text" class="form-control" value="wngustjr1306" name="id" id="floatingInput" placeholder="아이디">
       <label for="floatingInput">아이디</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" name="pass" id="floatingPassword" placeholder="비밀번호">
+      <input type="password" class="form-control" value="pp369572!" name="pass" id="floatingPassword" placeholder="비밀번호">
       <label for="floatingPassword">비밀번호</label>
     </div>
 
+	<div id="LoginFail"></div>
     <button class="btn btn-primary w-100 py-2" id="btnLogin" type="button">로그인</button>
     <p class="mt-5 mb-3 text-body-secondary">&copy; 내꺼야</p>
   </form>
