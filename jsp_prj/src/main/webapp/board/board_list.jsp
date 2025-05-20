@@ -7,7 +7,7 @@
 <%@ include file="../common/jsp/site_config.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%-- <%@ include file="../common/jsp/login_chk.jsp" %> --%>
+<%@ include file="../common/jsp/login_chk.jsp" %>
 <jsp:useBean id="rDTO" class="kr.co.sist.board.RangeDTO" scope="page"/>
 <jsp:setProperty name="rDTO" property="*"/>
 <!DOCTYPE html>
@@ -18,10 +18,20 @@
 <c:import url="${url}/common/jsp/external_file.jsp"/>
 <style type="text/css">
  #container{ min-height: 600px; margin-top: 30px; margin-left: 20px}
+ a{text-decoration:none; color:#333}
+ a:hover{color:#5A90D0}
 </style>
 <script type="text/javascript">
 $(function(){
-	
+	$("#btnSearch").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword==""){
+			alert("검색 키워드는 필수 입력");
+			return;
+		}
+		
+		$("#searchFrm").submit();
+	});
 });
 </script>
 </head>
@@ -31,11 +41,14 @@ $(function(){
 </header>
 <main>
 <div id="container">
+<div style="width:1220px">
+<h3>자유게시판</h3>
+<div id="boardwrap" style="margin:0px auto; height:700px; width:1220px;">
 <%
 	BoardService bs = new BoardService();
 
 	int totalCount = 0; //총 게시물의 수
-	totalCount = bs.totalCount(null);
+	totalCount = bs.totalCount(rDTO);
 	
 	int pageScale = 0; //한 화면에 보여줄 게시물의 수
 	pageScale = bs.pageScale();
@@ -56,15 +69,21 @@ $(function(){
 	pageContext.setAttribute("totalPage", totalPage);
 	pageContext.setAttribute("startNum", rDTO.getStartNum());
 	pageContext.setAttribute("endNum", rDTO.getEndNum());
+	pageContext.setAttribute("fieldText", rDTO.getFieldText());
 	pageContext.setAttribute("boardList", boardList);
+	
+	session.setAttribute("cntFlag", true);
+	
 %>
-총 게시물의 수 : ${totalCount}<br>
+전체 <c:out value="${totalPage}"/>페이지에서 현재 <c:out value="${rDTO.currentPage}"/>페이지
+<%-- 총 게시물의 수 : ${totalCount}<br>
 한 화면에 보여줄 게시물 수 : ${pageScale}<br>
 총 페이지 수 : ${totalPage}<br>
 시작 번호 : ${startNum}<br>
-끝 번호 : ${endNum}<br>
-<div style="width:1220px">
-<h3>자유게시판</h3>
+끝 번호 : ${endNum}<br> --%>
+<div style="text-align:right;">
+<a href="write_frm.jsp" class="btn btn-info btn-sm">글작성</a>
+</div>
 <table class="table table-hover">
 <thead>
 <tr style="text-align:center">
@@ -85,8 +104,8 @@ $(function(){
 </c:if>
 <c:forEach var="bDTO" items="${boardList}" varStatus="i" >
 <tr>
-<td><c:out value="${i.count}"/></td>
-<td><c:out value="${bDTO.subject}"/></td>
+<td><c:out value="${totalCount - (rDTO.currentPage-1)*pageScale - i.index}"/></td>
+<td><a href="board_detail.jsp?num=${bDTO.num}"><c:out value="${bDTO.subject}"/></a></td>
 <td><c:out value="${bDTO.id}"/></td>
 <td><fmt:formatDate value="${bDTO.input_date}" pattern="yyyy-MM-dd a EEEE HH:mm:ss"/></td>
 <td><c:out value="${bDTO.cnt}"/></td>
@@ -95,10 +114,22 @@ $(function(){
 </tbody>
 </table>
 </div>
-<div>
+<div id="searchDiv" style="text-align:center;">
+<form action="board_list.jsp" id="searchFrm" method="get">
+<select name="field" id="field">
+  <c:forEach var="field" items="${fieldText}" varStatus="i">
+    <option value="${i.index}"><c:out value="${field}"/></option>
+  </c:forEach>
+</select>
+<input type="text" name="keyword" id="keyword"/>
+<input type="button" value="검색" id="btnSearch" class="btn btn-success btn-sm"/>
+</form>
+</div>
+<div id="paginationDiv">
 <c:forEach var="i" begin="1" end="${totalPage}" step="1">
 [ <a href="board_list.jsp?currentPage=${i}"><c:out value="${i}"/></a> ]
 </c:forEach>
+</div>
 </div>
 </div>
 </main>
