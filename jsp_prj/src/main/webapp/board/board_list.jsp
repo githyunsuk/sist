@@ -1,3 +1,5 @@
+<%@page import="kr.co.sist.board.BoardUtil"%>
+<%@page import="kr.co.sist.board.PaginationDTO"%>
 <%@page import="kr.co.sist.board.BoardDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.co.sist.board.BoardService"%>
@@ -20,6 +22,11 @@
  #container{ min-height: 600px; margin-top: 30px; margin-left: 20px}
  a{text-decoration:none; color:#333}
  a:hover{color:#5A90D0}
+ 
+ .pagePrevMark{color:#FF0000}
+ .pageNextMark{color:#FF0000}
+ .pageCurrent{font-weight:bold; font-size:20px}
+ 
 </style>
 <script type="text/javascript">
 $(function(){
@@ -102,10 +109,20 @@ $(function(){
 <img src="../Login/images/Login_fail.jpg" style="width:60px"/>
 </tr>
 </c:if>
+<%
+StringBuilder searchQueryString = new StringBuilder();
+
+if(rDTO.getKeyword() != null && !rDTO.getKeyword().isEmpty()){
+	searchQueryString.append("&field=").append(rDTO.getField())
+	.append("&keyword=").append(rDTO.getKeyword());
+}
+
+pageContext.setAttribute("queryStr", searchQueryString);
+%>
 <c:forEach var="bDTO" items="${boardList}" varStatus="i" >
 <tr>
 <td><c:out value="${totalCount - (rDTO.currentPage-1)*pageScale - i.index}"/></td>
-<td><a href="board_detail.jsp?num=${bDTO.num}"><c:out value="${bDTO.subject}"/></a></td>
+<td><a href="board_detail.jsp?num=${bDTO.num}&currentPage=${rDTO.currentPage}${queryStr}"><c:out value="${bDTO.subject}"/></a></td>
 <td><c:out value="${bDTO.id}"/></td>
 <td><fmt:formatDate value="${bDTO.input_date}" pattern="yyyy-MM-dd a EEEE HH:mm:ss"/></td>
 <td><c:out value="${bDTO.cnt}"/></td>
@@ -126,9 +143,62 @@ $(function(){
 </form>
 </div>
 <div id="paginationDiv">
-<c:forEach var="i" begin="1" end="${totalPage}" step="1">
-[ <a href="board_list.jsp?currentPage=${i}"><c:out value="${i}"/></a> ]
-</c:forEach>
+<%
+
+int pageNumber=3;//한화면에 보여줄 페이지 인덱스의 수
+//2. 화면에 보여줄 시작페이지 번호
+int startPage = ((rDTO.getCurrentPage()-1)/pageNumber) * pageNumber+1;//1,2,3페이지는 => 1
+//3. 화면에 보여줄 마지막 번호
+int endPage=(((startPage-1)+pageNumber)/pageNumber)*pageNumber;
+//4. 총 페이지수가 연산된 마지막 페이지 수보다 작다면 총 페이지수가 마지막 페이지수로 설정
+if(totalPage <= endPage){
+   endPage=totalPage;
+}//end if
+
+//5. 첫 페이지가 인덱스 화면이 아닌 경우
+int movePage=0;
+StringBuilder prevMark=new StringBuilder("[ <span class='pagePrevMark'>&lt;&lt; </span>]");
+if( rDTO.getCurrentPage() > pageNumber){//시자게이지보다 1적은 페이지로 이동
+   prevMark.delete(0, prevMark.length());
+   movePage=startPage-1;
+   prevMark.append("[ <a href='board_list.jsp?currentPage=")
+    .append( movePage ).append(searchQueryString.toString())
+    .append("'class='pagePrevMark'>&lt;&lt;</a> ]");
+}
+
+//6. 시작페이지 번호부터 끝 페이지 번호까지 화면에 출력
+movePage=startPage;
+StringBuilder pageLink=new StringBuilder();
+while ( movePage <= endPage ){//
+   if( movePage == rDTO.getCurrentPage() ){//현재페이지는 링크 설정 x 
+      pageLink.append("[ <span class='pageCurrent'>").append(rDTO.getCurrentPage()).append("</span> ]");
+   }else{
+      pageLink.append("[ <a href='board_list.jsp?currentPage=")
+      .append(movePage).append(searchQueryString.toString())
+      .append("'class='pageNotCurrent'>").append(movePage).append("</a> ]");
+   }//end else
+      movePage++;
+}//end while
+   
+//7.뒤에 페이지가 더 있는 경우
+StringBuilder nextMark=new StringBuilder("[ <span class='pageNextMark'>&gt;&gt;</span> ]");
+if( totalPage > endPage ){
+   nextMark.delete(0, nextMark.length());
+   movePage=endPage+1;
+   nextMark.append("[ <a href='board_list.jsp?currentPage=")
+   .append(movePage).append(searchQueryString.toString())
+   .append("' class='pageNextMark'>&gt;&gt;</a> ]");
+}//end if
+   
+   
+%>
+<br>
+<%= prevMark %> ... <%= pageLink %> ... <%= nextMark %>
+
+<%
+PaginationDTO pDTO = new PaginationDTO(3, rDTO.getCurrentPage(), totalPage, "board_list.jsp", rDTO.getField(), rDTO.getKeyword());
+%>
+<%= BoardUtil.pagination(pDTO) %>
 </div>
 </div>
 </div>

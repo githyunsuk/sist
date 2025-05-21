@@ -48,9 +48,13 @@ $(function(){
 	 
 	 $("#btnWrite").click(function(){
 		//제목, 내용 등 필수 입력사항에 대한 유효성 검증
-		
+		var subject = $("#subject").val();
+		if(subject.trim() == ""){
+			alert("제목은 필수 입력입니다.");
+			return;
+		}
 		$("#writeFrm").submit();
-	 })
+	 });
 });
 </script>
 </head>

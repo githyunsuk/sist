@@ -139,7 +139,17 @@ function setEdit(flag){
 <input type="button" id="btnModify" value="글수정" class="btn btn-success btn-sm"/>
 <input type="button" id="btnRemove" value="글삭제" class="btn btn-danger btn-sm"/>
 </c:if>
-<a href="javascript:history.back()" class="btn btn-info btn-sm">글목록</a>
+<%
+String search = "";
+String field = request.getParameter("field");
+String keyword = request.getParameter("keyword");
+if(field != null && !field.isEmpty()){
+	search = "&field="+field+"&keyword="+keyword;
+}
+
+pageContext.setAttribute("search", search);
+%>
+<a href="board_list.jsp?currentPage=${param.currentPage}${search}" class="btn btn-info btn-sm">글목록</a>
 </td>
 </tr>
 </table>

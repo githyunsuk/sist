@@ -88,4 +88,29 @@ public class MemberService {
 		}
 		return list;
 	}//searchAllMember
+
+	public MemberDTO searchOneMember(String id) {
+		MemberDTO mDTO = null;
+		
+		MemberDAO mDAO = MemberDAO.getInstance();
+		
+		try {
+			mDTO = mDAO.selectOneMember(id);
+			String key = "abcdef0123456789";
+			DataDecryption dd = new DataDecryption(key);
+			try {
+				mDTO.setName(dd.decrypt(mDTO.getName()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				mDTO.setTel(dd.decrypt(mDTO.getTel()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return mDTO;
+	}//searchOneMember
 }

@@ -16,8 +16,8 @@
 //useBean으로 입력되는 parameter는 subject, contetn만 존재
 bDTO.setId( ((LoginResultDTO)session.getAttribute("userData")).getId());
 out.println(request.getParameter("num"));
-/* BoardService bs = new BoardService();
-pageContext.setAttribute("writeFlag", bs.writeBoard(bDTO)); */
+BoardService bs = new BoardService();
+pageContext.setAttribute("writeFlag", bs.writeBoard(bDTO));
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@ pageContext.setAttribute("writeFlag", bs.writeBoard(bDTO)); */
 <meta charset="UTF-8">
 <title><c:out value="${ site_name }"/></title>
 <script type="text/javascript">
-<%--<c:choose>
+<c:choose>
 	<c:when test="${writeFlag}">
 		alert("글쓰기 완료 되었습니다.");
 		location.href="${url}/board/board_list.jsp"
@@ -34,7 +34,7 @@ pageContext.setAttribute("writeFlag", bs.writeBoard(bDTO)); */
 		alert("글쓰기 실패!!");
 		history.back();
 	</c:otherwise>
-</c:choose>--%>
+</c:choose>
 </script>
 </head>
 <body>

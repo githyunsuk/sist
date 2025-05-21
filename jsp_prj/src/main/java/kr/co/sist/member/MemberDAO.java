@@ -142,4 +142,48 @@ public class MemberDAO {
 
 		return list;
 	}// selectAllMember
+	public MemberDTO selectOneMember(String id) throws SQLException {
+
+		MemberDTO mDTO = null;
+		
+		DbConnection db = DbConnection.getInstance();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
+		try {
+			// 1.JNDI 사용객체 생성
+			// 2.DBCP에서 연결객체 얻기(DataSource)
+			// 3.Connection 얻기
+			con = db.getDbConn();
+			// 4.쿼리문 생성객체 얻기
+			StringBuilder selectIdQuery = new StringBuilder();
+			selectIdQuery.append(
+					"	select name, birth, tel, gender, ip, input_date, profile_img		")
+			.append("	from web_member	")
+			.append(" 	where id=? ");
+			
+			pstmt = con.prepareStatement(selectIdQuery.toString());
+			// 5.바인드 변수에 값 할당
+			pstmt.setString(1, id);
+			// 6.쿼리문 수행 후 결과 얻기
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				mDTO = new MemberDTO();
+				mDTO.setName(rs.getString("name"));
+				mDTO.setBirth(rs.getString("birth"));
+				mDTO.setTel(rs.getString("tel"));
+				mDTO.setGender(rs.getString("gender"));
+				mDTO.setIp(rs.getString("ip"));
+				mDTO.setInput_date(rs.getDate("input_date"));
+				mDTO.setProfile_img(rs.getString("profile_img"));
+			}
+		} finally {
+			// 7.연결 끊기
+			db.dbClose(rs, pstmt, con);
+		}
+		
+		return mDTO;
+	}// selectAllMember
 }

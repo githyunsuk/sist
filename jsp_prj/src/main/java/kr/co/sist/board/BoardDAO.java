@@ -27,7 +27,7 @@ public class BoardDAO {
 			bDAO=new BoardDAO();
 		}//end if
 		return bDAO;
-	}//getInstace
+	}//getInstance
 	
 	public int selectTotalCount(RangeDTO rDTO) throws SQLException {
 		int cnt=0;
@@ -54,7 +54,6 @@ public class BoardDAO {
 				.append(",?) !=0");
 			}
 			
-			System.out.println(selectIdQuery);
 			pstmt=con.prepareStatement(selectIdQuery.toString());
 		//5. 바인드변수에 값 할당
 			
@@ -165,6 +164,7 @@ public class BoardDAO {
 		
 		PreparedStatement pstmt=null;
 		Connection con=null;
+		
 		
 		try {
 		//1.JDNI 사용객체 생성
