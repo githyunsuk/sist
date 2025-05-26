@@ -35,9 +35,10 @@ $(function(){
 </c:otherwise>
 </c:choose>
 
-
+<a href="place/rest_list.jsp">맛집</a>
 <a href="member/member_frm.jsp">회원가입</a>
 <a href="member/member_list.jsp">회원목록</a>
+<a href="file/file_list.jsp">파일목록</a>
 <a href="#void">상품소개</a>
 <a href="#void">영화소개</a>
 </div>
