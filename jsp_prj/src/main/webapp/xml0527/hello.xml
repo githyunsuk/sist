@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<msg>안녕하세요?</msg>
+<msg2>안녕하세요?</msg2>
+<msg3>안녕하세요?</msg3>
+</root>
+<!-- 최상위 부모노드는 하나 이어야한다. -->
