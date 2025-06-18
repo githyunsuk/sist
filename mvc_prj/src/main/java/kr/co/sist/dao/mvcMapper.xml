@@ -4,5 +4,12 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.sist.dao">
-
+<!-- 부서 번호와 연봉을 입력받아서 해당 부서에서 입력된 연봉보다 적게 받는 사원 정보를 검색 -->
+<select id="selectEmp" resultType="kr.co.sist.domain.Emp" parameterType="kr.co.sist.dto.SearchDTO">
+<![CDATA[
+select empno, ename, job, sal, hiredate
+from emp
+where deptno=#{deptno} and sal < #{sal}
+]]>
+</select>
 </mapper>

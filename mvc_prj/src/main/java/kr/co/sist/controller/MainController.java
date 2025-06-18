@@ -14,6 +14,7 @@ import kr.co.sist.action.Action;
 import kr.co.sist.action.BusinessAction;
 import kr.co.sist.action.DbAction;
 import kr.co.sist.action.MainAction;
+import kr.co.sist.action.RedirectAction;
 
 @SuppressWarnings("serial")
 public class MainController extends HttpServlet {
@@ -24,6 +25,7 @@ public class MainController extends HttpServlet {
 		map.put("M001", new MainAction()); //메인화면으로 이동
 		map.put("F001", new BusinessAction()); //업무로직을 처리하고 폼을 제공
 		map.put("P001", new DbAction()); //DB업무를 사용하는 액션
+		map.put("R001", new RedirectAction());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,9 +48,11 @@ public class MainController extends HttpServlet {
 	
 	private void moveURL(HttpServletRequest request, HttpServletResponse response, boolean forwardFlag, String movePage) throws ServletException, IOException {
 		if(forwardFlag) {
+			System.out.println("forward");
 			RequestDispatcher rd = request.getRequestDispatcher(movePage);
 			rd.forward(request, response);
 		} else {
+			System.out.println("redirect");
 			response.sendRedirect(movePage);
 		}
 	}

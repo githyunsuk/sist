@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
   
 <!DOCTYPE html>
 <html>
@@ -34,21 +35,34 @@ $(function(){
 <a href="index.html">메인</a>
 <a href="index.do">메인2</a>
 <a href="index.do?cmd=M001">메인3</a>
+<a href="index.do?cmd=F001">입력폼</a>
+<a href="index.do?cmd=R001">메인화면 redirect</a>
 <hr>
 <h3>사원검색 - 선택부서에 입력한 연봉보다 작은 사원 검색</h3>
-<h3><c:out value="${today}"/></h3>
-<form action="emp_search.do" id="frm">
-<input type="hidden" name="cmd" value="P001"/>
-<label>부서 번호</label><select name="deptno">
-<c:forEach var="dept" items="${ deptInfo }">
-<option value="${ dept.deptno }"><c:out value="${ dept.dname }"/></option>
+<h3><c:out value="${param.deptno}"/>번 부서에 연봉이 
+<c:out value="${param.sal}"/>보다 작은 사원 정보</h3>
+<table border="1">
+<thead>
+<tr>
+	<th>사원번호</th>
+	<th>사원명</th>
+	<th>연봉</th>
+	<th>직무</th>
+	<th>입사일</th>
+</tr>
+</thead>
+<tbody>
+<c:forEach var="emp" items="${list}">
+<tr>
+	<td><c:out value="${emp.empno}"/></td>
+	<td><c:out value="${emp.ename}"/></td>
+	<td><c:out value="${emp.sal}"/></td>
+	<td><c:out value="${emp.job}"/></td>
+	<td><fmt:formatDate pattern="yyyy-MM-dd" value="${emp.hiredate}"/></td>
+</tr>
 </c:forEach>
-</select>
-<label>연봉</label>
-<input type="text" name="sal"/>
-<input type="button" value="검색" id="btn" />
-
-</form>
+</tbody>
+</table>
 </div>
 </main>
 <footer class="text-body-secondary py-5">

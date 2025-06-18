@@ -1,11 +1,12 @@
 package kr.co.sist.dao;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
-import kr.co.sist.dao.MyBatisDAO;
+import kr.co.sist.domain.Emp;
+import kr.co.sist.dto.SearchDTO;
 
 public class MvcDAO {
 
@@ -22,19 +23,27 @@ public class MvcDAO {
 	}// getInstance
 
 	
-	public void selectProc(HashMap<String, Object> hashmap) throws PersistenceException {
+	public List<Emp> selecEmp(SearchDTO sDTO) throws PersistenceException {
+		List<Emp> list = null;
 		// 1.MyBatis Handler 얻기
 		SqlSession ss = MyBatisDAO.getInstance("kr/co/sist/dao/mybatis-config.xml").getMyBatisHandler();
 		// 2.쿼리를 실행 <파라메터 속성이 사용되지 않으므로
-		ss.selectOne("kr.co.sist.day0616.procedureSelect", hashmap);
+		list = ss.selectList("kr.co.sist.dao.selectEmp", sDTO);
 		
 		// 검색 결과
 		// 4.MyBatis Handler 끊기
 		ss.close();
+		
+		return list;
 	}
 
 	public static void main(String[] args) {
 		try {
+			SearchDTO sDTO = new SearchDTO();
+			sDTO.setDeptno(10);
+			sDTO.setSal(5000);
+			MvcDAO.getInstance().selecEmp(sDTO);
+			System.out.println(MvcDAO.getInstance().selecEmp(sDTO));
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
 		}
