@@ -14,10 +14,33 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <!-- jquery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+		var radioValue = $("[name='type']:checked").val();
+		
+		var frm = $("#frm")[0];
+		var tempAction = "useModel";
+		if(radioValue == "mav"){
+			tempAction = "useMav";
+		}
+		if(radioValue == "request"){
+			tempAction = "useRequest";
+		}
+		frm.action = tempAction;
+		alert(frm.action);
+		frm.submit();
+	});
+});
 </script>
 </head>
 <body>
-<c:out value="${param.name}"/>님의 정보가 입력되었습니다.<br>
-<a href="http://localhost:8080">메인</a>
+<img src="/images/default_img2.png" style="width:400"/>
+<form id="frm" method="post">
+<input type="radio" name="type" value="model" checked="checked"/>Model 사용
+<input type="radio" name="type" value="mav"/>ModelAndView사용
+<input type="radio" name="type" value="request"/>HTTPServletRequest 사용
+
+<input type="button" id="btn" value="전송" class="btn btn-success"/>
+</form>
 </body>
 </html>

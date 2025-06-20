@@ -52,7 +52,15 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <li>
 <a href="/day0619/param_frm">web parameter 입력</a>
 </li>
-
+<li>
+<a href="/day0620/data_send">view로 데티터 전달</a>
+</li>
+<li>
+<a href="/day0620/redirect">redirect 이동 전달</a>
+</li>
+<li>
+<a href="/day0620/req_param_frm">@RequestParam사용</a>
+</li>
 </ul>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +15,12 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <!-- jquery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <script type="text/javascript">
+
 </script>
 </head>
 <body>
-<c:out value="${param.name}"/>님의 정보가 입력되었습니다.<br>
-<a href="http://localhost:8080">메인</a>
+<img src="/images/default_img2.png" style="width:100px"/>
+<h2>정상적인 요청의 응답페이지</h2>
+<a href="javascript:history.back()">뒤로</a>
 </body>
 </html>
