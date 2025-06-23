@@ -61,6 +61,21 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <li>
 <a href="/day0620/req_param_frm">@RequestParam사용</a>
 </li>
+<li>
+<a href="/day0623/forwardA">ForwardA (forwardB로 이동)</a>
+</li>
+<li>
+<a href="/day0623/forwardB">ForwardB (forwardC로 이동)</a>
+</li>
+<li>
+<a href="/day0623/useInclude">include용</a>
+</li>
+<li>
+<a href="/day0623/useSession">session사용</a>
+</li>
+<li>
+<a href="/day0623/useCookie">cookie사용</a>
+</li>
 </ul>
 </body>
 </html>
