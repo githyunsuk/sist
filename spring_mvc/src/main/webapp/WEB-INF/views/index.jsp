@@ -76,6 +76,13 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 <li>
 <a href="/day0623/useCookie">cookie사용</a>
 </li>
+<li>
+<a href="/day0624/exception1">예외1</a>,
+<a href="/singleTypeProcess">예외2</a>
+</li>
+<li>
+<a href="/day0624/upload_form">파일업로드</a>
+</li>
 </ul>
 </body>
 </html>

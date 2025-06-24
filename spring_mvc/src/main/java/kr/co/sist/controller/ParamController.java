@@ -4,10 +4,12 @@ import java.util.Enumeration;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -28,7 +30,8 @@ public class ParamController {
 	 */
 	@PostMapping("/singleTypeProcess")
 //	@PostMapping("/singleTypeProcess")
-	public String singleType(String name2, int age, String addr, String gender) {
+	@RequestMapping(value="/singleTypeProcess", method= {RequestMethod.GET,RequestMethod.POST})
+	public String singleType(String name2, int age, String addr, String gender) throws IllegalStateException {
 		System.out.println(name2 + " / " + age + " / " + addr + " / " + gender );
 		return "day0619/param_result";
 	}
@@ -63,5 +66,13 @@ public class ParamController {
 			System.out.println(headerName + " / " + request.getHeader(headerName));
 		}
 		return "day0619/param_result";
+	}
+	
+	@ExceptionHandler(IllegalStateException.class)
+	public ModelAndView nfeProcess(IllegalStateException nfe) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/err/nfe.html");
+		nfe.printStackTrace();
+		return mav;
 	}
 }
