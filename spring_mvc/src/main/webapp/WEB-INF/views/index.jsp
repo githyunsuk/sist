@@ -82,6 +82,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
 </li>
 <li>
 <a href="/day0624/upload_form">파일업로드</a>
+<a href="/day0624/upload_form2">여러개의 파일업로드</a>
 </li>
 </ul>
 </body>

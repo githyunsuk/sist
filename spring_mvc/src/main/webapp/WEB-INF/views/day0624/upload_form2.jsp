@@ -21,15 +21,33 @@ $(function(){
 </script>
 </head>
 <body>
-<img src="/images/default_img.png" style="width:100px"/>
-<c:set var="msg" value="실패"/>
-<c:if test="${uploadFlag}">
-<c:set var="msg" value="성공"/>
-</c:if>
-<h2>파일 업로드 <c:out value="${msg}"/>.</h2>
-업로드 정보 :
-<c:out value="${fileData.fileName}"/>(
-<c:out value="${fileSize}"/>Byte)
+<img src="/images/default_img2.png" style="width:100px"/>
+<h2>파일 업로드</h2>
+<form action="/day0624/upload_process2" method="post" enctype="multipart/form-data">
+<table>
+<tr>
+<td>파일선택</td>
+<td><input type="file" name="upfile" multiple="multiple"/></td>
+</tr>
+<tr>
+<td>업로더</td>
+<td><input type="text" name="uploader"/></td>
+</tr>
+<tr>
+<td>대상나이</td>
+<td>
+<c:forEach var="i" begin="10" end="60" step="10" >
+<input type="checkbox" name="targetAge" value="${i}"/><c:out value="${i}"/>대
+</c:forEach>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<input type="submit" value="업로드" class="btn btn-success btn-sm"/>
+</td>
+</tr>
+</table>
+</form>
 <a href="javascript:history.back()">뒤로</a>
 </body>
 </html>
