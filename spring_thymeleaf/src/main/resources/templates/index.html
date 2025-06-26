@@ -3,24 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<!-- favicon 설정 -->
-<link rel="shorcut icon" href="http://192.168.10.75/images/favicon.ico"/>
-<!-- 부트스트랩 CDN -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
-
+<th:block th:replace="~{fragments/external_file :: cdn_block}"></th:block>
 <style type="text/css">
-
 </style>
-<!-- jquery CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <script type="text/javascript">
 $(function(){
+	$("#btn").click(function(){
+		var name = "강태일";
 		
+		alert(`${name}님 안녕하세요? 오늘은 목요일`)
+		alert(`[[${name}]]님 안녕하세요? 오늘은 목요일`)
+	});
 });
 </script>
 </head>
 <body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/login_box :: login(${id}, ${name2})}"></div>
+
+<input type="button" id="btn" class="btn btn-success" value="클릭"/>
+
+
 <div id="msg"  th:text="${ helloMsg }">안녕</div>
 <p id="msg1"  th:text="${ helloMsg2 }">안녕</p>
 <p id="msg1"  th:utext="${ helloMsg2 }">안녕</p>
@@ -32,6 +35,10 @@ $(function(){
 <ul>
 <li><a href="obj/object_value">객체 값 출력</a></li>
 <li><a href="link/link_view">링크 출력</a></li>
+<li><a href="img/img_view">이미지 출력</a></li>
+<li><a href="condition/condition_view">조건문</a></li>
 </ul>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

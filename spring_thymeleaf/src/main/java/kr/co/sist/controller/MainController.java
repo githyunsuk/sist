@@ -13,8 +13,11 @@ public class MainController {
 	public String index(Model model) {
 		model.addAttribute("helloMsg","hello");
 		model.addAttribute("helloMsg2","<strong>hello</strong>");
+		
 		model.addAttribute("name","이장훈");
 		model.addAttribute("name2","주현석");
+		
+		//model.addAttribute("id", "ju");
 		return "index";
 	}
 

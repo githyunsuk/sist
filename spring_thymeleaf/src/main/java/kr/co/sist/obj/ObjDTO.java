@@ -10,4 +10,5 @@ import lombok.ToString;
 public class ObjDTO {
 	private String name;
 	private int age;
+	private String role;
 }
