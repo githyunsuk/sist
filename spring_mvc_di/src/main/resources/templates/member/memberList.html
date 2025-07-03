@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 파비콘 설정 -->
+<link rel="shortcut icon" href="https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico"/>
+<!--  부트스트랩 CDN-->
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+});
+</script>
+</head>
+<body>
+<h2>회원정보</h2>
+<table class="table table-hover">
+<thead>
+<tr>
+	<th>번호</th>
+	<th>이름</th>
+	<th>나이</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="member, ind : ${ data }">
+	<td th:text="${ ind.count }"></td>
+	<td th:text="${ member.name }"></td>
+	<td th:text="${ member.age }"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
