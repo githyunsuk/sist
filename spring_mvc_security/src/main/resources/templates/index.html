@@ -25,7 +25,21 @@ $(function(){
 <label>비밀번호</label>
 <input type="password" name="pass"/>
 <input type="submit" value="전송" class="btn btn-sm btn-success"/>
-
 </form>
+
+<form th:action="@{/cipher}" method="POST">
+<label>이메일</label>
+<input type="text" name="email"/>
+<input type="submit" value="전송" class="btn btn-sm btn-success"/>
+</form>
+
+<form th:action="@{/plain}" method="POST">
+<label>암호화이메일</label>
+<input type="text" name="email"/>
+<input type="submit" value="전송" class="btn btn-sm btn-success"/>
+</form>
+
+<a th:href="@{/user/memberFrm}">회원가입</a>
+<a th:href="@{/user/login}">로그인</a>
 </body>
 </html>
