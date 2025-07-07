@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 파비콘 설정 -->
+<link rel="shortcut icon" href="https://cdn.oaistatic.com/assets/favicon-miwirzcw.ico"/>
+<!--  부트스트랩 CDN-->
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+});
+</script>
+</head>
+<body>
+<a th:href="@{/admin/dashboard}">대시보드</a>
+<a th:href="@{/admin/user_list}">사용자관리</a>
+<a th:href="@{/admin/logout}">로그아웃</a>
+아주 멋진 대시보드<br>
+의사결정에 반영해주세요.
+</body>
+</html>
