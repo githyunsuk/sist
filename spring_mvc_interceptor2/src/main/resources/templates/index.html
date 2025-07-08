@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/images/favicon.ico"/>
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+
+</style>
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
+<script type="text/javascript">
+$(function(){
+
+	var jsonObj = {name:"이장훈", age:20, addr:"서울시 강남구"};
+	console.log(jsonObj);
+	
+	var jsonObjStr = JSON.stringify(jsonObj);
+	console.log(jsonObjStr);
+	
+	var jsonObjStr2 = JSON.stringify(jsonObj, null, 2);
+	console.log(jsonObjStr2);
+	
+	//JSONObject string을 JSONObject 변환
+	var jsonObj2 = JSON.parse(jsonObjStr);
+	console.log(jsonObj2.name + " " + jsonObj2.age);
+});
+</script>
+</head>
+<body>
+<div>
+메인화면
+</div>
+<a th:href="@{/user/product}">상품상세</a>
+<a th:href="@{/user/mypage/user_info}">마이페이지</a>
+<a th:href="@{/admin/login/login_form}" style="color:#FFFFFF">.</a>
+</body>
+</html>

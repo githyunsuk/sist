@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kr.co.sist.interceptor.AdminInterceptor;
+import kr.co.sist.interceptor.UserInterceptor;
 
 @Configuration
 //1. WebMvcConfiguarer를 구현
@@ -18,14 +19,21 @@ public class interceptorConfig implements WebMvcConfigurer{
 	@Value("${myapp.admin.addPath}")
 	List<String> addAdminPathList;
 	
-	
 	@Value("${myapp.admin.excludePath}")
 	List<String> excludeAdminPathList;
-	//2. 제작하 Interceptor의 의존성 주입
 	
+	@Value("${myapp.user.addPath}")
+	List<String> addUserPathList;
+	
+	@Value("${myapp.user.excludePath}")
+	List<String> excludeUserPathList;
+	
+	//2. 제작한 Interceptor의 의존성 주입
 	@Autowired
 	private AdminInterceptor ai;
 	
+	@Autowired
+	private UserInterceptor ui;
 	
 	/**
 	 * 3.제작된 interceptor가  동작할 URI를 생성
@@ -37,6 +45,10 @@ public class interceptorConfig implements WebMvcConfigurer{
 		//AdminInterceptor 등록
 		registry.addInterceptor(ai).addPathPatterns(addAdminPathList).
 		excludePathPatterns(excludeAdminPathList);
+		
+		//UserInterceptor 등록.
+		registry.addInterceptor(ui).addPathPatterns(addUserPathList).
+		excludePathPatterns(excludeUserPathList);
 		
 		//여러개의 interceptor를 등록 가능
 //		registry.addInterceptor(ti2).addPathPatterns(addPathList).
