@@ -14,4 +14,9 @@ import lombok.ToString;
 public class MessageDTO {
 
 	private String message;
+	private boolean flag;
+	
+	public MessageDTO(String message) {
+		this.message = message;
+	}
 }

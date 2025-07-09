@@ -4,8 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +41,36 @@ public class MemberRestController {
 		Collection<MemberDTO> collection = memberMap.values();
 		System.out.println(collection);
 		return collection;
+	}
+	
+	@GetMapping("/member/{id}")
+	//RestController는 return 객체(Map, List, Set, DTO)를 JSON문자열로 변환하여 응답
+	public MemberDTO searchOneMember(@PathVariable String id){
+		MemberDTO mDTO = memberMap.get(id);
+		return mDTO;
+	}
+	
+	@PutMapping("/members/{id}")
+	public MessageDTO modifyMember(@PathVariable String id, @RequestBody MemberDTO mDTO){
+		MessageDTO msgDTO = new MessageDTO("아이디가 존재하지 않습니다.");
+		
+		if(memberMap.containsKey(id)) {
+			msgDTO.setMessage(id+"회원 정보를 변경하였습니다.");
+			memberMap.put(id, mDTO);
+		}
+		return msgDTO;
+	}
+	
+	@DeleteMapping("/members/{id}")
+	public MessageDTO modifyMember(@PathVariable String id){
+		MessageDTO msgDTO = new MessageDTO("아이디가 존재하지 않습니다.", false);
+		
+		if(memberMap.containsKey(id)) {
+			msgDTO.setMessage(id+"회원 정보를 변경하였습니다.");
+			msgDTO.setFlag(true);
+			memberMap.remove(id);
+		}
+		return msgDTO;
 	}
 
 }

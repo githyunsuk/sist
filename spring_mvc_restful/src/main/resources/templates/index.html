@@ -18,7 +18,12 @@
 $(function(){
  	$("#btnAdd").click(function(){ addMember() });
  	$("#btnSearchAll").click(function(){ searchAllMember() });
+ 	$("#btnSearchOne").click(function(){ searchOneMember() });
+ 	$("#btnUpdate").click(function(){ modifyMember() });
+ 	$("#btnRemove").click(function(){ removeMember() });
 });
+
+var preUri ="/app1";
 
 function addMember(){
 	var id = $("#id").val();
@@ -29,7 +34,7 @@ function addMember(){
 	var jsonParamStr = JSON.stringify(jsonParam);
 	
 	$.ajax({
-		url: "/member",
+		url: preUri + "/member",
 		type: "POST",
 		contentType: "application/JSON",
 		data: jsonParamStr,
@@ -63,6 +68,79 @@ function searchAllMember(){
 		}
 	});
 }
+
+function searchOneMember(){
+	var id = $("#id").val();
+	if(id.trim() == ""){
+		alert("아이디 필수 입력!");
+		return;
+	}
+	
+	var uri = "/member/"+id
+	$.ajax({
+		url : uri,
+		dataType:"JSON",
+		error: function(xhr){
+			alert("에러 : " + xhr.status);
+		},
+		success: function(jsonObj){
+			var output=`
+			<strong>아이디 :</strong> ${jsonObj.id}<br>
+			<strong>이름 :</strong> ${jsonObj.name}<br>
+			<strong>나이 :</strong> ${jsonObj.age}<br>
+			`;
+			$("#output").html(output);
+		}
+
+	});
+}
+
+function modifyMember(){
+	//아이디는 URI의 일부분으로 저장, 값은 JSONOBject String으로 생성
+	var id = $("#id").val();
+	var name = $("#name").val();
+	var age = $("#age").val();
+	
+	var jsonParam = {id:id, name:name, age:age}
+	var jsonParamStr = JSON.stringify(jsonParam);
+	
+	var uri = "/members/"+id; //@PathVariable
+	$.ajax({
+		url : uri,
+		type : "PUT",
+		contentType : "application/json",
+		data : jsonParamStr, //@RequestParam
+		dataType : "JSON",
+		error: function(xhr){
+			alert(xhr.status)
+		},
+		success : function(jsonObj) {
+			$("#output").html(`<strong>${jsonObj.message}</strong>`);
+		}
+	});
+}
+
+function removeMember(){
+	var id = $("#id").val();
+	
+	var uri="/members/"+id; //@PathVariable
+	
+	$.ajax({
+		url : uri,
+		type : "DELETE", //@DeleteMapping
+		dataType : "JSON",
+		error : function(xhr){
+			alert(xhr.status);
+		},
+		success: function(jsonObj){
+			var msg = "아이디를 확인하세요";
+			if(jsonObj.flag){
+				msg = `<strong>${id}</strong>회원 정보 삭제 완료`;
+			}
+			$("#output").html(msg)
+		}
+	});
+}
 </script>
 </head>
 <body>
@@ -72,8 +150,12 @@ function searchAllMember(){
 <label>이름</label><input type="text" name="name" id="name"/><br>
 <label>나이</label><input type="text" name="age" id="age"/><br>
 <input type="button" value="회원추가" class="btn btn-success" id="btnAdd"/>
+<input type="button" value="회원검색" class="btn btn-success" id="btnSearchOne">
+<input type="button" value="회원변경" class="btn btn-success" id="btnUpdate">
+<input type="button" value="회원삭제" class="btn btn-success" id="btnRemove">
 </div>
 <input type="button" value="전체회원 조회" class="btn btn-success" id="btnSearchAll">
 <div id="output"></div>
+<a href="/app2">회원관리</a>
 </body>
 </html>
