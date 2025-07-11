@@ -29,9 +29,7 @@ public class MemberRestController {
 			msg = "추가 성공";
 		}
 
-		System.out.println(mDTO);
 		MessageDTO msgDTO = new MessageDTO(msg);
-		System.out.println(msgDTO);
 		return msgDTO;
 	}
 

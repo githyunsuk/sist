@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/images/favicon.ico"/>
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+</style>
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
+<!-- Vue CDN -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script type="text/javascript">
+$(function(){
+});
+</script>
+</head>
+<body>
+<div id="app">
+<h3>클릭이벤트</h3>
+<div>버튼 클릭 횟수 : {{count}} </div>
+<div>
+<input type="button" value="클릭" v-on:click="count++"/>
+<input type="button" value="축약형 클릭" @click="count++"/>
+</div>
+</div>
+<script>
+Vue.createApp({
+	data(){
+		return {count:0}
+	}
+}).mount("#app");
+</script>
+</body>
+</html>

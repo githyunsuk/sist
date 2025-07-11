@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- favicon 설정 -->
+<link rel="shorcut icon" href="http://192.168.10.75/images/favicon.ico"/>
+<!-- 부트스트랩 CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+
+<style type="text/css">
+</style>
+<!-- jquery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
+<!-- Vue CDN -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script type="text/javascript">
+$(function(){
+});
+</script>
+</head>
+<body>
+<div id="app">
+<h3>v-if 조건부 렌더링</h3>
+<label>이름</label><input type="text" v-model="name"/>
+<input type="checkbox" v-model="loginStatus"/>로그인 여부
+<div v-if="loginStatus">{{name}}님 로그인하셨습니다.</div>
+<div v-else>로그인해주세요</div>
+</div>
+<script>
+Vue.createApp({
+	data(){
+		return {name:"이장훈", loginStatus:false}
+	}
+}).mount("#app");
+</script>
+</body>
+</html>
